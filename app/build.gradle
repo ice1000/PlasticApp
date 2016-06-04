@@ -34,9 +34,10 @@ dependencies {
     compile ('com.android.support:design:23.4.0') {
         force = true
     }
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.android.support:recyclerview-v7:24.0.0-beta1'
+    compile 'com.android.support:support-v4:23.4.0'
     compile "org.jetbrains.anko:anko-common:$anko_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 buildscript {

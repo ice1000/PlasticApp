@@ -5,22 +5,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import android.view.View
-import kotlinx.android.synthetic.main.activity_contribute.*
 import org.jetbrains.anko.toast
 import utils.BaseActivity
 
-class ContributeActivity : BaseActivity() {
+class ScrollingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contribute)
+        setContentView(R.layout.content_scrolling)
         val toolbar = findViewById(R.id.toolbar) as Toolbar?
         setSupportActionBar(toolbar)
 
-        val fab = fab
-        fab.setOnClickListener({
-            joinQQGroup("cAyOYEJxVW0zF4mR5XNZ1uoFk5qEBMlR")
-        })
+//        val fab = fab
+//        fab.setOnClickListener({
+//            joinQQGroup("cAyOYEJxVW0zF4mR5XNZ1uoFk5qEBMlR")
+//        })
     }
 
     fun viewGitHub(view: View) = openWeb("https://github.com/ice1000/PlasticApp")
@@ -43,5 +42,4 @@ class ContributeActivity : BaseActivity() {
         }
 
     }
-
 }

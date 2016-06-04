@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/des"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textColor="#656565"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

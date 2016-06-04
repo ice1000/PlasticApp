@@ -23,7 +23,7 @@ import java.util.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var index = ArrayList<BaseData>();
+    var index: ArrayList<BaseData> = ArrayList()
     var indexText: List<String> = emptyList()
     var dataSetOnScreen: RecyclerView? = null
 
@@ -88,7 +88,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 //
             }
             R.id.nav_contribute ->
-                startActivity(Intent(this, ContributeActivity::class.java))
+                startActivity(Intent(this, ScrollingActivity::class.java))
         }
         val drawer = drawer_layout
         drawer.closeDrawer(GravityCompat.START)

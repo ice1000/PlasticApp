@@ -21,9 +21,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".ContributeActivity"
+        <activity
+            android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ice1000.plastic.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
