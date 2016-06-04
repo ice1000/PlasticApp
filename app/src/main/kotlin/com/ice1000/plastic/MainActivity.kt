@@ -109,14 +109,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         navigationView.setNavigationItemSelectedListener(this)
 
         dataSetOnScreen = dataSet
+        dataSetOnScreen?.adapter = MyAdapter()
         dataSetOnScreen?.layoutManager = LinearLayoutManager(this)
         dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
-        dataSetOnScreen?.adapter = MyAdapter()
     }
 
     inner class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
         override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
-            holder?.init(position)
+            holder?.init(index[position])
         }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = MyViewHolder(
@@ -131,17 +131,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         inner class MyViewHolder : RecyclerView.ViewHolder {
 
-            private var view1: TextView
-            private var view2: TextView
+            private var view1: TextView? = null
+            private var view2: TextView? = null
 
             constructor(view: View) : super(view) {
-                view1 = (findViewById(R.id.title) as TextView)
-                view2 = (findViewById(R.id.des) as TextView)
+                view1 = findViewById(R.id.title) as TextView?
+                view2 = findViewById(R.id.des) as TextView?
             }
 
-            fun init(pos: Int) {
-                view1.text = index[pos].title
-                view2.text = index[pos].url
+            fun init(data: BaseData) {
+                view1?.text = data.title
+                view2?.text = data.url
             }
         }
     }
