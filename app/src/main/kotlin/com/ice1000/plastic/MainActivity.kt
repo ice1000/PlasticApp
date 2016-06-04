@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import data.BaseData
@@ -24,36 +25,31 @@ import java.util.*
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     var index: ArrayList<BaseData> = ArrayList()
-    var indexText: List<String> = emptyList()
     var dataSetOnScreen: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
-        async() {
-            indexText = URL(indexLink).readText(Charsets.UTF_8).split("\n") as MutableList<String>
-            uiThread { refresh() }
-        }
+
     }
 
     private fun refresh() {
-        index.removeAll(index)
-        var i = 0;
-        while (i < indexText.size) {
-            index.add(BaseData(indexText[i], indexText[i + 1]))
-//            SpUtils.put(this, "index1", indexText[i])
-//            SpUtils.put(this, "index2", indexText[i + 1])
-            i += 2
+        async() {
+            var indexText = URL(indexLink).readText(Charsets.UTF_8).split("\n") as MutableList<String>
+            uiThread {
+                index.removeAll(index)
+                var i = 0;
+                while (i < indexText.size) {
+                    index.add(BaseData(indexText[i], indexText[i + 1]))
+                    //            SpUtils.put(this, "index1", indexText[i])
+                    //            SpUtils.put(this, "index2", indexText[i + 1])
+                    Log.v("", indexText[i])
+                    i += 2
+                }
+            }
         }
-//        for ((title, url, des) in index) {
-//            var a = layoutInflater.inflate(R.layout.data_base, null)
-//            a.find<TextView>(R.id.title).text = title
-//            a.find<TextView>(R.id.des).text = url
-//            a.setOnClickListener {
-//                openWeb(url)
-//            }
-//        }
+
     }
 
     override fun onBackPressed() {
@@ -76,6 +72,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.action_settings -> {
                 return true
             }
+            R.id.action_refresh -> refresh()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -135,8 +132,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             private var view2: TextView? = null
 
             constructor(view: View) : super(view) {
-                view1 = findViewById(R.id.title) as TextView?
-                view2 = findViewById(R.id.des) as TextView?
+                view1 = view.findViewById(R.id.title) as TextView?
+                view2 = view.findViewById(R.id.des) as TextView?
             }
 
             fun init(data: BaseData) {

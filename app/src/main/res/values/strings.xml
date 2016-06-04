@@ -120,4 +120,5 @@
         "when a user tries to pick up one of cards.\n\n\n\n"
     </string>
     <string name="source">源代码</string>
+    <string name="refresh">刷新</string>
 </resources>
