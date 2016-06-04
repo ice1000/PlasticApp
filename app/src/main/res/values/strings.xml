@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Plastic</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="news">新鲜事</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="contribute">
+        参与贡献文档/资源/代码\n
+        我们需要你的帮助，也随时欢迎任何人加入PLASTIC组织。\n\n
+
+        我们是一个以00后、95后学生为主的编程社区。\n
+        这是一个有萝莉(Nicole)有御姐(SpiderKing)有大叔(3A)有正太(就是我)的社区，\n
+        这是一个有运维(MilkTea)有前端(Miracle)有C++(3A)有Java(还是我)的社区，\n
+        这是一个有傻逼(404)有抑郁症(MilkTea)有神经病(iXinWei)有脑残(依旧是我)的社区，
+        这是一个有小学生(Nicole)有中学生(大多数都是)有大学生(3A)有职业程序员(此人名字叫无)。\n\n
+
+        我们常驻两个QQ群，加群链接在下面均有给出。\n
+        我们兴趣爱好广泛，从项目工程开发，到信息学竞赛，都有涉猎。\n
+        我们充满热情，虽然有时只有三分钟。\n\n
+
+        但是，我们却从未分开。\n\n
+
+
+    </string>
+</resources>
