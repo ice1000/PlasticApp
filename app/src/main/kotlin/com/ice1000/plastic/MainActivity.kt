@@ -1,5 +1,6 @@
 package com.ice1000.plastic
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -18,10 +19,11 @@ import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 import utils.indexLink
 import java.net.URL
+import java.util.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var index: Array<BaseData> = emptyArray()
+    var index = ArrayList<BaseData>();
     var indexText: List<String> = emptyList()
     var dataSetOnScreen: RecyclerView? = null
 
@@ -36,10 +38,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun refresh() {
-        index = emptyArray()
+        index.removeAll(index)
         var i = 0;
         while (i < indexText.size) {
-            index.plus(BaseData(indexText[i], indexText[i + 1]))
+            index.add(BaseData(indexText[i], indexText[i + 1]))
 //            SpUtils.put(this, "index1", indexText[i])
 //            SpUtils.put(this, "index2", indexText[i + 1])
             i += 2
@@ -86,7 +88,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 //
             }
             R.id.nav_contribute ->
-                to(ContributeActivity::class.java)
+                startActivity(Intent(this, ContributeActivity::class.java))
         }
         val drawer = drawer_layout
         drawer.closeDrawer(GravityCompat.START)
@@ -138,8 +140,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
 
             fun init(pos: Int) {
-                view1.text = index[pos].component1()
-                view2.text = index[pos].component2()
+                view1.text = index[pos].title
+                view2.text = index[pos].url
             }
         }
     }

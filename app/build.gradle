@@ -31,7 +31,9 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile ('com.android.support:design:23.4.0') {
+        force = true
+    }
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.android.support:recyclerview-v7:24.0.0-beta1'
     compile "org.jetbrains.anko:anko-common:$anko_version"
