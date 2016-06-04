@@ -121,4 +121,5 @@
     </string>
     <string name="source">源代码</string>
     <string name="refresh">刷新</string>
+    <string name="member_list">成员列表</string>
 </resources>

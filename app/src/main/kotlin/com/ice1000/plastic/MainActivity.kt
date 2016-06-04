@@ -20,6 +20,7 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 import utils.indexLink
+import utils.memberLink
 import java.net.URL
 import java.util.*
 
@@ -36,19 +37,30 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         refresh()
     }
 
-    private fun refresh() {
+    private fun refresh(link: String = indexLink, dataSize:Int = 3) {
         async() {
-            var indexText = URL(indexLink).readText(Charsets.UTF_8).split("\n")
+            var indexText = URL(link).readText(Charsets.UTF_8).split("\n")
             uiThread {
                 index = ArrayList<BaseData>()
                 var i = 0;
                 while (i < indexText.size) {
-                    index.add(BaseData(
-                            indexText[i],
-                            indexText[i + 1],
-                            indexText[i + 2]
-                    ))
-                    i += 3
+                    if(dataSize == 3) {
+                        index.add(BaseData(
+                                indexText[i],
+                                indexText[i + 1],
+                                indexText[i + 2]
+                        ))
+                        i += 3
+                        continue
+                    }
+                    if(dataSize == 2) {
+                        index.add(BaseData(
+                                indexText[i],
+                                indexText[i + 1],
+                                "                                                                          "
+                        ))
+                        i += 2
+                    }
                 }
                 dataSetOnScreen?.adapter = MyAdapter()
             }
@@ -84,9 +96,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_news -> {
-                //
-            }
+            R.id.nav_news -> refresh(indexLink, 3)
+            R.id.nav_members -> refresh(memberLink, 2)
             R.id.nav_contribute ->
                 startActivity(Intent(this, ScrollingActivity::class.java))
         }
@@ -135,20 +146,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         private var view1: TextView? = null
         private var view2: TextView? = null
-        private var isPressed = false
 
         constructor(view: View) : super(view) {
             view1 = view.findViewById(R.id.messageBox).findViewById(R.id.title) as TextView?
             view2 = view.findViewById(R.id.messageBox).findViewById(R.id.des) as TextView?
             Log.v("", "views are " + if(view1 == null) "null" else "OK")
             view.setOnTouchListener { view, event ->
-                if(isPressed) {
-                    view.setBackgroundColor(Color.WHITE)
-                    isPressed = true
-                }
-                else {
-                    view.setBackgroundColor(Color.GRAY)
-                    isPressed = false
+                when(event.action) {
+                    0, 2 -> {
+                        view.setBackgroundColor(Color.GRAY)
+                    }
+                    else -> {
+                        view.setBackgroundColor(Color.WHITE)
+                    }
                 }
                 true
             }
