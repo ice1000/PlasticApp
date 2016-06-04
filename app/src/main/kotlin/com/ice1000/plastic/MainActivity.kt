@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.TextView
 import data.BaseData
-import justwe.SpUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -38,11 +37,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun refresh() {
         index = emptyArray()
-        var i = 1;
-        while (i <= indexText.size) {
+        var i = 0;
+        while (i < indexText.size) {
             index.plus(BaseData(indexText[i], indexText[i + 1]))
-            SpUtils.put(this, "index1", indexText[i])
-            SpUtils.put(this, "index2", indexText[i + 1])
+//            SpUtils.put(this, "index1", indexText[i])
+//            SpUtils.put(this, "index2", indexText[i + 1])
             i += 2
         }
 //        for ((title, url, des) in index) {
@@ -86,6 +85,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_news -> {
                 //
             }
+            R.id.nav_contribute ->
+                to(ContributeActivity::class.java)
         }
         val drawer = drawer_layout
         drawer.closeDrawer(GravityCompat.START)

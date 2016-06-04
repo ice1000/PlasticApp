@@ -8,21 +8,25 @@
     <string name="news">新鲜事</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="contribute">
-        参与贡献文档/资源/代码\n
+        参与贡献文档/资源/代码：\n
+        请联系开发者。\n
+        我叫千里冰封，请在github上联系我： github.com/ice1000\n
         我们需要你的帮助，也随时欢迎任何人加入PLASTIC组织。\n\n
 
         我们是一个以00后、95后学生为主的编程社区。\n
         这是一个有萝莉(Nicole)有御姐(SpiderKing)有大叔(3A)有正太(就是我)的社区，\n
         这是一个有运维(MilkTea)有前端(Miracle)有C++(3A)有Java(还是我)的社区，\n
         这是一个有傻逼(404)有抑郁症(MilkTea)有神经病(iXinWei)有脑残(依旧是我)的社区，
-        这是一个有小学生(Nicole)有中学生(大多数都是)有大学生(3A)有职业程序员(此人名字叫无)。\n\n
+        这是一个有小学生(Nicole)有中学生(大多数都是)有大学生(3A)有职业程序员(此人名字叫无)的社区。\n\n
 
-        我们常驻两个QQ群，加群链接在下面均有给出。\n
+        请点击上面的圆形按钮来加入我们常驻的QQ群，你可以在那里找到我。\n
         我们兴趣爱好广泛，从项目工程开发，到信息学竞赛，都有涉猎。\n
+        我们不仅喜欢摆弄代码，也吟诗作词，讨论晶体化学，讨论电路分析。\n
+        我们有C这样的古老语言的使用者，也有Kotlin这样的新语言的使用者。\n
         我们充满热情，虽然有时只有三分钟。\n\n
 
         但是，我们却从未分开。\n\n
-
-
+        PLASTIC forever.
     </string>
+    <string name="contributing">参与开发</string>
 </resources>
