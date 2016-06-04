@@ -9,8 +9,11 @@
     tools:showIn="@layout/app_bar_main">
 
     <android.support.v7.widget.RecyclerView
+        android:layout_margin="10dp"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:dividerHeight="10dp"
+        android:divider="#ffffff"
         android:id="@+id/dataSet" />
 
 </RelativeLayout>

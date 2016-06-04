@@ -13,8 +13,14 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_gravity="center"
+        android:id="@+id/messageBox"
         android:layout_height="match_parent"
-        android:layout_width="wrap_content">
+        android:layout_width="match_parent">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/title"
@@ -28,12 +34,18 @@
 
         <TextView
             android:id="@+id/des"
-            android:textSize="12sp"
+            android:textSize="15sp"
             android:textColor="#656565"
             android:layout_margin="3dp"
             tools:text="疑似表白遭奶茶拒绝？本台新闻为您报道。\n记者：张新伟"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

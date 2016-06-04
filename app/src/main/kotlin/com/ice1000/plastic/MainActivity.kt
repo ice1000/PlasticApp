@@ -1,6 +1,7 @@
 package com.ice1000.plastic
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -25,31 +26,33 @@ import java.util.*
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     var index: ArrayList<BaseData> = ArrayList()
+//    var index: List<BaseData>? = null
     var dataSetOnScreen: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
-
+        refresh()
     }
 
     private fun refresh() {
         async() {
-            var indexText = URL(indexLink).readText(Charsets.UTF_8).split("\n") as MutableList<String>
+            var indexText = URL(indexLink).readText(Charsets.UTF_8).split("\n")
             uiThread {
-                index.removeAll(index)
+                index = ArrayList<BaseData>()
                 var i = 0;
                 while (i < indexText.size) {
-                    index.add(BaseData(indexText[i], indexText[i + 1]))
-                    //            SpUtils.put(this, "index1", indexText[i])
-                    //            SpUtils.put(this, "index2", indexText[i + 1])
-                    Log.v("", indexText[i])
-                    i += 2
+                    index.add(BaseData(
+                            indexText[i],
+                            indexText[i + 1],
+                            indexText[i + 2]
+                    ))
+                    i += 3
                 }
+                dataSetOnScreen?.adapter = MyAdapter()
             }
         }
-
     }
 
     override fun onBackPressed() {
@@ -96,6 +99,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val toolbar = toolbar
         setSupportActionBar(toolbar)
 
+        dataSetOnScreen = dataSet
+        dataSetOnScreen?.layoutManager = LinearLayoutManager(this)
+        dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
+
         val drawer = drawer_layout
         val toggle = ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -105,41 +112,51 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val navigationView = nav_view
         navigationView.setNavigationItemSelectedListener(this)
 
-        dataSetOnScreen = dataSet
-        dataSetOnScreen?.adapter = MyAdapter()
-        dataSetOnScreen?.layoutManager = LinearLayoutManager(this)
-        dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
     }
 
-    inner class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+    inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
         override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
             holder?.init(index[position])
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = MyViewHolder(
-                LayoutInflater.from(this@MainActivity).inflate(
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int)
+                = MyViewHolder(LayoutInflater.from(this@MainActivity).inflate(
                         R.layout.data_base,
-                        parent,
-                        false
-                )
-        )
+                        null
+        ))
 
-        override fun getItemCount(): Int = index.size
+        override fun getItemCount(): Int {
+            Log.v("", "index.size = ${index.size}")
+            return index.size
+        }
 
-        inner class MyViewHolder : RecyclerView.ViewHolder {
+    }
+    inner class MyViewHolder : RecyclerView.ViewHolder {
 
-            private var view1: TextView? = null
-            private var view2: TextView? = null
+        private var view1: TextView? = null
+        private var view2: TextView? = null
+        private var isPressed = false
 
-            constructor(view: View) : super(view) {
-                view1 = view.findViewById(R.id.title) as TextView?
-                view2 = view.findViewById(R.id.des) as TextView?
+        constructor(view: View) : super(view) {
+            view1 = view.findViewById(R.id.messageBox).findViewById(R.id.title) as TextView?
+            view2 = view.findViewById(R.id.messageBox).findViewById(R.id.des) as TextView?
+            Log.v("", "views are " + if(view1 == null) "null" else "OK")
+            view.setOnTouchListener { view, event ->
+                if(isPressed) {
+                    view.setBackgroundColor(Color.WHITE)
+                    isPressed = true
+                }
+                else {
+                    view.setBackgroundColor(Color.GRAY)
+                    isPressed = false
+                }
+                true
             }
+        }
 
-            fun init(data: BaseData) {
-                view1?.text = data.title
-                view2?.text = data.url
-            }
+        fun init(data: BaseData) {
+            view1?.text = data.title
+            view2?.text = data.description
         }
     }
 }
