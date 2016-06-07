@@ -1,0 +1,10 @@
+= PLASTIC APP
+
+:hardbreaks:
+:toc:
+:toc-placement!:
+
+toc::[]
+
+== What is this
+This is an social app for the https://github.com/ProgramLeague/[plastic club]
