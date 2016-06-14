@@ -44,7 +44,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 index = ArrayList<BaseData>()
                 var i = 0;
                 while (i < indexText.size) {
-                    if(dataSize == 3) {
+                  if (indexText[i].startsWith("====") {
+                    i++
+                    if (dataSize == 3) {
                         index.add(BaseData(
                                 indexText[i],
                                 indexText[i + 1],
@@ -53,15 +55,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                         i += 3
                         continue
                     }
-                    if(dataSize == 2) {
+                    if (dataSize == 2) {
                         index.add(BaseData(
                                 indexText[i],
                                 indexText[i + 1],
-                                "                                                                          "
+                                "                                                                      "
                         ))
                         i += 2
                     }
-                }
+                  }
+                  i++
+              }
                 dataSetOnScreen?.adapter = MyAdapter()
             }
         }
