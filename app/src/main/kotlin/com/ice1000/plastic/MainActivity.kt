@@ -141,7 +141,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         ))
 
         override fun getItemCount(): Int {
-            Log.v("", "index.size = ${index.size}")
             return index.size
         }
 
