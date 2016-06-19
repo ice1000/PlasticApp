@@ -152,16 +152,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         private var view2: TextView? = null
 
         constructor(view: View) : super(view) {
-            view1 = view.findViewById(R.id.messageBox).findViewById(R.id.title) as TextView?
-            view2 = view.findViewById(R.id.messageBox).findViewById(R.id.des) as TextView?
+            var box = view.findViewById(R.id.messageBox);
+            view1 = box.findViewById(R.id.title) as TextView?
+            view2 = box.findViewById(R.id.des) as TextView?
             Log.v("", "views are " + if(view1 == null) "null" else "OK")
             view.setOnTouchListener { view, event ->
                 when(event.action) {
                     0, 2 -> {
-                        view.setBackgroundColor(Color.GRAY)
+                        box.setBackgroundColor(Color.GRAY)
                     }
                     else -> {
-                        view.setBackgroundColor(Color.WHITE)
+                        box.setBackgroundColor(Color.WHITE)
                     }
                 }
                 true
