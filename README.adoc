@@ -8,3 +8,5 @@ toc::[]
 
 == What is this
 This is an social app for the https://github.com/ProgramLeague/[plastic club]
+
+Actually this App will become a program learning App(I will publish some dialogs to the backend and you guys can read it)
