@@ -27,7 +27,7 @@ import java.util.*
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     var index: ArrayList<BaseData> = ArrayList()
-//    var index: List<BaseData>? = null
+    //    var index: List<BaseData>? = null
     var dataSetOnScreen: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,35 +37,35 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         refresh()
     }
 
-    private fun refresh(link: String = indexLink, dataSize:Int = 3) {
+    private fun refresh(link: String = indexLink, dataSize: Int = 3) {
         async() {
             var indexText = URL(link).readText(Charsets.UTF_8).split("\n")
             uiThread {
                 index = ArrayList<BaseData>()
                 var i = 0;
                 while (i < indexText.size) {
-                  if (indexText[i].startsWith("====") {
+                    if (indexText[i].startsWith("====") ) {
+                        i++
+                        if (dataSize == 3) {
+                            index.add(BaseData(
+                                    indexText[i],
+                                    indexText[i + 1],
+                                    indexText[i + 2]
+                            ))
+                            i += 3
+                            continue
+                        }
+                        if (dataSize == 2) {
+                            index.add(BaseData(
+                                    indexText[i],
+                                    indexText[i + 1],
+                                    "                                                                      "
+                            ))
+                            i += 2
+                        }
+                    }
                     i++
-                    if (dataSize == 3) {
-                        index.add(BaseData(
-                                indexText[i],
-                                indexText[i + 1],
-                                indexText[i + 2]
-                        ))
-                        i += 3
-                        continue
-                    }
-                    if (dataSize == 2) {
-                        index.add(BaseData(
-                                indexText[i],
-                                indexText[i + 1],
-                                "                                                                      "
-                        ))
-                        i += 2
-                    }
-                  }
-                  i++
-              }
+                }
                 dataSetOnScreen?.adapter = MyAdapter()
             }
         }
@@ -136,8 +136,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int)
                 = MyViewHolder(LayoutInflater.from(this@MainActivity).inflate(
-                        R.layout.data_base,
-                        null
+                R.layout.data_base,
+                null
         ))
 
         override fun getItemCount(): Int {
@@ -145,18 +145,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
     }
+
     inner class MyViewHolder : RecyclerView.ViewHolder {
 
         private var view1: TextView? = null
         private var view2: TextView? = null
 
         constructor(view: View) : super(view) {
-            var box = view.findViewById(R.id.messageBox);
+            var box = view.findViewById(R.id.messageBox)
             view1 = box.findViewById(R.id.title) as TextView?
             view2 = box.findViewById(R.id.des) as TextView?
-            Log.v("", "views are " + if(view1 == null) "null" else "OK")
+            Log.v("", "views are " + if (view1 == null) "null" else "OK")
             view.setOnTouchListener { view, event ->
-                when(event.action) {
+                when (event.action) {
                     0, 2 -> {
                         box.setBackgroundColor(Color.GRAY)
                     }
