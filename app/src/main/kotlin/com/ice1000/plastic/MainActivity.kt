@@ -30,6 +30,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var connection: ConnectivityManager? = null
     var refresher: SwipeRefreshLayout? = null
 
+    val NUMBER_TWO = 0x2
+    val NUMBER_THREE = 0x3
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,7 +41,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         refresh()
     }
 
-    private fun refresh(link: String = learnLink, dataSize: Int = 3) {
+    private fun refresh(
+            link: String = learnLink,
+            dataSize: Int = NUMBER_THREE,
+            clean: Boolean = true) {
         async() {
             val indexText: List<String>
             indexText = getStringWebResource(
@@ -49,12 +55,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     connection?.activeNetworkInfo != null
             ).split("\n")
             uiThread {
-                index = ArrayList<BaseData>()
-                var i = 0;
+                if (clean)
+                    index = ArrayList<BaseData>()
+                var i = 0
                 while (i < indexText.size) {
                     if (indexText[i].startsWith("====")) {
                         i++
-                        if (dataSize == 3) {
+                        if (dataSize == NUMBER_THREE) {
                             index.add(BaseData(
                                     indexText[i],
                                     indexText[i + 1],
@@ -63,7 +70,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             i += 3
                             continue
                         }
-                        if (dataSize == 2) {
+                        if (dataSize == NUMBER_TWO) {
                             index.add(BaseData(
                                     indexText[i],
                                     indexText[i + 1],
@@ -109,9 +116,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_news -> refresh(indexLink, 3)
-            R.id.nav_members -> refresh(memberLink, 2)
-            R.id.nav_learn -> refresh(learnLink, 2)
+            R.id.nav_news ->
+                refresh(indexLink, NUMBER_THREE)
+            R.id.nav_members ->
+                refresh(memberLink, NUMBER_TWO)
+            R.id.nav_learn ->
+                refresh(learnLink, NUMBER_TWO)
+            R.id.nav_blogs ->
+                refresh(learnLink, NUMBER_THREE)
             R.id.nav_contribute ->
                 startActivity(Intent(this, ScrollingActivity::class.java))
         }
