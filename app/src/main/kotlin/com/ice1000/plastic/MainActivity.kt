@@ -2,6 +2,7 @@ package com.ice1000.plastic
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -19,9 +20,9 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
+import utils.getStringWebResource
 import utils.indexLink
 import utils.memberLink
-import java.net.URL
 import java.util.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -29,17 +30,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var index: ArrayList<BaseData> = ArrayList()
     //    var index: List<BaseData>? = null
     var dataSetOnScreen: RecyclerView? = null
+    var connection: ConnectivityManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        connection = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         initViews()
         refresh()
     }
 
     private fun refresh(link: String = indexLink, dataSize: Int = 3) {
         async() {
-            var indexText = URL(link).readText(Charsets.UTF_8).split("\n")
+            val indexText: List<String>
+            indexText = getStringWebResource(
+                    link,
+                    this@MainActivity,
+                    // 这里我觉得我写得很厉害，如果没有网络连接那就会返回null，然后这里就是false，就会读取内部信息。
+                    connection?.activeNetworkInfo != null
+            ).split("\n")
             uiThread {
                 index = ArrayList<BaseData>()
                 var i = 0;
@@ -152,7 +161,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         private var view2: TextView? = null
 
         constructor(view: View) : super(view) {
-            var box = view.findViewById(R.id.messageBox)
+            val box = view.findViewById(R.id.messageBox)
             view1 = box.findViewById(R.id.title) as TextView?
             view2 = box.findViewById(R.id.des) as TextView?
             Log.v("", "views are " + if (view1 == null) "null" else "OK")
