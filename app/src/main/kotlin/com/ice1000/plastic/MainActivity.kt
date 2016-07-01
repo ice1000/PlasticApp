@@ -79,6 +79,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     i++
                 }
                 dataSetOnScreen?.adapter = MyAdapter()
+                refresher?.isRefreshing = false
             }
         }
     }
