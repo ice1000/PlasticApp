@@ -52,7 +52,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 index = ArrayList<BaseData>()
                 var i = 0;
                 while (i < indexText.size) {
-                    if (indexText[i].startsWith("====") ) {
+                    if (indexText[i].startsWith("====")) {
                         i++
                         if (dataSize == 3) {
                             index.add(BaseData(
@@ -67,8 +67,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             index.add(BaseData(
                                     indexText[i],
                                     indexText[i + 1],
-                                    "                               " +
-                                            "                                       "
+                                    ""
                             ))
                             i += 2
                         }
@@ -112,6 +111,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         when (item.itemId) {
             R.id.nav_news -> refresh(indexLink, 3)
             R.id.nav_members -> refresh(memberLink, 2)
+            R.id.nav_learn -> refresh(learnLink, 2)
             R.id.nav_contribute ->
                 startActivity(Intent(this, ScrollingActivity::class.java))
         }
@@ -159,6 +159,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
     }
+
     inner class MyViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
         private var view1 = view.findViewById(R.id.title) as TextView?
