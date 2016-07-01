@@ -7,3 +7,4 @@ package utils
 
 val indexLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/index.txt"
 val memberLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/member.txt"
+val learnLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/learn.txt"

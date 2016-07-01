@@ -19,10 +19,7 @@ import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
-import utils.BaseActivity
-import utils.getStringWebResource
-import utils.indexLink
-import utils.memberLink
+import utils.*
 import java.util.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -41,7 +38,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         refresh()
     }
 
-    private fun refresh(link: String = indexLink, dataSize: Int = 3) {
+    private fun refresh(link: String = learnLink, dataSize: Int = 3) {
         async() {
             val indexText: List<String>
             indexText = getStringWebResource(
