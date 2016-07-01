@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
+import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 import utils.getStringWebResource
@@ -29,6 +31,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     //    var index: List<BaseData>? = null
     var dataSetOnScreen: RecyclerView? = null
     var connection: ConnectivityManager? = null
+    var refresher: SwipeRefreshLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             indexText = getStringWebResource(
                     link,
                     this@MainActivity,
-                    // 这里我觉得我写得很厉害，如果没有网络连接那就会返回null，然后这里就是false，就会读取内部信息。
+                    // 这里我觉得我写得很厉害，如果没有网络连接那就会返回null，
+                    // 然后这里就是false，就会读取内部信息。
                     connection?.activeNetworkInfo != null
             ).split("\n")
             uiThread {
@@ -66,7 +70,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             index.add(BaseData(
                                     indexText[i],
                                     indexText[i + 1],
-                                    "                                                                      "
+                                    "                               " +
+                                            "                                       "
                             ))
                             i += 2
                         }
@@ -98,7 +103,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.action_settings -> {
                 return true
             }
-            R.id.action_refresh -> refresh()
+//            R.id.action_refresh -> refresh()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -134,6 +139,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val navigationView = nav_view
         navigationView.setNavigationItemSelectedListener(this)
 
+        refresher = find(R.id.refresher)
+        refresher?.setOnRefreshListener {
+            refresh()
+        }
     }
 
     inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {

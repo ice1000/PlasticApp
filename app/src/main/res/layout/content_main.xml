@@ -8,12 +8,19 @@
     tools:context="com.ice1000.plastic.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_margin="10dp"
-        android:layout_height="match_parent"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresher"
         android:layout_width="match_parent"
-        android:dividerHeight="10dp"
-        android:divider="#ffffff"
-        android:id="@+id/dataSet" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:dividerHeight="10dp"
+            android:divider="#ffffff"
+            android:id="@+id/dataSet" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
