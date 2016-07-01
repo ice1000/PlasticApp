@@ -9,7 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import data.BaseData
@@ -153,22 +152,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
     }
+    inner class MyViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
-    inner class MyViewHolder : RecyclerView.ViewHolder {
-
-        private var view1: TextView? = null
-        private var view2: TextView? = null
-
-        constructor(view: View) : super(view) {
-            val box = view.findViewById(R.id.messageBox)
-            view1 = box.findViewById(R.id.title) as TextView?
-            view2 = box.findViewById(R.id.des) as TextView?
-            Log.v("", "views are " + if (view1 == null) "null" else "OK")
-        }
+        private var view1 = view.findViewById(R.id.title) as TextView?
+        private var view2 = view.findViewById(R.id.des) as TextView?
 
         fun init(data: BaseData) {
             view1?.text = data.title
             view2?.text = data.description
+            view.setOnClickListener {
+                openWeb(data.url)
+            }
         }
     }
+
 }
