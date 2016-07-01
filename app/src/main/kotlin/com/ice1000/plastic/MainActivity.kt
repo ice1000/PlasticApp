@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.find
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import utils.*
 import java.util.*
@@ -45,8 +46,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             link: String = learnLink,
             dataSize: Int = NUMBER_THREE,
             clean: Boolean = true) {
+
         async() {
             val indexText: List<String>
+            if (connection?.activeNetworkInfo == null) {
+                toast(getString(R.string.please_check_network))
+            }
             indexText = getStringWebResource(
                     link,
                     this@MainActivity,
@@ -181,7 +186,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             view1?.text = data.title
             view2?.text = data.description
             view.setOnClickListener {
-                openWeb(data.url)
+                if (!data.url.equals("null"))
+                    openWeb(data.url)
             }
         }
     }

@@ -39,7 +39,7 @@ class ScrollingActivity : BaseActivity() {
             startActivity(intent)
             return true
         } catch (e: Exception) {
-            toast("打开QQ失败，请安装最新版本的QQ！")
+            toast(getString(R.string.please_install_qq))
             return false
         }
 
