@@ -30,6 +30,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var dataSetOnScreen: RecyclerView? = null
     var connection: ConnectivityManager? = null
     var refresher: SwipeRefreshLayout? = null
+    var currentLink = learnLink
 
     val NUMBER_TWO = 0x2
     val NUMBER_THREE = 0x3
@@ -43,9 +44,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun refresh(
-            link: String = learnLink,
+            link: String = currentLink,
             dataSize: Int = NUMBER_THREE,
             clean: Boolean = true) {
+
+        currentLink = link
 
         async() {
             val indexText: List<String>
@@ -130,7 +133,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_blogs ->
                 refresh(learnLink, NUMBER_THREE)
             R.id.nav_contribute ->
-                startActivity(Intent(this, ScrollingActivity::class.java))
+                startActivity(Intent(
+                        this, 
+                        ScrollingActivity::class.java
+                ))
         }
         val drawer = drawer_layout
         drawer.closeDrawer(GravityCompat.START)
@@ -147,7 +153,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         val drawer = drawer_layout
         val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        )
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
