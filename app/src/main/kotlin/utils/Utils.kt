@@ -1,6 +1,7 @@
 package utils
 
 import android.content.Context
+import android.util.Log
 import java.net.URL
 
 /**
@@ -16,6 +17,7 @@ fun getStringWebResource(res: String, context: Context, force: Boolean = false):
             Context.MODE_PRIVATE
     )
     var ret = preference.getString(res, DEFAULT_VALUE)
+    Log.i("", ret)
     if(ret.equals(DEFAULT_VALUE) || force) {
         ret = URL(res).readText(Charsets.UTF_8)
         val editor = preference.edit()

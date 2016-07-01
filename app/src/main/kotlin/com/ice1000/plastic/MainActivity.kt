@@ -1,7 +1,6 @@
 package com.ice1000.plastic
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -165,17 +164,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             view1 = box.findViewById(R.id.title) as TextView?
             view2 = box.findViewById(R.id.des) as TextView?
             Log.v("", "views are " + if (view1 == null) "null" else "OK")
-            view.setOnTouchListener { view, event ->
-                when (event.action) {
-                    0, 2 -> {
-                        box.setBackgroundColor(Color.GRAY)
-                    }
-                    else -> {
-                        box.setBackgroundColor(Color.WHITE)
-                    }
-                }
-                true
-            }
         }
 
         fun init(data: BaseData) {
