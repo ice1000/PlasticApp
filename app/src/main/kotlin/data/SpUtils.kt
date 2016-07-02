@@ -7,27 +7,30 @@ import java.net.URL
 
 /**
  * @author ice1000
- * Created by asus1 on 2016/7/1.
+ * Created by ice1000 on 2016/7/1.
  */
 
 private val DEFAULT_VALUE = "DEFAULT_VALUE"
 
-fun getStringWebResource(context: Context, res: String, force: Boolean = false): String {
-    val preference = openPreference(context)
-    var ret = preference.getString(res, DEFAULT_VALUE)
+fun getStringWebResource(
+        context: Context,
+        res: String
+        , haveConnection: Boolean = false): String {
+    var ret = getStringFromSp(context, res, DEFAULT_VALUE)
     Log.i("", ret)
-    if(ret.equals(DEFAULT_VALUE) || force) {
+    if(ret.equals(DEFAULT_VALUE) || haveConnection) {
         ret = URL(res).readText(Charsets.UTF_8)
-        val editor = preference.edit()
-        editor.putString(res, ret)
-        editor.apply()
+        insertIntoSp(context, res, ret)
         return ret
     } else {
         return ret
     }
 }
 
-fun insertIntoSp(context: Context, key: String, value: Any) {
+fun insertIntoSp(
+        context: Context,
+        key: String,
+        value: Any) {
     val editor = openPreference(context).edit()
     if(value is Int) {
         editor.putInt(key, value)
@@ -45,12 +48,18 @@ fun insertIntoSp(context: Context, key: String, value: Any) {
     editor.apply()
 }
 
-fun getBooleanFromSp(context: Context, key: String, default: Boolean = false): Boolean {
+fun getBooleanFromSp(
+        context: Context,
+        key: String,
+        default: Boolean = false): Boolean {
     val preference = openPreference(context)
     return preference.getBoolean(key, default)
 }
 
-fun getStringFromSp(context: Context, key: String, default: String = ""): String {
+fun getStringFromSp(
+        context: Context,
+        key: String,
+        default: String = ""): String {
     val preference = openPreference(context)
     return preference.getString(key, default)
 }
