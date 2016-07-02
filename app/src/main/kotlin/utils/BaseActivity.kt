@@ -1,9 +1,7 @@
 package utils
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.ice1000.plastic.WebViewerActivity
@@ -22,7 +20,7 @@ open class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private val DEFAULT_VALUE = "DEFAULT_VALUE"
+    protected val DEFAULT_VALUE = "DEFAULT_VALUE"
 
     protected fun getStringWebResource(res: String,
             haveConnection: Boolean = false): String {
@@ -50,6 +48,7 @@ open class BaseActivity : AppCompatActivity() {
         } else if(value is Boolean) {
             editor.putBoolean(key, value)
         } else if(value is String) {
+            Log.i("important", "value = $value")
             editor.putString(key, value)
         } else {
             throw Exception("not supported type")

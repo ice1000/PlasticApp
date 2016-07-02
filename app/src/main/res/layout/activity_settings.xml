@@ -11,11 +11,19 @@
     tools:context="com.ice1000.plastic.SettingsActivity">
 
     <TextView
+        android:id="@+id/insert_test_data"
         android:layout_width="match_parent"
         android:layout_height="@dimen/setting_item"
         android:text="@string/insert_test_data"
         android:layout_gravity="center"
-        android:onClick="insertData"
+        android:gravity="center"
+        android:background="@drawable/btn_default_more_light"/>
+    <TextView
+        android:id="@+id/delete_test_data"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_item"
+        android:text="@string/delete_test_data"
+        android:layout_gravity="center"
         android:gravity="center"
         android:background="@drawable/btn_default_more_light"/>
 </LinearLayout>
