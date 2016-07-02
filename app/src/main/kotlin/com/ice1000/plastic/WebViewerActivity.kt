@@ -10,7 +10,8 @@ class WebViewerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_viewer)
 
-        webViewer.loadUrl(intent.getStringExtra(URL))
+        actionBar.setDisplayShowHomeEnabled(true)
 
+        webViewer.loadUrl(intent.getStringExtra(URL))
     }
 }

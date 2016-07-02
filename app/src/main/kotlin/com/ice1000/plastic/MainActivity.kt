@@ -28,7 +28,6 @@ import java.util.*
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     var index: ArrayList<BaseData> = ArrayList()
-    //    var index: List<BaseData>? = null
     var dataSetOnScreen: RecyclerView? = null
     var connection: ConnectivityManager? = null
     var refresher: SwipeRefreshLayout? = null
@@ -61,9 +60,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             if (connection?.activeNetworkInfo == null) {
                 toast(getString(R.string.please_check_network))
             }
-            indexText = getStringWebResource(
-                    this@MainActivity,
-                    link,
+            indexText = getStringWebResource(link,
                     connection?.activeNetworkInfo != null
             ).split("\n")
 
