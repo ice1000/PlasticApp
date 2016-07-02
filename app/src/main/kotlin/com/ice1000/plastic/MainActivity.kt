@@ -14,7 +14,6 @@ import android.util.Log
 import android.view.*
 import android.widget.TextView
 import data.BaseData
-import data.getStringWebResource
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
