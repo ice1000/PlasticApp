@@ -21,7 +21,10 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import utils.*
+import utils.BaseActivity
+import utils.indexLink
+import utils.learnLink
+import utils.memberLink
 import java.util.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {

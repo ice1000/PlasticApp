@@ -11,7 +11,7 @@ import com.ice1000.plastic.WebViewerActivity
  */
 open class BaseActivity : AppCompatActivity() {
 
-    protected final val URL = "URL"
+    protected val URL = "URL"
 
     protected fun openWeb(url: String) {
         var intent = Intent(this, WebViewerActivity::class.java)
