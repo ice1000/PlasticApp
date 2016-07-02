@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import data.BaseData
@@ -21,10 +22,7 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import utils.BaseActivity
-import utils.indexLink
-import utils.learnLink
-import utils.memberLink
+import utils.*
 import java.util.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -52,19 +50,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             dataSize: Int = NUMBER_THREE,
             clean: Boolean = true) {
 
+        Log.i("important", "refreshing, link is $link, have connection = ${
+            connection?.activeNetworkInfo != null
+        }, dataSize = $dataSize")
+
         currentLink = link
 
         async() {
             val indexText: List<String>
-            if (connection!!.activeNetworkInfo == null) {
+            if (connection?.activeNetworkInfo == null) {
                 toast(getString(R.string.please_check_network))
             }
             indexText = getStringWebResource(
                     this@MainActivity,
-                    link
-//                    connection?.activeNetworkInfo != null
+                    link,
+                    connection?.activeNetworkInfo != null
             ).split("\n")
+
             uiThread {
+                Log.i("important", "indexText = $indexText")
                 if (clean)
                     index = ArrayList<BaseData>()
                 var i = 0
@@ -137,7 +141,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_learn ->
                 refresh(learnLink, NUMBER_TWO)
             R.id.nav_blogs ->
-                refresh(learnLink, NUMBER_THREE)
+                refresh(blogLink, NUMBER_THREE)
             R.id.nav_contribute ->
                 startActivity(Intent(
                         this, 
@@ -204,6 +208,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             view.setOnClickListener {
                 if (!data.url.equals("null"))
                     openWeb(data.url)
+            }
+            view.setOnTouchListener { view, event ->
+                when(event.action) {
+                    MotionEvent.ACTION_BUTTON_PRESS -> view.background =
+                            resources.getDrawable(R.drawable.btn_default_light)
+                    MotionEvent.ACTION_MOVE -> view.background =
+                            resources.getDrawable(R.drawable.btn_default_light)
+                    else -> view.background =
+                            resources.getDrawable(R.drawable.btn_default_more_light)
+                }
+                return@setOnTouchListener true
             }
         }
     }
