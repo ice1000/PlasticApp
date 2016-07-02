@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.TextView
 import data.BaseData
+import data.getStringWebResource
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -52,15 +53,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         async() {
             val indexText: List<String>
-            if (connection?.activeNetworkInfo == null) {
+            if (connection!!.activeNetworkInfo == null) {
                 toast(getString(R.string.please_check_network))
             }
             indexText = getStringWebResource(
-                    link,
                     this@MainActivity,
-                    // 这里我觉得我写得很厉害，如果没有网络连接那就会返回null，
-                    // 然后这里就是false，就会读取内部信息。
-                    connection?.activeNetworkInfo != null
+                    link
+//                    connection?.activeNetworkInfo != null
             ).split("\n")
             uiThread {
                 if (clean)
@@ -90,7 +89,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     i++
                 }
                 dataSetOnScreen?.adapter = MyAdapter()
-                refresher?.isRefreshing = false
+//                refresher?.isRefreshing = false
             }
         }
     }
@@ -113,6 +112,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> {
+                startActivity(Intent(
+                        this@MainActivity,
+                        SettingsActivity::class.java
+                ))
                 return true
             }
 //            R.id.action_refresh -> refresh()
@@ -166,6 +169,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         refresher = find(R.id.refresher)
         refresher?.setOnRefreshListener {
             refresh()
+            refresher!!.isRefreshing = false
         }
     }
 
