@@ -25,7 +25,7 @@ open class BaseActivity : AppCompatActivity() {
     protected fun getStringWebResource(res: String,
             haveConnection: Boolean = false): String {
         var ret = getStringFromSp(res, DEFAULT_VALUE)
-        Log.i("important", ret)
+        Log.i("important", "ret = $ret")
         if(ret.equals(DEFAULT_VALUE) || haveConnection) {
             Log.i("important", "linking to web")
             ret = java.net.URL(res).readText(Charsets.UTF_8)
