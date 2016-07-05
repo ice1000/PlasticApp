@@ -1,7 +1,6 @@
 package com.ice1000.plastic
 
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -23,11 +22,11 @@ import org.jetbrains.anko.uiThread
 import utils.*
 import java.util.*
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(),
+        NavigationView.OnNavigationItemSelectedListener {
 
     var index: ArrayList<BaseData> = ArrayList()
     var dataSetOnScreen: RecyclerView? = null
-    var connection: ConnectivityManager? = null
     var refresher: SwipeRefreshLayout? = null
 
     var currentLink = learnLink
@@ -37,7 +36,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        connection = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         initViews()
         refresh()
     }

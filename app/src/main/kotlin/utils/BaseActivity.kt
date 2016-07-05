@@ -2,6 +2,8 @@ package utils
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.ice1000.plastic.WebViewerActivity
@@ -13,6 +15,12 @@ import com.ice1000.plastic.WebViewerActivity
 open class BaseActivity : AppCompatActivity() {
 
     protected val URL = "URL"
+    var connection: ConnectivityManager? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        connection = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+    }
 
     protected fun openWeb(url: String) {
         startActivity(Intent(
