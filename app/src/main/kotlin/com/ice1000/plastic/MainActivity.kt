@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
-import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import utils.*
@@ -186,7 +185,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val toolbar = toolbar
         setSupportActionBar(toolbar)
 
-        dataSetOnScreen = dataSet
+        dataSetOnScreen = dataSet_main
         dataSetOnScreen?.layoutManager = LinearLayoutManager(this)
         dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
 
@@ -202,14 +201,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val navigationView = nav_view
         navigationView.setNavigationItemSelectedListener(this)
 
-        refresher = find(R.id.refresher)
+        refresher = refresher_main
         refresher?.setOnRefreshListener {
             refresh()
             refresher!!.isRefreshing = false
         }
     }
 
-    inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
+    inner class MyAdapter :
+            RecyclerView.Adapter<MyViewHolder>() {
         override fun onBindViewHolder(
                 holder: MyViewHolder?,
                 position: Int) {
