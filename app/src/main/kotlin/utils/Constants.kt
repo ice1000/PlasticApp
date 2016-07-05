@@ -19,3 +19,6 @@ val indexNum = NUMBER_THREE
 val blogNum = NUMBER_THREE
 val learnNum = NUMBER_THREE
 val memberNum = NUMBER_TWO
+
+val listType = 0xFF1
+val flowType = 0xFF2

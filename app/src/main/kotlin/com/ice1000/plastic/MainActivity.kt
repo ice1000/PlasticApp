@@ -31,8 +31,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var dataSetOnScreen: RecyclerView? = null
     var connection: ConnectivityManager? = null
     var refresher: SwipeRefreshLayout? = null
+
     var currentLink = learnLink
     var currentNum = learnNum
+    var currentType = listType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun refresh(
             link: String = currentLink,
+            dataType: Int = currentType,
             dataSize: Int = currentNum,
             clean: Boolean = true) {
 
@@ -53,13 +56,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         currentLink = link
         currentNum = dataSize
+        currentType = dataType
 
         try {
             Log.v("not important", "connection?.activeNetworkInfo = " +
                     "${connection!!.activeNetworkInfo}")
         } catch (e: Exception) {
             toast(getString(R.string.please_check_network))
-            showData(JJFLY.split("\n"), clean, dataSize)
+            showData(
+                    JJFLY.split("\n"),
+                    clean,
+                    dataSize,
+                    dataType
+            )
             return
         }
         async() {
@@ -70,12 +79,24 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             ).split("\n")
 
             uiThread {
-                showData(indexText, clean, dataSize)
+                showData(
+                        indexText,
+                        clean,
+                        dataSize,
+                        dataType
+                )
             }
         }
     }
 
-    private fun showData(indexText: List<String>, clean: Boolean, dataSize: Int) {
+    /**
+     * core code of this system
+     */
+    private fun showData(
+            indexText: List<String>,
+            clean: Boolean,
+            dataSize: Int,
+            dataType: Int) {
         Log.i("important", "indexText = $indexText")
         if (clean)
             index = ArrayList<BaseData>()
@@ -87,6 +108,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     index.add(BaseData(
                             indexText[i],
                             indexText[i + 1],
+                            dataType,
                             indexText[i + 2]
                     ))
                     i += 3
@@ -96,6 +118,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     index.add(BaseData(
                             indexText[i],
                             indexText[i + 1],
+                            dataType,
                             ""
                     ))
                     i += 2
@@ -141,13 +164,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_news ->
-                refresh(indexLink, indexNum)
+                refresh(indexLink, indexNum, listType)
 //            R.id.nav_members ->
-//                refresh(memberLink, memberNum)
+//                refresh(memberLink, memberNum, listType)
             R.id.nav_learn ->
-                refresh(learnLink, learnNum)
+                refresh(learnLink, learnNum, listType)
             R.id.nav_blogs ->
-                refresh(blogLink, blogNum)
+                refresh(blogLink, blogNum, listType)
             R.id.nav_contribute ->
                 startActivity(Intent(
                         this, 
@@ -218,8 +241,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             view2?.text = data.description
 
             view.setOnClickListener {
-                if (!data.url.equals("null"))
-                    openWeb(data.url)
+                if(data.type == listType) {
+                    if (!data.url.equals("null"))
+                        openWeb(data.url)
+                } else {
+                    startActivity(Intent(
+                            this@MainActivity,
+                            ScrollingActivity::class.java
+                    ).putExtra(URL, data.url))
+                }
             }
 
             view.setOnTouchListener { view, event ->

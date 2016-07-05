@@ -7,5 +7,6 @@ package data
 data class BaseData (
         var title: String,
         var url: String,
+        var type: Int,
         var description: String = ""
 )
