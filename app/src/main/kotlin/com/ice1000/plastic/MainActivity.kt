@@ -16,7 +16,6 @@ import android.widget.TextView
 import data.BaseData
 import data.JJFLY
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
@@ -167,7 +166,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //            R.id.nav_members ->
 //                refresh(memberLink, memberNum, listType)
             R.id.nav_learn ->
-                refresh(learnLink, learnNum, listType)
+                refresh(learnLink, learnNum, otherListType)
             R.id.nav_blogs ->
                 refresh(blogLink, blogNum, listType)
             R.id.nav_contribute ->
@@ -241,14 +240,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             view2?.text = data.description
 
             view.setOnClickListener {
-                if(data.type == listType) {
-                    if (!data.url.equals("null"))
-                        openWeb(data.url)
-                } else {
-                    startActivity(Intent(
-                            this@MainActivity,
-                            ScrollingActivity::class.java
-                    ).putExtra(URL, data.url))
+                when(data.type) {
+                    // 显示一个表，元素点击之后打开网页
+                    listType ->
+                        if (!"null".equals(data.url))
+                            openWeb(data.url)
+                    // 显示一个表，元素打开之后是另一个表
+                    otherListType ->
+                        if (!"null".equals(data.url))
+                            refresh(
+                                    data.url,
+                                    flowType,
+                                    NUMBER_THREE
+                            )
+                    // 显示一个数据流
+                    flowType ->
+                        startActivity(Intent(
+                                this@MainActivity,
+                                ScrollingActivity::class.java
+                        ).putExtra(URL, data.url))
                 }
             }
 
