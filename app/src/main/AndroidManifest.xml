@@ -25,14 +25,14 @@
         <activity android:name=".SettingsActivity" />
         <activity
             android:name=".ScrollingActivity"
-            android:label="参与开发"
+            android:label=""
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ice1000.plastic.MainActivity" />
         </activity>
-        <activity android:name=".WebViewerActivity"></activity>
+        <activity android:name=".WebViewerActivity" />
     </application>
 
 </manifest>

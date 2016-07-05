@@ -32,9 +32,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     var connection: ConnectivityManager? = null
     var refresher: SwipeRefreshLayout? = null
     var currentLink = learnLink
-
-    val NUMBER_TWO = 0x2
-    val NUMBER_THREE = 0x3
+    var currentNum = learnNum
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +44,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun refresh(
             link: String = currentLink,
-            dataSize: Int = NUMBER_THREE,
+            dataSize: Int = currentNum,
             clean: Boolean = true) {
 
         Log.i("important", "refreshing, link is $link, have connection = ${
@@ -54,6 +52,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }, dataSize = $dataSize")
 
         currentLink = link
+        currentNum = dataSize
 
         try {
             Log.v("not important", "connection?.activeNetworkInfo = " +
@@ -142,13 +141,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_news ->
-                refresh(indexLink, NUMBER_THREE)
-            R.id.nav_members ->
-                refresh(memberLink, NUMBER_TWO)
+                refresh(indexLink, indexNum)
+//            R.id.nav_members ->
+//                refresh(memberLink, memberNum)
             R.id.nav_learn ->
-                refresh(learnLink, NUMBER_TWO)
+                refresh(learnLink, learnNum)
             R.id.nav_blogs ->
-                refresh(blogLink, NUMBER_THREE)
+                refresh(blogLink, blogNum)
             R.id.nav_contribute ->
                 startActivity(Intent(
                         this, 
