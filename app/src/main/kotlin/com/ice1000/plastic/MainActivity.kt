@@ -35,13 +35,17 @@ class MainActivity : BaseActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViews()
-        refresh()
+        refresh(
+                currentLink,
+                currentNum,
+                currentType
+        )
     }
 
     private fun refresh(
-            link: String = currentLink,
-            dataType: Int = currentType,
-            dataSize: Int = currentNum,
+            link: String,
+            dataType: Int,
+            dataSize: Int,
             clean: Boolean = true) {
 
         Log.i("important", "refreshing, link is $link, have connection = ${
@@ -202,7 +206,11 @@ class MainActivity : BaseActivity(),
 
         val refresher = refresher_main
         refresher.setOnRefreshListener {
-            refresh()
+            refresh(
+                    currentLink,
+                    currentNum,
+                    currentType
+            )
             refresher.isRefreshing = false
         }
     }

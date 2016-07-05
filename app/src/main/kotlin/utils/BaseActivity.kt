@@ -10,7 +10,7 @@ import com.ice1000.plastic.WebViewerActivity
 
 /**
  * @author ice1000
- * Created by asus1 on 2016/6/4.
+ * Created by ice1000 on 2016/6/4.
  */
 open class BaseActivity : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        connection = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        connection = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager;
     }
 
     protected fun openWeb(url: String) {
@@ -45,13 +45,13 @@ open class BaseActivity : AppCompatActivity() {
      */
     protected fun getStringWebResource(
             url: String): String {
-        var ret = getStringFromSp(url, DEFAULT_VALUE)
+        var ret = getStringFromSharedPreference(url, DEFAULT_VALUE)
         Log.i("important", "ret = $ret")
         if(ret.equals(DEFAULT_VALUE)
                 || checkNetwork()) {
             Log.i("important", "linking to web")
             ret = java.net.URL(url).readText(Charsets.UTF_8)
-            insertIntoSp(url, ret)
+            insertIntoSharedPreference(url, ret)
             return ret
         } else {
             Log.i("important", "linking to SharedPreference")
@@ -59,7 +59,7 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    protected fun insertIntoSp(key: String, value: Any) {
+    protected fun insertIntoSharedPreference(key: String, value: Any) {
         val editor = openPreference().edit()
         if(value is Int) {
             editor.putInt(key, value)
@@ -83,7 +83,7 @@ open class BaseActivity : AppCompatActivity() {
         return preference.getBoolean(key, default)
     }
 
-    protected fun getStringFromSp(key: String, default: String = ""): String {
+    protected fun getStringFromSharedPreference(key: String, default: String = ""): String {
         val preference = openPreference()
         return preference.getString(key, default)
     }

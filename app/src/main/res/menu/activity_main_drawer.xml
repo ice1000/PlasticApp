@@ -16,10 +16,10 @@
                     android:id="@+id/nav_news"
                     android:icon="@drawable/sms_failed_128px_1182256_easyicon"
                     android:title="@string/news" />
-                <item
-                    android:id="@+id/nav_members"
-                    android:icon="@drawable/thumb_up_128px_1182305_easyicon"
-                    android:title="@string/member_list" />
+                <!--<item-->
+                    <!--android:id="@+id/nav_members"-->
+                    <!--android:icon="@drawable/thumb_up_128px_1182305_easyicon"-->
+                    <!--android:title="@string/member_list" />-->
                 <item
                     android:id="@+id/nav_contribute"
                     android:icon="@drawable/usb_128px_1182331_easyicon"
