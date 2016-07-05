@@ -8,10 +8,13 @@ package utils
 val NUMBER_TWO = 0x2
 val NUMBER_THREE = 0x3
 
-val indexLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/index.txt"
-val memberLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/member.txt"
-val learnLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/learn.txt"
-val blogLink = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/blog.txt"
+val link = "https://coding.net/u/ice1000/p/pastic-raw/git/raw/master/raw/"
+
+val indexLink = "${link}index.txt"
+val memberLink = "${link}member.txt"
+val learnLink = "${link}learn.txt"
+val blogLink = "${link}blog.txt"
+
 val indexNum = NUMBER_THREE
 val blogNum = NUMBER_THREE
 val learnNum = NUMBER_THREE

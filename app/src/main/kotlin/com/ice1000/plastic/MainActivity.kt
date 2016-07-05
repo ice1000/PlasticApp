@@ -187,11 +187,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
-        override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
+        override fun onBindViewHolder(
+                holder: MyViewHolder?,
+                position: Int) {
             holder?.init(index[position])
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int)
+        override fun onCreateViewHolder(
+                parent: ViewGroup?,
+                viewType: Int)
                 = MyViewHolder(LayoutInflater.from(this@MainActivity).inflate(
                 R.layout.data_base,
                 null
@@ -203,7 +207,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     }
 
-    inner class MyViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
+    inner class MyViewHolder(var view: View) :
+            RecyclerView.ViewHolder(view) {
 
         private var view1 = view.findViewById(R.id.title) as TextView?
         private var view2 = view.findViewById(R.id.des) as TextView?
@@ -211,10 +216,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         fun init(data: BaseData) {
             view1?.text = data.title
             view2?.text = data.description
+
             view.setOnClickListener {
                 if (!data.url.equals("null"))
                     openWeb(data.url)
             }
+
             view.setOnTouchListener { view, event ->
                 when(event.action) {
                     MotionEvent.ACTION_BUTTON_PRESS -> view.background =
