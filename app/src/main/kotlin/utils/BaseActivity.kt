@@ -29,17 +29,29 @@ open class BaseActivity : AppCompatActivity() {
         ).putExtra(URL, url))
     }
 
+    protected fun checkNetwork(): Boolean {
+        Log.v("not important", "connection?.activeNetworkInfo = " +
+                "${connection!!.activeNetworkInfo}")
+        return connection!!.activeNetworkInfo != null
+    }
+
     protected val DEFAULT_VALUE = "DEFAULT_VALUE"
 
-    protected fun getStringWebResource(res: String,
-            haveConnection: Boolean = false): String {
-        var ret = getStringFromSp(res, DEFAULT_VALUE)
+    /**
+     * this will cache the data into SharedPreference
+     * next time when the network is invalid, it will return the data
+     * stored in the SharedPreference.
+     * @param url url
+     */
+    protected fun getStringWebResource(
+            url: String): String {
+        var ret = getStringFromSp(url, DEFAULT_VALUE)
         Log.i("important", "ret = $ret")
         if(ret.equals(DEFAULT_VALUE)
-                || haveConnection) {
+                || checkNetwork()) {
             Log.i("important", "linking to web")
-            ret = java.net.URL(res).readText(Charsets.UTF_8)
-            insertIntoSp(res, ret)
+            ret = java.net.URL(url).readText(Charsets.UTF_8)
+            insertIntoSp(url, ret)
             return ret
         } else {
             Log.i("important", "linking to SharedPreference")

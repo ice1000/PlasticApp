@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -27,7 +26,6 @@ class MainActivity : BaseActivity(),
 
     var index: ArrayList<BaseData> = ArrayList()
     var dataSetOnScreen: RecyclerView? = null
-    var refresher: SwipeRefreshLayout? = null
 
     var currentLink = learnLink
     var currentNum = learnNum
@@ -50,37 +48,41 @@ class MainActivity : BaseActivity(),
             connection?.activeNetworkInfo != null
         }, dataSize = $dataSize")
 
+        val showUselessData = showData(
+                JJFLY.split("\n"),
+                clean,
+                dataSize,
+                dataType
+        )
+
         currentLink = link
         currentNum = dataSize
         currentType = dataType
 
         try {
-            Log.v("not important", "connection?.activeNetworkInfo = " +
-                    "${connection!!.activeNetworkInfo}")
+            checkNetwork()
         } catch (e: Exception) {
             toast(getString(R.string.please_check_network))
-            showData(
-                    JJFLY.split("\n"),
-                    clean,
-                    dataSize,
-                    dataType
-            )
+            showUselessData
             return
         }
+
         async() {
             val indexText: List<String>
 
-            indexText = getStringWebResource(link,
-                    connection!!.activeNetworkInfo != null
-            ).split("\n")
+            indexText = getStringWebResource(link).split("\n")
 
             uiThread {
-                showData(
-                        indexText,
-                        clean,
-                        dataSize,
-                        dataType
-                )
+                try {
+                    showData(
+                            indexText,
+                            clean,
+                            dataSize,
+                            dataType
+                    )
+                } catch (e: IndexOutOfBoundsException) {
+                    showUselessData
+                }
             }
         }
     }
@@ -198,10 +200,10 @@ class MainActivity : BaseActivity(),
         val navigationView = nav_view
         navigationView.setNavigationItemSelectedListener(this)
 
-        refresher = refresher_main
-        refresher?.setOnRefreshListener {
+        val refresher = refresher_main
+        refresher.setOnRefreshListener {
             refresh()
-            refresher!!.isRefreshing = false
+            refresher.isRefreshing = false
         }
     }
 
