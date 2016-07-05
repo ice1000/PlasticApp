@@ -15,9 +15,10 @@ open class BaseActivity : AppCompatActivity() {
     protected val URL = "URL"
 
     protected fun openWeb(url: String) {
-        var intent = Intent(this, WebViewerActivity::class.java)
-        intent.putExtra(URL, url)
-        startActivity(intent)
+        startActivity(Intent(
+                this,
+                WebViewerActivity::class.java
+        ).putExtra(URL, url))
     }
 
     protected val DEFAULT_VALUE = "DEFAULT_VALUE"
@@ -26,7 +27,8 @@ open class BaseActivity : AppCompatActivity() {
             haveConnection: Boolean = false): String {
         var ret = getStringFromSp(res, DEFAULT_VALUE)
         Log.i("important", "ret = $ret")
-        if(ret.equals(DEFAULT_VALUE) || haveConnection) {
+        if(ret.equals(DEFAULT_VALUE)
+                || haveConnection) {
             Log.i("important", "linking to web")
             ret = java.net.URL(res).readText(Charsets.UTF_8)
             insertIntoSp(res, ret)

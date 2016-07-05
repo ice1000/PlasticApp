@@ -8,11 +8,23 @@
     <string name="news">新鲜事</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="contribute">
-        参与贡献文档/资源/代码：\n\n
-        请联系开发者。\n\n
-        我叫千里冰封，请在github上联系我： \n\n
-        github.com/ice1000\n\n
-        我们需要你的帮助，也随时欢迎任何人加入PLASTIC组织。\n\n\n\n
+
+    </string>
+    <string name="contributing">参与开发</string>
+    <string name="source">源代码</string>
+    <string name="refresh">刷新</string>
+    <string name="member_list">成员列表</string>
+    <string name="learn_coding">学习编程</string>
+    <string name="about_plastic">关于Plastic</string>
+    <string name="view_blogs">经验之谈</string>
+    <string name="please_check_network">请检查网络连接</string>
+    <string name="please_install_qq">打开QQ失败，请安装最新版本的QQ！</string>
+    <string name="insert_test_data">插入测试数据</string>
+    <string name="delete_test_data">清除测试数据</string>
+</resources>
+<!--
+        我们是PLASTIC。\n
+        我们欢迎任何人加入我们。\n\n\n\n
 
         我们是一个以00后、95后学生为主的编程社区。\n\n
         这是一个有萝莉(Nicole)有御姐(SpiderKing)有大叔(3A)有正太(就是我)的社区，\n\n
@@ -28,16 +40,6 @@
 
         但是，我们却从未分开。\n\n\n\n
         PLASTIC forever.
-    </string>
-    <string name="contributing">参与开发</string>
-    <string name="source">源代码</string>
-    <string name="refresh">刷新</string>
-    <string name="member_list">成员列表</string>
-    <string name="learn_coding">学习编程</string>
-    <string name="about_plastic">关于Plastic</string>
-    <string name="view_blogs">经验之谈</string>
-    <string name="please_check_network">请检查网络连接</string>
-    <string name="please_install_qq">打开QQ失败，请安装最新版本的QQ！</string>
-    <string name="insert_test_data">插入测试数据</string>
-    <string name="delete_test_data">清除测试数据</string>
-</resources>
+
+
+-->
