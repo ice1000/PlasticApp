@@ -3,13 +3,9 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import data.JJFLY
-import kotlinx.android.synthetic.main.activity_scrolling.*
-
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.toast
 import utils.BaseActivity
-import utils.indexLink
 class SettingsActivity : BaseActivity() {
 
 
@@ -18,7 +14,7 @@ class SettingsActivity : BaseActivity() {
         setContentView(R.layout.activity_settings)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val fab = fab
+        val fab = fab_setting
         fab.setOnClickListener({
             joinQQGroup("cAyOYEJxVW0zF4mR5XNZ1uoFk5qEBMlR")
         })
