@@ -57,14 +57,19 @@
         tools:context="com.ice1000.plastic.ScrollingActivity"
         tools:showIn="@layout/activity_scrolling">
 
-        <android.support.v7.widget.RecyclerView
-            android:orientation="vertical"
-            android:layout_margin="16dp"
-            android:id="@+id/recycler_scrolling"
-
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresher_scrolling"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                android:id="@+id/recycler_scrolling"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
