@@ -6,4 +6,4 @@ package data
  */
 
 
-val JJFLY = "====\n周明凯同学自杀\nnull\n疑似表白失败"
+val JJ_FLY = "====\n周明凯同学自杀\nnull\n疑似表白失败"

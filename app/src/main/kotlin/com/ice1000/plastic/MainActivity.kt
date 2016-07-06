@@ -12,7 +12,7 @@ import android.util.Log
 import android.view.*
 import android.widget.TextView
 import data.BaseData
-import data.JJFLY
+import data.JJ_FLY
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
@@ -29,7 +29,7 @@ class MainActivity : BaseActivity(),
 
     var currentLink = learnLink
     var currentNum = learnNum
-    var currentType = listType
+    var currentType = otherListType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +53,7 @@ class MainActivity : BaseActivity(),
         }, dataSize = $dataSize")
 
         val showUselessData = showData(
-                JJFLY.split("\n"),
+                JJ_FLY.split("\n"),
                 clean,
                 dataSize,
                 dataType
@@ -66,7 +66,7 @@ class MainActivity : BaseActivity(),
         Log.i("important",
                 "currentLink = $currentLink, " +
                 "currentNum = $currentNum, " +
-                "currentType = $currentType")
+                "currentType = 0xFF${currentType - 0xFF0}")
 
         try {
             checkNetwork()
@@ -90,7 +90,7 @@ class MainActivity : BaseActivity(),
                             dataType
                     )
                 } catch (e: IndexOutOfBoundsException) {
-                    showUselessData
+                    Log.v("important", "showUseLessData = $showUselessData")
                 }
             }
         }
