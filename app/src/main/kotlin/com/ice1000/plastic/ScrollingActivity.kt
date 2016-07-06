@@ -19,7 +19,8 @@ class ScrollingActivity : BaseActivity() {
         url = intent.getStringExtra(URL)
         Log.d(this.toString(), url)
         initViews()
-        refresh()
+        refresh({
+        })
     }
 
     private fun initViews() {
@@ -28,16 +29,18 @@ class ScrollingActivity : BaseActivity() {
         })
         val refresher = refresher_scrolling
         refresher.setOnRefreshListener {
-            refresh()
-            refresher.isRefreshing = false
+            refresh({
+                refresher.isRefreshing = false
+            })
         }
         data = data_scrolling
     }
 
-    private fun refresh() {
+    private fun refresh(end: () -> Unit) {
         async() {
             val text = getStringWebResource(url)
             uiThread {
+                end()
                 data?.text = text
             }
         }
