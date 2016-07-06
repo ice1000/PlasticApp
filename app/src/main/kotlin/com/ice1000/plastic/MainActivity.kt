@@ -36,9 +36,9 @@ class MainActivity : BaseActivity(),
         setContentView(R.layout.activity_main)
         initViews()
         refresh(
-                currentLink,
-                currentNum,
-                currentType
+                link = currentLink,
+                dataSize = currentNum,
+                dataType = currentType
         )
     }
 
@@ -49,7 +49,7 @@ class MainActivity : BaseActivity(),
             clean: Boolean = true) {
 
         Log.i("important", "refreshing, link is $link, have connection = ${
-            connection?.activeNetworkInfo != null
+        connection?.activeNetworkInfo != null
         }, dataSize = $dataSize")
 
         val showUselessData = showData(
@@ -65,8 +65,8 @@ class MainActivity : BaseActivity(),
 
         Log.i("important",
                 "currentLink = $currentLink, " +
-                "currentNum = $currentNum, " +
-                "currentType = 0xFF${currentType - 0xFF0}")
+                        "currentNum = $currentNum, " +
+                        "currentType = 0xFF${currentType - 0xFF0}")
 
         try {
             checkNetwork()
@@ -171,16 +171,32 @@ class MainActivity : BaseActivity(),
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_news ->
-                refresh(indexLink, indexNum, listType)
+                refresh(
+                        link = indexLink,
+                        dataSize = indexNum,
+                        dataType = listType
+                )
 //            R.id.nav_members ->
-//                refresh(memberLink, memberNum, listType)
+//                refresh(
+//                        link = memberLink,
+//                        dataSize = memberNum,
+//                        dataType = listType
+//                )
             R.id.nav_learn ->
-                refresh(learnLink, learnNum, otherListType)
+                refresh(
+                        link = learnLink,
+                        dataSize = learnNum,
+                        dataType = otherListType
+                )
             R.id.nav_blogs ->
-                refresh(blogLink, blogNum, listType)
+                refresh(
+                        link = blogLink,
+                        dataSize = blogNum,
+                        dataType = listType
+                )
             R.id.nav_contribute ->
                 startActivity(Intent(
-                        this, 
+                        this,
                         ScrollingActivity::class.java
                 ))
         }
@@ -253,20 +269,20 @@ class MainActivity : BaseActivity(),
 
             view.setOnClickListener {
                 Log.i("important", "An item is clicked, dataType = 0xFF${data.type - 0xFF0}")
-                when(data.type) {
-                    // 显示一个表，元素点击之后打开网页
+                when (data.type) {
+                // 显示一个表，元素点击之后打开网页
                     listType ->
                         if (!"null".equals(data.url))
                             openWeb(data.url)
-                    // 显示一个表，元素打开之后是另一个表
+                // 显示一个表，元素打开之后是另一个表
                     otherListType ->
                         if (!"null".equals(data.url))
                             refresh(
-                                    data.url,
-                                    flowType,
-                                    NUMBER_THREE
+                                    link = data.url,
+                                    dataSize = NUMBER_THREE,
+                                    dataType = flowType
                             )
-                    // 显示一个数据流
+                // 显示一个数据流
                     flowType ->
                         startActivity(Intent(
                                 this@MainActivity,
@@ -277,15 +293,15 @@ class MainActivity : BaseActivity(),
 
             view.setOnTouchListener { view, event ->
                 Log.i("clicked", "event = ${event.action}")
-                if(lastClick == 0 && event.action == 1)
+                if (lastClick == 0 && event.action == 1)
                     view.callOnClick()
-                when(event.action) {
+                when (event.action) {
 //                    MotionEvent.ACTION_BUTTON_PRESS ->{
 //                        view.background = resources.getDrawable(R.drawable.btn_default_light)
 //                        view.callOnClick()
 //                    }
 //                    MotionEvent.ACTION_OUTSIDE
-                    MotionEvent.ACTION_MOVE ,
+                    MotionEvent.ACTION_MOVE,
                     MotionEvent.ACTION_DOWN -> view.background =
                             resources.getDrawable(R.drawable.btn_default_light)
                     else -> view.background =
