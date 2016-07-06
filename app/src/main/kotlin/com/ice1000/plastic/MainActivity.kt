@@ -82,16 +82,12 @@ class MainActivity : BaseActivity(),
             indexText = getStringWebResource(link).split("\n")
 
             uiThread {
-                try {
-                    showData(
-                            indexText,
-                            clean,
-                            dataSize,
-                            dataType
-                    )
-                } catch (e: IndexOutOfBoundsException) {
-                    Log.v("important", "showUseLessData = $showUselessData")
-                }
+                showData(
+                        indexText,
+                        clean,
+                        dataSize,
+                        dataType
+                )
             }
         }
     }
@@ -110,25 +106,28 @@ class MainActivity : BaseActivity(),
         var i = 0
         while (i < indexText.size) {
             if (indexText[i].startsWith("====")) {
-                i++
-                if (dataSize == NUMBER_THREE) {
-                    index.add(BaseData(
-                            indexText[i],
-                            indexText[i + 1],
-                            dataType,
-                            indexText[i + 2]
-                    ))
-                    i += 3
-                    continue
-                }
-                if (dataSize == NUMBER_TWO) {
-                    index.add(BaseData(
-                            indexText[i],
-                            indexText[i + 1],
-                            dataType,
-                            ""
-                    ))
-                    i += 2
+                try {
+                    i++
+                    if (dataSize == NUMBER_THREE) {
+                        index.add(BaseData(
+                                indexText[i],
+                                indexText[i + 1],
+                                dataType,
+                                indexText[i + 2]
+                        ))
+                        i += 3
+                        continue
+                    }
+                    if (dataSize == NUMBER_TWO) {
+                        index.add(BaseData(
+                                indexText[i],
+                                indexText[i + 1],
+                                dataType,
+                                ""
+                        ))
+                        i += 2
+                    }
+                } catch (e: IndexOutOfBoundsException) {
                 }
             }
             i++
@@ -228,9 +227,9 @@ class MainActivity : BaseActivity(),
         val refresher = refresher_main
         refresher.setOnRefreshListener {
             refresh(
-                    currentLink,
-                    currentNum,
-                    currentType
+                    link = currentLink,
+                    dataSize = currentNum,
+                    dataType = currentType
             )
             refresher.isRefreshing = false
         }
