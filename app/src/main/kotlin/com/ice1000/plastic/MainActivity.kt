@@ -44,8 +44,8 @@ class MainActivity : BaseActivity(),
 
     private fun refresh(
             link: String,
-            dataType: Int,
             dataSize: Int,
+            dataType: Int,
             clean: Boolean = true) {
 
         Log.i("important", "refreshing, link is $link, have connection = ${
