@@ -21,5 +21,5 @@ val learnNum = NUMBER_THREE
 val memberNum = NUMBER_TWO
 
 val listType = 0xFF1
-val otherListType = 0xFF1
-val flowType = 0xFF2
+val otherListType = 0xFF2
+val flowType = 0xFF3

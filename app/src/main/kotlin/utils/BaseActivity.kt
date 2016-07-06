@@ -70,7 +70,7 @@ open class BaseActivity : AppCompatActivity() {
         } else if(value is Boolean) {
             editor.putBoolean(key, value)
         } else if(value is String) {
-            Log.i("important", "value = $value")
+//            Log.i("important", "value = $value")
             editor.putString(key, value)
         } else {
             throw Exception("not supported type")

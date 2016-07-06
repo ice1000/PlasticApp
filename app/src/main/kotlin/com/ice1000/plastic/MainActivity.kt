@@ -104,7 +104,7 @@ class MainActivity : BaseActivity(),
             clean: Boolean,
             dataSize: Int,
             dataType: Int) {
-        Log.i("important", "indexText = $indexText")
+//        Log.i("important", "indexText = $indexText")
         if (clean)
             index = ArrayList<BaseData>()
         var i = 0
@@ -236,9 +236,7 @@ class MainActivity : BaseActivity(),
                 null
         ))
 
-        override fun getItemCount(): Int {
-            return index.size
-        }
+        override fun getItemCount() = index.size
 
     }
 
@@ -247,13 +245,14 @@ class MainActivity : BaseActivity(),
 
         private var view1 = view.findViewById(R.id.title) as TextView?
         private var view2 = view.findViewById(R.id.des) as TextView?
+        private var lastClick = 0xFF
 
         fun init(data: BaseData) {
             view1?.text = data.title
             view2?.text = data.description
 
             view.setOnClickListener {
-                Log.i("important", "An item is clicked")
+                Log.i("important", "An item is clicked, dataType = 0xFF${data.type - 0xFF0}")
                 when(data.type) {
                     // 显示一个表，元素点击之后打开网页
                     listType ->
@@ -277,16 +276,22 @@ class MainActivity : BaseActivity(),
             }
 
             view.setOnTouchListener { view, event ->
+                Log.i("clicked", "event = ${event.action}")
+                if(lastClick == 0 && event.action == 1)
+                    view.callOnClick()
                 when(event.action) {
-                    MotionEvent.ACTION_BUTTON_PRESS ->{
-                        view.background = resources.getDrawable(R.drawable.btn_default_light)
-                        view.callOnClick()
-                    }
-                    MotionEvent.ACTION_MOVE -> view.background =
+//                    MotionEvent.ACTION_BUTTON_PRESS ->{
+//                        view.background = resources.getDrawable(R.drawable.btn_default_light)
+//                        view.callOnClick()
+//                    }
+//                    MotionEvent.ACTION_OUTSIDE
+                    MotionEvent.ACTION_MOVE ,
+                    MotionEvent.ACTION_DOWN -> view.background =
                             resources.getDrawable(R.drawable.btn_default_light)
                     else -> view.background =
                             resources.getDrawable(R.drawable.btn_default_more_light)
                 }
+                lastClick = event.action
                 return@setOnTouchListener true
             }
         }
