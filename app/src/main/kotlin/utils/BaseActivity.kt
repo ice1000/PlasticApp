@@ -46,7 +46,7 @@ open class BaseActivity : AppCompatActivity() {
     protected fun getStringWebResource(
             url: String): String {
         var ret = getStringFromSharedPreference(url, DEFAULT_VALUE)
-        Log.i("important", "ret = $ret")
+//        Log.i("important", "ret = $ret")
         if(ret.equals(DEFAULT_VALUE)
                 || checkNetwork()) {
             Log.i("important", "linking to web")
@@ -91,7 +91,7 @@ open class BaseActivity : AppCompatActivity() {
     private fun openPreference(): SharedPreferences =
             getSharedPreferences(
                     "MainPreference",
-                    MODE_APPEND
+                    MODE_ENABLE_WRITE_AHEAD_LOGGING
             )
 
 }

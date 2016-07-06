@@ -63,6 +63,11 @@ class MainActivity : BaseActivity(),
         currentNum = dataSize
         currentType = dataType
 
+        Log.i("important",
+                "currentLink = $currentLink, " +
+                "currentNum = $currentNum, " +
+                "currentType = $currentType")
+
         try {
             checkNetwork()
         } catch (e: Exception) {
@@ -248,6 +253,7 @@ class MainActivity : BaseActivity(),
             view2?.text = data.description
 
             view.setOnClickListener {
+                Log.i("important", "An item is clicked")
                 when(data.type) {
                     // 显示一个表，元素点击之后打开网页
                     listType ->
@@ -272,8 +278,10 @@ class MainActivity : BaseActivity(),
 
             view.setOnTouchListener { view, event ->
                 when(event.action) {
-                    MotionEvent.ACTION_BUTTON_PRESS -> view.background =
-                            resources.getDrawable(R.drawable.btn_default_light)
+                    MotionEvent.ACTION_BUTTON_PRESS ->{
+                        view.background = resources.getDrawable(R.drawable.btn_default_light)
+                        view.callOnClick()
+                    }
                     MotionEvent.ACTION_MOVE -> view.background =
                             resources.getDrawable(R.drawable.btn_default_light)
                     else -> view.background =
