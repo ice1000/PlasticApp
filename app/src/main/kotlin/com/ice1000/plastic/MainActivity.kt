@@ -200,7 +200,6 @@ class MainActivity : BaseActivity() {
 
 
     private fun initViews() {
-        val toolbar = toolbar
         setSupportActionBar(toolbar)
 
         dataSetOnScreen = dataSet_main
