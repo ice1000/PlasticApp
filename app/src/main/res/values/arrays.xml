@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="spinner_names">
-        <item>列表式布局</item>
-        <item>表格式布局（两列）</item>
-        <item>表格式布局（三列）</item>
-    </string-array>
-</resources>

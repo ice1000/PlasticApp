@@ -21,6 +21,14 @@
     <string name="delete_test_data">清除测试数据</string>
     <string name="learn_resource">学习资料</string>
     <string name="title_activity_settings">SettingsActivity</string>
+
+    <string name="choose_layout">选择你喜欢的布局</string>
+    <string-array name="spinner_names">
+        <item>列表式布局</item>
+        <item>表格式布局（两列）</item>
+        <item>表格式布局（三列）</item>
+    </string-array>
+
 </resources><!--
         我们是PLASTIC。\n
         我们欢迎任何人加入我们。\n\n\n\n
