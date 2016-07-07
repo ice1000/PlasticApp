@@ -1,4 +1,4 @@
-package data
+package data.constants
 
 /**
  * @author ice1000
