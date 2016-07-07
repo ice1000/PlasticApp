@@ -39,7 +39,7 @@ class MainActivity : BaseActivity(),
                 link = currentLink,
                 dataSize = currentNum,
                 dataType = currentType,
-                done = {}
+                done = { }
         )
     }
 
