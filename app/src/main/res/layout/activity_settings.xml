@@ -30,7 +30,7 @@
 
         <Spinner
             android:popupBackground="@color/colorSecondPrimaryDark"
-            android:prompt="@strings/choose_layout"
+            android:prompt="@string/choose_layout"
             android:id="@+id/spinner_settings_layout"
             android:layout_margin="@dimen/setting_item_margin"
             android:layout_width="match_parent"

@@ -160,7 +160,7 @@ class MainActivity : BaseActivity() {
             R.id.action_settings -> {
                 startActivity(Intent(
                         this@MainActivity,
-                        AboutActivity::class.java
+                        SettingsActivity::class.java
                 ))
                 return true
             }
@@ -202,16 +202,12 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
 
         dataSetOnScreen = dataSet_main
-        dataSetOnScreen?.layoutManager = when(
-        getIntFromSharedPreference(LAYOUT_PREFERENCE)) {
-            LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
-            LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
-            else -> LinearLayoutManager(this)
-        }
+        dataSetOnScreen?.layoutManager = chooseLayout()
         dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
 
         val refresher = refresher_main
         refresher.setOnRefreshListener {
+            dataSetOnScreen?.layoutManager = chooseLayout()
             refresh(
                     link = currentLink,
                     dataSize = currentNum,
@@ -223,6 +219,13 @@ class MainActivity : BaseActivity() {
 //            refresher.isRefreshing = false
         }
     }
+
+    private fun chooseLayout() = when(
+        getIntFromSharedPreference(LAYOUT_PREFERENCE)) {
+            LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
+            LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
+            else -> LinearLayoutManager(this)
+        }
 
     inner class MyAdapter :
             RecyclerView.Adapter<MyViewHolder>() {
