@@ -164,6 +164,11 @@ class MainActivity : BaseActivity() {
                 return true
             }
 //            R.id.action_refresh -> refresh()
+            R.id.action_contributing ->
+                startActivity(Intent(
+                        this,
+                        AboutActivity::class.java
+                ))
         }
         return super.onOptionsItemSelected(item)
     }
@@ -191,13 +196,6 @@ class MainActivity : BaseActivity() {
                     dataType = listType,
                     done = { }
             )
-
-    fun toolbarContribution(view: View) =
-            startActivity(Intent(
-                    this,
-                    AboutActivity::class.java
-            ))
-
 
     private fun initViews() {
         setSupportActionBar(toolbar)

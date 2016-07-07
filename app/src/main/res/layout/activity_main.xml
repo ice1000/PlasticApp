@@ -62,14 +62,6 @@
                     android:background="@drawable/sms_failed_128px_1182256_easyicon"
                     android:layout_height="32dp" />
 
-                <ImageButton
-                    android:layout_gravity="center"
-                    android:layout_width="32dp"
-                    android:layout_margin="6dp"
-                    android:onClick="toolbarContribution"
-                    android:background="@drawable/thumb_up_128px_1182305_easyicon"
-                    android:layout_height="32dp" />
-
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
