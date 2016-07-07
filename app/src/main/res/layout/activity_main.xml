@@ -41,6 +41,7 @@
                     android:layout_gravity="center"
                     android:layout_width="32dp"
                     android:layout_margin="6dp"
+                    android:onClick="toolbarLearn"
                     android:background="@drawable/view_list_128px_1182346_easyicon"
                     android:layout_height="32dp" />
                 
@@ -48,6 +49,7 @@
                     android:layout_gravity="center"
                     android:layout_width="32dp"
                     android:layout_margin="6dp"
+                    android:onClick="toolbarBlogs"
                     android:background="@drawable/icon_blog"
                     android:layout_height="32dp" />
                 
@@ -55,6 +57,7 @@
                     android:layout_gravity="center"
                     android:layout_width="32dp"
                     android:layout_margin="6dp"
+                    android:onClick="toolbarNews"
                     android:background="@drawable/sms_failed_128px_1182256_easyicon"
                     android:layout_height="32dp" />
 
@@ -62,6 +65,7 @@
                     android:layout_gravity="center"
                     android:layout_width="32dp"
                     android:layout_margin="6dp"
+                    android:onClick="toolbarContribution"
                     android:background="@drawable/thumb_up_128px_1182305_easyicon"
                     android:layout_height="32dp" />
 
