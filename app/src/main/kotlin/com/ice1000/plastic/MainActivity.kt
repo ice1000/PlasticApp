@@ -2,9 +2,6 @@ package com.ice1000.plastic
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -21,8 +18,7 @@ import org.jetbrains.anko.uiThread
 import utils.*
 import java.util.*
 
-class MainActivity : BaseActivity(),
-        NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity() {
 
     var index: ArrayList<BaseData> = ArrayList()
     var dataSetOnScreen: RecyclerView? = null
@@ -144,12 +140,12 @@ class MainActivity : BaseActivity(),
     }
 
     override fun onBackPressed() {
-        val drawer = drawer_layout
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
+        refresh(
+                link = currentLink,
+                done = { },
+                dataSize = currentNum,
+                dataType = currentType
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -172,46 +168,36 @@ class MainActivity : BaseActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.nav_news ->
-                refresh(
-                        link = indexLink,
-                        dataSize = indexNum,
-                        dataType = listType,
-                        done = { }
-                )
-//            R.id.nav_members ->
-//                refresh(
-//                        link = memberLink,
-//                        dataSize = memberNum,
-//                        dataType = listType
-//                )
-            R.id.nav_learn ->
+    fun toolbarNews(view: View) =
+        refresh(
+                link = indexLink,
+                dataSize = indexNum,
+                dataType = listType,
+                done = { }
+        )
+
+    fun toolbarLearn(view: View) =
                 refresh(
                         link = learnLink,
                         dataSize = learnNum,
                         dataType = otherListType,
                         done = { }
                 )
-            R.id.nav_blogs ->
+
+    fun toolbarBlogs(view: View) =
                 refresh(
                         link = blogLink,
                         dataSize = blogNum,
                         dataType = listType,
                         done = { }
                 )
-            R.id.nav_contribute ->
+
+    fun toolbarContribution(view: View) =
                 startActivity(Intent(
                         this,
                         AboutActivity::class.java
                 ))
-        }
-        val drawer = drawer_layout
-        drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
+
 
     private fun initViews() {
         val toolbar = toolbar
@@ -220,18 +206,6 @@ class MainActivity : BaseActivity(),
         dataSetOnScreen = dataSet_main
         dataSetOnScreen?.layoutManager = LinearLayoutManager(this)
         dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
-
-        val drawer = drawer_layout
-        val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
-        )
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
-
-        val navigationView = nav_view
-        navigationView.setNavigationItemSelectedListener(this)
 
         val refresher = refresher_main
         refresher.setOnRefreshListener {
