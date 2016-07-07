@@ -14,6 +14,8 @@ class SettingsActivity : BaseActivity() {
         setContentView(R.layout.activity_settings)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
+        setSupportActionBar(toolbar_settings)
+
         val fab = fab_setting
         fab.setOnClickListener({
             joinQQGroup("cAyOYEJxVW0zF4mR5XNZ1uoFk5qEBMlR")
