@@ -3,7 +3,7 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_about.*
 import org.jetbrains.anko.toast
 import utils.BaseActivity
 class AboutActivity : BaseActivity() {
@@ -11,7 +11,7 @@ class AboutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        setContentView(R.layout.activity_about)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         setSupportActionBar(toolbar_settings)

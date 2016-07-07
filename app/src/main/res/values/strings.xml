@@ -20,8 +20,8 @@
     <string name="insert_test_data">插入测试数据</string>
     <string name="delete_test_data">清除测试数据</string>
     <string name="learn_resource">学习资料</string>
-</resources>
-<!--
+    <string name="title_activity_settings">SettingsActivity</string>
+</resources><!--
         我们是PLASTIC。\n
         我们欢迎任何人加入我们。\n\n\n\n
 

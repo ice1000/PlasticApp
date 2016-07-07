@@ -11,13 +11,12 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
-import data.JJ_FLY
-import data.LAYOUT_PREFERENCE
+import data.constants.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread
-import utils.*
+import utils.BaseActivity
 import java.util.*
 
 class MainActivity : BaseActivity() {
@@ -252,32 +251,33 @@ class MainActivity : BaseActivity() {
         private var view2 = view.findViewById(R.id.des) as TextView?
         private var lastClick = 0xFF
 
-        fun init(data: BaseData) {
-            view1?.text = data.title
-            view2?.text = data.description
+        fun init(viewData: BaseData) {
+            view1?.text = viewData.title
+            view2?.text = viewData.description
 
             view.setOnClickListener {
-                Log.i("important", "An item is clicked, dataType = 0xFF${data.type - 0xFF0}")
-                when (data.type) {
+                Log.i("important", "An item is clicked, dataType = 0xFF${
+                viewData.type - 0xFF0}")
+                when (viewData.type) {
                 // 显示一个表，元素点击之后打开网页
-                    TYPE_LIST ->
-                        if (!"null".equals(data.url))
-                            openWeb(data.url)
+                    data.constants.TYPE_LIST ->
+                        if (!"null".equals(viewData.url))
+                            openWeb(viewData.url)
                 // 显示一个表，元素打开之后是另一个表
-                    TYPE_OTHER_LIST ->
-                        if (!"null".equals(data.url))
+                    data.constants.TYPE_OTHER_LIST ->
+                        if (!"null".equals(viewData.url))
                             refresh(
-                                    link = data.url,
-                                    dataSize = NUMBER_THREE,
-                                    dataType = TYPE_FLOW,
+                                    link = viewData.url,
+                                    dataSize = data.constants.NUMBER_THREE,
+                                    dataType = data.constants.TYPE_FLOW,
                                     done = { }
                             )
                 // 显示一个数据流
-                    TYPE_FLOW ->
+                    data.constants.TYPE_FLOW ->
                         startActivity(Intent(
                                 this@MainActivity,
                                 ScrollingActivity::class.java
-                        ).putExtra(URL, data.url))
+                        ).putExtra(URL, viewData.url))
                 }
             }
 

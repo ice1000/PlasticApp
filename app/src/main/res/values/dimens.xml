@@ -9,4 +9,5 @@
     <dimen name="app_bar_height">100dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="setting_item">64dp</dimen>
+    <dimen name="toolbar_height">64dp</dimen>
 </resources>
