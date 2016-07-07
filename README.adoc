@@ -17,6 +17,11 @@ You can see the screencut:
 
 image::art/1.jpg[]
 
+=== Resource ===
+
+https://github.com/huanglizhuo/kotlin-in-chinese/issues/18#issuecomment-230971017[Kotlin docs Chinese]
+Kotlin中文官方文档
+
 === Build and deployment ===
 构建与部署
 

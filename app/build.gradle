@@ -14,15 +14,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-    }
-    dexOptions {
-        incremental true
     }
     productFlavors {
     }
@@ -40,7 +37,7 @@ dependencies {
 }
 
 buildscript {
-    ext.kotlin_version = '1.0.2'
+    ext.kotlin_version = '1.0.3'
     ext.anko_version = '0.8.3'
     repositories {
         mavenCentral()
