@@ -28,7 +28,8 @@
             android:label=""
             android:screenOrientation="portrait"
             android:launchMode="singleInstance"
-            android:name=".SettingsActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".AboutActivity" />
         <activity
             android:name=".ScrollingActivity"
             android:launchMode="singleInstance"

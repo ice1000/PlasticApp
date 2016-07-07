@@ -157,7 +157,7 @@ class MainActivity : BaseActivity(),
             R.id.action_settings -> {
                 startActivity(Intent(
                         this@MainActivity,
-                        SettingsActivity::class.java
+                        AboutActivity::class.java
                 ))
                 return true
             }
@@ -196,7 +196,7 @@ class MainActivity : BaseActivity(),
             R.id.nav_contribute ->
                 startActivity(Intent(
                         this,
-                        ScrollingActivity::class.java
+                        AboutActivity::class.java
                 ))
         }
         val drawer = drawer_layout

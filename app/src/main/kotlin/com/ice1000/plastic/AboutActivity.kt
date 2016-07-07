@@ -6,7 +6,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.toast
 import utils.BaseActivity
-class SettingsActivity : BaseActivity() {
+class AboutActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
