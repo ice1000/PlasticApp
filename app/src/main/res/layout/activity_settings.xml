@@ -29,7 +29,7 @@
         android:layout_height="match_parent">
 
         <Spinner
-            android:popupBackground="@color/colorSecondPrimaryDark"
+            android:popupBackground="@color/colorPrimaryLight"
             android:prompt="@string/choose_layout"
             android:id="@+id/spinner_settings_layout"
             android:layout_margin="@dimen/setting_item_margin"
@@ -38,13 +38,5 @@
 
         </Spinner>
     </ScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>

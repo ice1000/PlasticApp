@@ -40,6 +40,11 @@ class MainActivity : BaseActivity() {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        dataSetOnScreen?.layoutManager = chooseLayout()
+    }
+
     private fun refresh(
             link: String,
             dataSize: Int,
@@ -207,7 +212,6 @@ class MainActivity : BaseActivity() {
 
         val refresher = refresher_main
         refresher.setOnRefreshListener {
-            dataSetOnScreen?.layoutManager = chooseLayout()
             refresh(
                     link = currentLink,
                     dataSize = currentNum,

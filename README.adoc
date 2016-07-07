@@ -19,8 +19,10 @@ image::art/1.jpg[]
 
 === Resource ===
 
-https://github.com/huanglizhuo/kotlin-in-chinese/issues/18#issuecomment-230971017[Kotlin docs Chinese]
+https://github.com/huanglizhuo/kotlin-in-chinese[Kotlin docs Chinese]
 Kotlin中文官方文档
+https://github.com/huanglizhuo/kotlin-in-chinese/issues/18#issuecomment-230971017[Application]
+申请权限
 
 === Build and deployment ===
 构建与部署
