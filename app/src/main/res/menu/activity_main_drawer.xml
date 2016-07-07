@@ -2,14 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_learn"
-            android:icon="@drawable/view_list_128px_1182346_easyicon"
-            android:title="@string/learn_coding" />
-        <item
-            android:id="@+id/nav_blogs"
-            android:icon="@drawable/view_list_128px_1182346_easyicon"
-            android:title="@string/view_blogs" />
+        <item android:title="@string/learn_coding">
+            <menu>
+                <item
+                    android:id="@+id/nav_learn"
+                    android:icon="@drawable/view_list_128px_1182346_easyicon"
+                    android:title="@string/learn_resource" />
+                <item
+                    android:id="@+id/nav_blogs"
+                    android:icon="@drawable/icon_blog"
+                    android:title="@string/view_blogs" />
+            </menu>
+        </item>
         <item android:title="@string/about_plastic">
             <menu>
                 <item
