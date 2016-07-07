@@ -3,6 +3,7 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
 import data.JJ_FLY
+import data.LAYOUT_PREFERENCE
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
@@ -25,7 +27,7 @@ class MainActivity : BaseActivity() {
 
     var currentLink = learnLink
     var currentNum = learnNum
-    var currentType = otherListType
+    var currentType = TYPE_OTHER_LIST
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -177,7 +179,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = indexLink,
                     dataSize = indexNum,
-                    dataType = listType,
+                    dataType = TYPE_LIST,
                     done = { }
             )
 
@@ -185,7 +187,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = learnLink,
                     dataSize = learnNum,
-                    dataType = otherListType,
+                    dataType = TYPE_OTHER_LIST,
                     done = { }
             )
 
@@ -193,7 +195,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = blogLink,
                     dataSize = blogNum,
-                    dataType = listType,
+                    dataType = TYPE_LIST,
                     done = { }
             )
 
@@ -201,7 +203,12 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
 
         dataSetOnScreen = dataSet_main
-        dataSetOnScreen?.layoutManager = LinearLayoutManager(this)
+        dataSetOnScreen?.layoutManager = when(
+        getIntFromSharedPreference(LAYOUT_PREFERENCE)) {
+            LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
+            LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
+            else -> LinearLayoutManager(this)
+        }
         dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
 
         val refresher = refresher_main
@@ -253,20 +260,20 @@ class MainActivity : BaseActivity() {
                 Log.i("important", "An item is clicked, dataType = 0xFF${data.type - 0xFF0}")
                 when (data.type) {
                 // 显示一个表，元素点击之后打开网页
-                    listType ->
+                    TYPE_LIST ->
                         if (!"null".equals(data.url))
                             openWeb(data.url)
                 // 显示一个表，元素打开之后是另一个表
-                    otherListType ->
+                    TYPE_OTHER_LIST ->
                         if (!"null".equals(data.url))
                             refresh(
                                     link = data.url,
                                     dataSize = NUMBER_THREE,
-                                    dataType = flowType,
+                                    dataType = TYPE_FLOW,
                                     done = { }
                             )
                 // 显示一个数据流
-                    flowType ->
+                    TYPE_FLOW ->
                         startActivity(Intent(
                                 this@MainActivity,
                                 ScrollingActivity::class.java

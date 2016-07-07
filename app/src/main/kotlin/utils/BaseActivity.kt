@@ -15,6 +15,7 @@ import com.ice1000.plastic.WebViewerActivity
 open class BaseActivity : AppCompatActivity() {
 
     protected val URL = "URL"
+
     var connection: ConnectivityManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,14 +79,22 @@ open class BaseActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    protected fun getBooleanFromSp(key: String, default: Boolean = false): Boolean {
-        val preference = openPreference()
-        return preference.getBoolean(key, default)
+    protected fun getBooleanFromSp(
+            key: String,
+            default: Boolean = false): Boolean {
+        return openPreference().getBoolean(key, default)
     }
 
-    protected fun getStringFromSharedPreference(key: String, default: String = ""): String {
-        val preference = openPreference()
-        return preference.getString(key, default)
+    protected fun getStringFromSharedPreference(
+            key: String,
+            default: String = ""): String {
+        return openPreference().getString(key, default)
+    }
+
+    protected fun getIntFromSharedPreference(
+            key: String,
+            default: Int = 0): Int {
+        return openPreference().getInt(key, default)
     }
 
     private fun openPreference(): SharedPreferences =

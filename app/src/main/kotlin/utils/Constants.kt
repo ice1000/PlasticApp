@@ -20,6 +20,10 @@ val blogNum = NUMBER_TWO
 val learnNum = NUMBER_THREE
 val memberNum = NUMBER_TWO
 
-val listType = 0xFF1
-val otherListType = 0xFF2
-val flowType = 0xFF3
+val TYPE_LIST = 0xFF1
+val TYPE_OTHER_LIST = 0xFF2
+val TYPE_FLOW = 0xFF3
+
+val LAYOUT_LIST = 0x1
+val LAYOUT_GRID_2 = 0x2
+val LAYOUT_GRID_3 = 0x3
