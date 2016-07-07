@@ -11,12 +11,12 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import data.BaseData
 import data.JJ_FLY
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import utils.*
 import java.util.*
@@ -38,7 +38,8 @@ class MainActivity : BaseActivity(),
         refresh(
                 link = currentLink,
                 dataSize = currentNum,
-                dataType = currentType
+                dataType = currentType,
+                done = {}
         )
     }
 
@@ -46,6 +47,7 @@ class MainActivity : BaseActivity(),
             link: String,
             dataSize: Int,
             dataType: Int,
+            done: () -> Unit,
             clean: Boolean = true) {
 
         Log.i("important", "refreshing, link is $link, have connection = ${
@@ -71,9 +73,12 @@ class MainActivity : BaseActivity(),
         try {
             checkNetwork()
         } catch (e: Exception) {
-            toast(getString(R.string.please_check_network))
+            e.printStackTrace()
+            Toast.makeText(
+                    this@MainActivity,
+                    R.string.please_check_network,
+                    Toast.LENGTH_SHORT).show()
             showUselessData
-            return
         }
 
         async() {
@@ -88,6 +93,7 @@ class MainActivity : BaseActivity(),
                         dataSize,
                         dataType
                 )
+                done()
             }
         }
     }
@@ -173,7 +179,8 @@ class MainActivity : BaseActivity(),
                 refresh(
                         link = indexLink,
                         dataSize = indexNum,
-                        dataType = listType
+                        dataType = listType,
+                        done = { }
                 )
 //            R.id.nav_members ->
 //                refresh(
@@ -185,13 +192,15 @@ class MainActivity : BaseActivity(),
                 refresh(
                         link = learnLink,
                         dataSize = learnNum,
-                        dataType = otherListType
+                        dataType = otherListType,
+                        done = { }
                 )
             R.id.nav_blogs ->
                 refresh(
                         link = blogLink,
                         dataSize = blogNum,
-                        dataType = listType
+                        dataType = listType,
+                        done = { }
                 )
             R.id.nav_contribute ->
                 startActivity(Intent(
@@ -229,9 +238,12 @@ class MainActivity : BaseActivity(),
             refresh(
                     link = currentLink,
                     dataSize = currentNum,
-                    dataType = currentType
+                    dataType = currentType,
+                    done = {
+                        refresher.isRefreshing = false
+                    }
             )
-            refresher.isRefreshing = false
+//            refresher.isRefreshing = false
         }
     }
 
@@ -279,7 +291,8 @@ class MainActivity : BaseActivity(),
                             refresh(
                                     link = data.url,
                                     dataSize = NUMBER_THREE,
-                                    dataType = flowType
+                                    dataType = flowType,
+                                    done = {  }
                             )
                 // 显示一个数据流
                     flowType ->
