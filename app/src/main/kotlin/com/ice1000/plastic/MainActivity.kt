@@ -169,34 +169,34 @@ class MainActivity : BaseActivity() {
     }
 
     fun toolbarNews(view: View) =
-        refresh(
-                link = indexLink,
-                dataSize = indexNum,
-                dataType = listType,
-                done = { }
-        )
+            refresh(
+                    link = indexLink,
+                    dataSize = indexNum,
+                    dataType = listType,
+                    done = { }
+            )
 
     fun toolbarLearn(view: View) =
-                refresh(
-                        link = learnLink,
-                        dataSize = learnNum,
-                        dataType = otherListType,
-                        done = { }
-                )
+            refresh(
+                    link = learnLink,
+                    dataSize = learnNum,
+                    dataType = otherListType,
+                    done = { }
+            )
 
     fun toolbarBlogs(view: View) =
-                refresh(
-                        link = blogLink,
-                        dataSize = blogNum,
-                        dataType = listType,
-                        done = { }
-                )
+            refresh(
+                    link = blogLink,
+                    dataSize = blogNum,
+                    dataType = listType,
+                    done = { }
+            )
 
     fun toolbarContribution(view: View) =
-                startActivity(Intent(
-                        this,
-                        AboutActivity::class.java
-                ))
+            startActivity(Intent(
+                    this,
+                    AboutActivity::class.java
+            ))
 
 
     private fun initViews() {
@@ -266,7 +266,7 @@ class MainActivity : BaseActivity() {
                                     link = data.url,
                                     dataSize = NUMBER_THREE,
                                     dataType = flowType,
-                                    done = {  }
+                                    done = { }
                             )
                 // 显示一个数据流
                     flowType ->
