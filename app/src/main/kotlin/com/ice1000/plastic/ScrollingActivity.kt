@@ -26,6 +26,7 @@ class ScrollingActivity : BaseActivity() {
     private fun initViews() {
         val fab = fab_scrolling
         fab.setOnClickListener({
+            openWeb(url)
         })
         val refresher = refresher_scrolling
         refresher.setOnRefreshListener {
