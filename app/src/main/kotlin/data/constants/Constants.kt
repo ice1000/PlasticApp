@@ -15,6 +15,8 @@ val memberLink = "${link}member.txt"
 val learnLink = "${link}learn.txt"
 val blogLink = "${link}blog.txt"
 
+val appreciateLink = "${link}thanks.txt"
+
 val indexNum = NUMBER_THREE
 val blogNum = NUMBER_TWO
 val learnNum = NUMBER_THREE

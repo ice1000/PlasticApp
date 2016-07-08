@@ -42,6 +42,9 @@ open class BaseActivity : AppCompatActivity() {
      * this will cache the data into SharedPreference
      * next time when the network is invalid, it will return the data
      * stored in the SharedPreference.
+     *
+     * use this in asnyc!!!!
+     *
      * @param url url
      */
     protected fun getStringWebResource(
@@ -60,6 +63,10 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * insert a value t SharedPreference
+     * any types of value is accepted.
+     */
     protected fun insertIntoSharedPreference(key: String, value: Any) {
         val editor = openPreference().edit()
         if(value is Int) {
@@ -97,6 +104,9 @@ open class BaseActivity : AppCompatActivity() {
         return openPreference().getInt(key, default)
     }
 
+    /**
+     * returns a SharedPreference
+     */
     private fun openPreference(): SharedPreferences =
             getSharedPreferences(
                     "MainPreference",

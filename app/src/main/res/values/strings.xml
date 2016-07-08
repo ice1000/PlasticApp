@@ -4,13 +4,6 @@
     <string name="action_settings">设置</string>
     <string name="news">新鲜事</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="contribute">
-        参与开发、资料维护请联系作者：\n\n
-        email  ice1000kotlin@foxmail.com\n\n\n\n
-        资料来源：\n\n
-        Kotlin\n
-        https://github.com/huanglizhuo/kotlin-in-chinese\n\n
-    </string>
     <string name="contributing">参与开发</string>
     <string name="source">源代码</string>
     <string name="refresh">刷新</string>

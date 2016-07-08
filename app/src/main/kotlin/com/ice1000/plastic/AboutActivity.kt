@@ -3,8 +3,11 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import data.constants.appreciateLink
 import kotlinx.android.synthetic.main.activity_about.*
+import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 class AboutActivity : BaseActivity() {
 
@@ -25,6 +28,14 @@ class AboutActivity : BaseActivity() {
             viewGitHub()
         }
 
+        async() {
+            val fuck = getStringWebResource(
+                    appreciateLink
+            )
+            uiThread {
+                contributeText.text = fuck
+            }
+        }
     }
 
     fun viewGitHub() = openWeb("https://github.com/ice1000/PlasticApp")
