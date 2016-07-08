@@ -15,7 +15,7 @@ This is an Android App for learning of programming.
 You can see the screencut:
 你可以看到截图：
 
-image::art/1.jpg[]
+image::art/2.jpg[]
 
 === Resource ===
 
