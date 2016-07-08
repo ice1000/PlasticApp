@@ -24,6 +24,11 @@ Kotlin中文官方文档
 https://github.com/huanglizhuo/kotlin-in-chinese/issues/18#issuecomment-230971017[Application]
 申请权限
 
+https://github.com/numbbbbb/the-swift-programming-language-in-chinese/issues/630[Swift doc Chinese]
+Swift中文官方文档
+https://github.com/numbbbbb/the-swift-programming-language-in-chinese/issues/630[Application]
+申请权限
+
 === Build and deployment ===
 构建与部署
 
