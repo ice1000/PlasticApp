@@ -29,7 +29,12 @@
             android:label=""
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ice1000.plastic.MainActivity" />
+        </activity>
         <activity
             android:name=".ScrollingActivity"
             android:label=""

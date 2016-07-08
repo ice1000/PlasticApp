@@ -21,6 +21,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <android.support.v7.widget.Toolbar
+                app:theme="@style/AppTheme.PopupOverlay"
                 android:id="@+id/toolbar_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
