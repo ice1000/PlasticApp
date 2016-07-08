@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|left"
         android:layout_marginRight="32dp"
-        android:src="@drawable/publ_128px_1182146_easyicon"
+        android:src="@drawable/publ_128px_1182146_easyicon_net"
         app:fabSize="normal"
         app:layout_anchor="@+id/appBarLayout"
         app:layout_anchorGravity="bottom|right" />
