@@ -10,7 +10,7 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="128dp"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
         android:id="@+id/appBarLayout">
@@ -30,21 +30,37 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccentDark"
+        app:fabSize="normal"
+        android:src="@android:drawable/ic_dialog_email"
+        android:layout_marginRight="32dp"
+        android:layout_gravity="center_vertical|left"
+        app:layout_anchor="@+id/scrollView2"
+        app:layout_anchorGravity="top|right" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/colorPrimary"
         tools:context="com.ice1000.plastic.ScrollingActivity"
-        tools:showIn="@layout/activity_scrolling">
+        tools:showIn="@layout/activity_scrolling"
+        android:id="@+id/scrollView2">
 
         <LinearLayout
-            android:layout_marginTop="@dimen/text_margin"
             android:orientation="vertical"
+            android:layout_marginTop="@dimen/text_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,17 +80,6 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fabSize="normal"
-        android:src="@android:drawable/ic_dialog_email"
-        app:layout_anchor="@+id/appBarLayout"
-        android:layout_marginRight="32dp"
-        app:layout_anchorGravity="bottom|right"
-        android:layout_gravity="center_vertical|left" />
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
