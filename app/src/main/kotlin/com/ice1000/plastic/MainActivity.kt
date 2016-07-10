@@ -181,7 +181,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initViews() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar_main)
 
         dataSetOnScreen.layoutManager = chooseLayout()
         dataSetOnScreen.itemAnimator = DefaultItemAnimator()
@@ -246,7 +246,7 @@ class MainActivity : BaseActivity() {
                 viewType: Int) = MyViewHolder(
                 LayoutInflater.from(this@MainActivity).inflate(
                         R.layout.data_base,
-                        parent
+                        null
                 ))
 
         override fun getItemCount() = index.size
@@ -262,7 +262,7 @@ class MainActivity : BaseActivity() {
 
         init {
             view1 = view.find<TextView>(R.id.title_data)
-            view2 = view.find<TextView>(R.id.des)
+            view2 = view.find<TextView>(R.id.des_data)
         }
 
         fun init(viewData: BaseData) {
@@ -272,6 +272,7 @@ class MainActivity : BaseActivity() {
             view.setOnClickListener {
                 Log.i("important", "An item is clicked, dataType = 0xFF${
                 viewData.type - 0xFF0}")
+
                 when (viewData.type) {
 
                 // 显示一个表，元素点击之后打开网页

@@ -18,7 +18,7 @@ class SettingsActivity : BaseActivity() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initViews()
     }
@@ -47,7 +47,11 @@ class SettingsActivity : BaseActivity() {
          * @param p2 is the item which is selected.
          * p2 -> LAYOUT_* in data.constants.DefaultValue
          */
-        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        override fun onItemSelected(
+                p0: AdapterView<*>?,
+                p1: View?,
+                p2: Int,
+                p3: Long) {
             insertIntoSharedPreference(
                     key = LAYOUT_PREFERENCE,
                     value = p2

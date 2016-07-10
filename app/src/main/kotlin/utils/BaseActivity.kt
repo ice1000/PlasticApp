@@ -8,7 +8,9 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.ice1000.plastic.R
 import com.ice1000.plastic.WebViewerActivity
+import org.jetbrains.anko.toast
 
 /**
  * @author ice1000
@@ -40,6 +42,7 @@ open class BaseActivity : AppCompatActivity() {
     protected fun checkNetwork(): Boolean {
         Log.v("not important", "connection? = " +
                 "${connection ?: "no network found!"}")
+        toast(R.string.please_check_network)
         return connection != null
     }
 
