@@ -119,20 +119,20 @@ class MainActivity : BaseActivity() {
                     i++
                     if (dataSize == NUMBER_THREE) {
                         index.add(BaseData(
-                                indexText[i],
-                                indexText[i + 1],
-                                dataType,
-                                indexText[i + 2]
+                                title = indexText[i],
+                                url = indexText[i + 1],
+                                type = dataType,
+                                description = indexText[i + 2]
                         ))
                         i += 3
                         continue
                     }
                     if (dataSize == NUMBER_TWO) {
                         index.add(BaseData(
-                                indexText[i],
-                                indexText[i + 1],
-                                dataType,
-                                ""
+                                title = indexText[i],
+                                url = indexText[i + 1],
+                                type = dataType,
+                                description = FUCKER
                         ))
                         i += 2
                     }
@@ -173,7 +173,7 @@ class MainActivity : BaseActivity() {
 //            R.id.action_refresh -> refresh()
             R.id.action_contributing ->
                 startActivity(Intent(
-                        this,
+                        this@MainActivity,
                         AboutActivity::class.java
                 ))
         }
@@ -246,7 +246,7 @@ class MainActivity : BaseActivity() {
                 viewType: Int) = MyViewHolder(
                 LayoutInflater.from(this@MainActivity).inflate(
                         R.layout.data_base,
-                        null
+                        parent
                 ))
 
         override fun getItemCount() = index.size
