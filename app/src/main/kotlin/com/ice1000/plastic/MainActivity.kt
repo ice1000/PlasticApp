@@ -307,7 +307,7 @@ class MainActivity : BaseActivity() {
                             MotionEvent.ACTION_MOVE,
                             MotionEvent.ACTION_DOWN -> R.drawable.btn_default_light
                             else -> R.drawable.btn_default_more_light
-                        })
+                        }, theme)
                 lastClick = event.action
                 return@setOnTouchListener true
             }

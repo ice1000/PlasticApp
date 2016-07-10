@@ -40,6 +40,7 @@
 
                 <EditText
                     android:id="@+id/text_size_settings"
+                    android:hint="@string/text_size"
                     android:background="@color/cardview_dark_background"
                     android:inputType="number"
                     android:layout_width="match_parent"

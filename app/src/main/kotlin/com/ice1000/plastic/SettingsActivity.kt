@@ -35,6 +35,7 @@ class SettingsActivity : BaseActivity() {
         layoutSpinner.onItemSelectedListener = SpinnerSelected()
 
         val textSizeEditor = text_size_settings
+        textSizeEditor.text.append(TEXT_SIZE.readInt(16).toString())
         textSizeEditor.onFocusChangeListener =
                 View.OnFocusChangeListener { view, onAction ->
                     try {
@@ -46,7 +47,7 @@ class SettingsActivity : BaseActivity() {
                                 throw Exception("对方不想和你说话，并向你抛出了一个异常")
                             }
                         }
-                    } finally {
+                    } catch (e: Exception) {
                         toast(resources.getString(
                                 R.string.please_input_valid_num))
                     }
