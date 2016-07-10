@@ -61,7 +61,7 @@ open class BaseActivity : AppCompatActivity() {
                 || checkNetwork()) {
             Log.i("important", "linking to web")
             ret = java.net.URL(this).readText(Charsets.UTF_8)
-            insertIntoSharedPreference(this, ret)
+            insertIntoSharedPreference(ret)
             return ret
         } else {
             Log.i("important", "linking to SharedPreference")
@@ -75,19 +75,19 @@ open class BaseActivity : AppCompatActivity() {
      *
      * Will be start casted.
      */
-    protected fun insertIntoSharedPreference(key: String, value: Any) {
+     fun String.insertIntoSharedPreference(value: Any) {
         val editor = openPreference().edit()
         if(value is Int) {
-            editor.putInt(key, value)
+            editor.putInt(this, value)
         } else if(value is Float) {
-            editor.putFloat(key, value)
+            editor.putFloat(this, value)
         } else if(value is Long) {
-            editor.putLong(key, value)
+            editor.putLong(this, value)
         } else if(value is Boolean) {
-            editor.putBoolean(key, value)
+            editor.putBoolean(this, value)
         } else if(value is String) {
 //            Log.i("important", "value = $value")
-            editor.putString(key, value)
+            editor.putString(this, value)
         } else {
             throw Exception("not supported type")
         }

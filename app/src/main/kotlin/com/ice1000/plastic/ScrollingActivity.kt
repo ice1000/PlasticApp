@@ -10,7 +10,8 @@ import utils.BaseActivity
 
 class ScrollingActivity : BaseActivity() {
 
-    var data: TextView? = null
+    val data: TextView
+        get() = data_scrolling
     var url: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class ScrollingActivity : BaseActivity() {
                 refresher.isRefreshing = false
             })
         }
-        data = data_scrolling
+//        data.textSize = 10F
     }
 
     private fun refresh(end: () -> Unit) {
@@ -42,7 +43,7 @@ class ScrollingActivity : BaseActivity() {
             val text = url.webResource()
             uiThread {
                 end()
-                data?.text = text
+                data.text = text
             }
         }
     }
