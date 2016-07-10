@@ -17,6 +17,8 @@
     <string name="delete_test_data">清除测试数据</string>
     <string name="learn_resource">学习资料</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    
+    <string name="please_input_valid_num">请好好输入数字哦？</string>
 
     <string name="choose_layout">选择你喜欢的布局</string>
     <string-array name="spinner_names">

@@ -6,3 +6,5 @@ package data.constants
  */
 
 val LAYOUT_PREFERENCE = "LAYOUT_PREFERENCE"
+
+val TEXT_SIZE = "TEXT_SIZE"
