@@ -301,18 +301,12 @@ class MainActivity : BaseActivity() {
                 Log.i("clicked", "event = ${event.action}")
                 if (lastClick == 0 && event.action == 1)
                     view.callOnClick()
-                when (event.action) {
-//                    MotionEvent.ACTION_BUTTON_PRESS ->{
-//                        view.background = resources.getDrawable(R.drawable.btn_default_light)
-//                        view.callOnClick()
-//                    }
-//                    MotionEvent.ACTION_OUTSIDE
-                    MotionEvent.ACTION_MOVE,
-                    MotionEvent.ACTION_DOWN -> view.background =
-                            resources.getDrawable(R.drawable.btn_default_light)
-                    else -> view.background =
-                            resources.getDrawable(R.drawable.btn_default_more_light)
-                }
+                view.background = resources.getDrawable(
+                        when (event.action) {
+                            MotionEvent.ACTION_MOVE,
+                            MotionEvent.ACTION_DOWN -> R.drawable.btn_default_light
+                            else -> R.drawable.btn_default_more_light
+                        })
                 lastClick = event.action
                 return@setOnTouchListener true
             }
