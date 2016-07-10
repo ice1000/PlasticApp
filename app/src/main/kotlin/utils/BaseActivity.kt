@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -17,8 +18,13 @@ open class BaseActivity : AppCompatActivity() {
 
     protected val URL = "URL"
 
-    val connection: ConnectivityManager
-    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    /**
+     * if this is null,
+     * it means I have 2 load data from Sp.
+     */
+    val connection: NetworkInfo?
+    get() = (getSystemService(Context.CONNECTIVITY_SERVICE)
+            as ConnectivityManager).activeNetworkInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +38,9 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     protected fun checkNetwork(): Boolean {
-        Log.v("not important", "connection?.activeNetworkInfo = " +
-                "${connection.activeNetworkInfo ?: "no network found!"}")
-        return connection.activeNetworkInfo != null
+        Log.v("not important", "connection? = " +
+                "${connection ?: "no network found!"}")
+        return connection != null
     }
 
     protected val DEFAULT_VALUE = "DEFAULT_VALUE"
