@@ -55,13 +55,13 @@ open class BaseActivity : AppCompatActivity() {
      * this method extended String.
      */
     fun String.webResource(): String {
-        var ret = getStringFromSharedPreference(this, DEFAULT_VALUE)
+        var ret = readString(DEFAULT_VALUE)
 //        Log.i("important", "ret = $ret")
         if(ret.equals(DEFAULT_VALUE)
                 || checkNetwork()) {
             Log.i("important", "linking to web")
             ret = java.net.URL(this).readText(Charsets.UTF_8)
-            insertIntoSharedPreference(ret)
+            save(ret)
             return ret
         } else {
             Log.i("important", "linking to SharedPreference")
@@ -75,7 +75,7 @@ open class BaseActivity : AppCompatActivity() {
      *
      * Will be start casted.
      */
-     fun String.insertIntoSharedPreference(value: Any) {
+     fun String.save(value: Any) {
         val editor = openPreference().edit()
         if(value is Int) {
             editor.putInt(this, value)
@@ -94,16 +94,12 @@ open class BaseActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    protected fun getStringFromSharedPreference(
-            key: String,
-            default: String = ""): String {
-        return openPreference().getString(key, default)
+    fun String.readString(default: String = ""): String {
+        return openPreference().getString(this, default)
     }
 
-    protected fun getIntFromSharedPreference(
-            key: String,
-            default: Int = 0): Int {
-        return openPreference().getInt(key, default)
+    fun String.readInt(default: Int = 0): Int {
+        return openPreference().getInt(this, default)
     }
 
     /**

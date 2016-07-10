@@ -21,23 +21,29 @@ class SettingsActivity : BaseActivity() {
     }
 
     fun initViews() {
+
         val adapter = ArrayAdapter.createFromResource(
                 this@SettingsActivity,
                 R.array.spinner_names,
                 android.R.layout.simple_spinner_item
         )
-        val spinner = spinner_settings_layout
-        spinner.adapter = adapter
-        spinner.onItemSelectedListener = SpinnerSelected()
 
+        val layoutSpinner = spinner_settings_layout
+        layoutSpinner.adapter = adapter
+        layoutSpinner.onItemSelectedListener = SpinnerSelected()
+
+        val textSizeEditor = text_size_settings
+        textSizeEditor.onFocusChangeListener =
+                View.OnFocusChangeListener { view, onAction ->
+                    if(!onAction) {
+                        //
+                    }
+                }
     }
 
     inner class SpinnerSelected() : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(p0: AdapterView<*>?) {
-            insertIntoSharedPreference(
-                    key = LAYOUT_PREFERENCE,
-                    value = LAYOUT_LIST
-            )
+            LAYOUT_PREFERENCE.save(LAYOUT_LIST)
         }
 
         /**
@@ -49,10 +55,7 @@ class SettingsActivity : BaseActivity() {
                 p1: View?,
                 p2: Int,
                 p3: Long) {
-            insertIntoSharedPreference(
-                    key = LAYOUT_PREFERENCE,
-                    value = p2
-            )
+            LAYOUT_PREFERENCE.save(p2)
         }
     }
 }

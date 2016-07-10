@@ -19,15 +19,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Spinner
-            android:popupBackground="@color/colorPrimaryLight"
-            android:prompt="@string/choose_layout"
-            android:id="@+id/spinner_settings_layout"
-            android:layout_margin="@dimen/setting_item_margin"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/setting_item">
+            android:layout_height="wrap_content">
 
-        </Spinner>
+            <Spinner
+                android:popupBackground="@color/colorPrimaryLight"
+                android:prompt="@string/choose_layout"
+                android:id="@+id/spinner_settings_layout"
+                android:layout_margin="@dimen/setting_item_margin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_item" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_default_light"
+                android:layout_height="@dimen/setting_item"
+                android:layout_margin="@dimen/setting_item_margin">
+
+                <EditText
+                    android:id="@+id/text_size_settings"
+                    android:background="@color/cardview_dark_background"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
     </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

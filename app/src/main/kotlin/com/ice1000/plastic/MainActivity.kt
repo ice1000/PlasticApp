@@ -226,8 +226,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun chooseLayout() = when (
-    getIntFromSharedPreference(LAYOUT_PREFERENCE)) {
+    private fun chooseLayout() = when (LAYOUT_PREFERENCE.readInt(1)) {
         LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
         LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
         else -> LinearLayoutManager(this)
