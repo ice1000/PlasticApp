@@ -32,7 +32,7 @@ open class BaseActivity : AppCompatActivity() {
 
     protected fun openWeb(url: String) {
         startActivity(Intent(
-                this,
+                this@BaseActivity,
                 WebViewerActivity::class.java
         ).putExtra(URL, url))
     }

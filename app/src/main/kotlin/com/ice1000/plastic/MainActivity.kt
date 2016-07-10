@@ -54,14 +54,13 @@ class MainActivity : BaseActivity() {
             clean: Boolean = true) {
 
         Log.i("important", "refreshing, link is $link, have connection = ${
-        connection?.activeNetworkInfo != null
-        }, dataSize = $dataSize")
+        connection != null}, dataSize = $dataSize")
 
         val showUselessData = showData(
-                JJ_FLY.split("\n"),
-                clean,
-                dataSize,
-                dataType
+                indexText = JJ_FLY.split("\n"),
+                clean = clean,
+                dataSize = dataSize,
+                dataType = dataType
         )
 
         currentLink = link
@@ -91,10 +90,10 @@ class MainActivity : BaseActivity() {
 
             uiThread {
                 showData(
-                        indexText,
-                        clean,
-                        dataSize,
-                        dataType
+                        indexText = indexText,
+                        clean = clean,
+                        dataSize = dataSize,
+                        dataType = dataType
                 )
                 done()
             }
@@ -180,30 +179,6 @@ class MainActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun toolbarNews(view: View) =
-            refresh(
-                    link = indexLink,
-                    dataSize = indexNum,
-                    dataType = TYPE_LIST,
-                    done = { }
-            )
-
-    fun toolbarLearn(view: View) =
-            refresh(
-                    link = learnLink,
-                    dataSize = learnNum,
-                    dataType = TYPE_OTHER_LIST,
-                    done = { }
-            )
-
-    fun toolbarBlogs(view: View) =
-            refresh(
-                    link = blogLink,
-                    dataSize = blogNum,
-                    dataType = TYPE_LIST,
-                    done = { }
-            )
-
     private fun initViews() {
         setSupportActionBar(toolbar)
 
@@ -221,16 +196,42 @@ class MainActivity : BaseActivity() {
                         refresher.isRefreshing = false
                     }
             )
-//            refresher.isRefreshing = false
+        }
+
+        toolbar_learn_main.setOnClickListener {
+            refresh(
+                    link = learnLink,
+                    dataSize = learnNum,
+                    dataType = TYPE_OTHER_LIST,
+                    done = { }
+            )
+        }
+
+        toolbar_blog_main.setOnClickListener {
+            refresh(
+                    link = blogLink,
+                    dataSize = blogNum,
+                    dataType = TYPE_LIST,
+                    done = { }
+            )
+        }
+
+        toolbar_news_main.setOnClickListener {
+            refresh(
+                    link = indexLink,
+                    dataSize = indexNum,
+                    dataType = TYPE_LIST,
+                    done = { }
+            )
         }
     }
 
-    private fun chooseLayout() = when(
-        getIntFromSharedPreference(LAYOUT_PREFERENCE)) {
-            LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
-            LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
-            else -> LinearLayoutManager(this)
-        }
+    private fun chooseLayout() = when (
+    getIntFromSharedPreference(LAYOUT_PREFERENCE)) {
+        LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
+        LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
+        else -> LinearLayoutManager(this)
+    }
 
     inner class MyAdapter :
             RecyclerView.Adapter<MyViewHolder>() {
@@ -244,9 +245,9 @@ class MainActivity : BaseActivity() {
                 parent: ViewGroup?,
                 viewType: Int) = MyViewHolder(
                 LayoutInflater.from(this@MainActivity).inflate(
-                R.layout.data_base,
-                null
-        ))
+                        R.layout.data_base,
+                        null
+                ))
 
         override fun getItemCount() = index.size
 
