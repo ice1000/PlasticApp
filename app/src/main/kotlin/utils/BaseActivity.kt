@@ -52,17 +52,16 @@ open class BaseActivity : AppCompatActivity() {
      *
      * use this in asnyc!!!!
      *
-     * @param url url
+     * this method extended String.
      */
-    protected fun getStringWebResource(
-            url: String): String {
-        var ret = getStringFromSharedPreference(url, DEFAULT_VALUE)
+    fun String.webResource(): String {
+        var ret = getStringFromSharedPreference(this, DEFAULT_VALUE)
 //        Log.i("important", "ret = $ret")
         if(ret.equals(DEFAULT_VALUE)
                 || checkNetwork()) {
             Log.i("important", "linking to web")
-            ret = java.net.URL(url).readText(Charsets.UTF_8)
-            insertIntoSharedPreference(url, ret)
+            ret = java.net.URL(this).readText(Charsets.UTF_8)
+            insertIntoSharedPreference(this, ret)
             return ret
         } else {
             Log.i("important", "linking to SharedPreference")

@@ -39,7 +39,7 @@ class ScrollingActivity : BaseActivity() {
 
     private fun refresh(end: () -> Unit) {
         async() {
-            val text = getStringWebResource(url)
+            val text = url.webResource()
             uiThread {
                 end()
                 data?.text = text

@@ -87,7 +87,7 @@ class MainActivity : BaseActivity() {
         async() {
             val indexText: List<String>
 
-            indexText = getStringWebResource(link).split("\n")
+            indexText = link.webResource().split("\n")
 
             uiThread {
                 showData(
@@ -136,8 +136,8 @@ class MainActivity : BaseActivity() {
                         ))
                         i += 2
                     }
-                } catch (e: IndexOutOfBoundsException) {
-                }
+                } catch (e: IndexOutOfBoundsException) { }
+                Log.i("important", "parse finished")
             }
             i++
         }

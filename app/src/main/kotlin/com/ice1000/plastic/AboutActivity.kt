@@ -29,9 +29,7 @@ class AboutActivity : BaseActivity() {
         }
 
         async() {
-            val fuck = getStringWebResource(
-                    appreciateLink
-            )
+            val fuck = appreciateLink.webResource()
             uiThread {
                 contributeText.text = fuck
             }
