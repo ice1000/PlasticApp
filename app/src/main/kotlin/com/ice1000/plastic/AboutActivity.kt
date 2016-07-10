@@ -17,7 +17,7 @@ class AboutActivity : BaseActivity() {
         setContentView(R.layout.activity_about)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setSupportActionBar(toolbar_settings)
+        setSupportActionBar(toolbar_about)
 
         val fab = fab_setting
         fab.setOnClickListener({

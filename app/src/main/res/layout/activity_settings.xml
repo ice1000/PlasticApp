@@ -9,6 +9,11 @@
     android:background="@color/colorPrimary"
     tools:context="com.ice1000.plastic.SettingsActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_marginTop="@dimen/toolbar_height"
         android:layout_width="match_parent"

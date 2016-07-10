@@ -1,7 +1,6 @@
 package com.ice1000.plastic
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,9 +14,7 @@ class SettingsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-
+        setSupportActionBar(toolbar_settings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initViews()
