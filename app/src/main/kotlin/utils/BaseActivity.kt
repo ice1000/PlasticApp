@@ -1,5 +1,6 @@
 package utils
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
@@ -16,11 +17,11 @@ open class BaseActivity : AppCompatActivity() {
 
     protected val URL = "URL"
 
-    var connection: ConnectivityManager? = null
+    val connection: ConnectivityManager
+    get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        connection = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager;
     }
 
     protected fun openWeb(url: String) {
@@ -32,8 +33,8 @@ open class BaseActivity : AppCompatActivity() {
 
     protected fun checkNetwork(): Boolean {
         Log.v("not important", "connection?.activeNetworkInfo = " +
-                "${connection!!.activeNetworkInfo}")
-        return connection!!.activeNetworkInfo != null
+                "${connection.activeNetworkInfo ?: "no network found!"}")
+        return connection.activeNetworkInfo != null
     }
 
     protected val DEFAULT_VALUE = "DEFAULT_VALUE"
@@ -66,6 +67,8 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * insert a value t SharedPreference
      * any types of value is accepted.
+     *
+     * Will be start casted.
      */
     protected fun insertIntoSharedPreference(key: String, value: Any) {
         val editor = openPreference().edit()
@@ -86,12 +89,6 @@ open class BaseActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    protected fun getBooleanFromSp(
-            key: String,
-            default: Boolean = false): Boolean {
-        return openPreference().getBoolean(key, default)
-    }
-
     protected fun getStringFromSharedPreference(
             key: String,
             default: String = ""): String {
@@ -105,7 +102,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * returns a SharedPreference
+     * @return a SharedPreference
      */
     private fun openPreference(): SharedPreferences =
             getSharedPreferences(
