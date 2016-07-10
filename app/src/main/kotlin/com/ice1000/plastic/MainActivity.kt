@@ -15,6 +15,7 @@ import data.constants.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
+import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 import java.util.*
@@ -241,8 +242,8 @@ class MainActivity : BaseActivity() {
 
         override fun onCreateViewHolder(
                 parent: ViewGroup?,
-                viewType: Int)
-                = MyViewHolder(LayoutInflater.from(this@MainActivity).inflate(
+                viewType: Int) = MyViewHolder(
+                LayoutInflater.from(this@MainActivity).inflate(
                 R.layout.data_base,
                 null
         ))
@@ -254,22 +255,29 @@ class MainActivity : BaseActivity() {
     inner class MyViewHolder(var view: View) :
             RecyclerView.ViewHolder(view) {
 
-        private var view1 = view.findViewById(R.id.title) as TextView?
-        private var view2 = view.findViewById(R.id.des) as TextView?
         private var lastClick = 0xFF
+        private var view1: TextView
+        private var view2: TextView
+
+        init {
+            view1 = view.find<TextView>(R.id.title_data)
+            view2 = view.find<TextView>(R.id.des)
+        }
 
         fun init(viewData: BaseData) {
-            view1?.text = viewData.title
-            view2?.text = viewData.description
+            view1.text = viewData.title
+            view2.text = viewData.description
 
             view.setOnClickListener {
                 Log.i("important", "An item is clicked, dataType = 0xFF${
                 viewData.type - 0xFF0}")
                 when (viewData.type) {
+
                 // 显示一个表，元素点击之后打开网页
                     data.constants.TYPE_LIST ->
                         if (!"null".equals(viewData.url))
                             openWeb(viewData.url)
+
                 // 显示一个表，元素打开之后是另一个表
                     data.constants.TYPE_OTHER_LIST ->
                         if (!"null".equals(viewData.url))
@@ -279,6 +287,7 @@ class MainActivity : BaseActivity() {
                                     dataType = data.constants.TYPE_FLOW,
                                     done = { }
                             )
+
                 // 显示一个数据流
                     data.constants.TYPE_FLOW ->
                         startActivity(Intent(

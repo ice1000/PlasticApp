@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -20,7 +20,7 @@
         tools:text="3A自杀 喜大普奔" />
 
     <TextView
-        android:id="@+id/des"
+        android:id="@+id/des_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
