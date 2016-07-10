@@ -23,7 +23,8 @@ import java.util.*
 class MainActivity : BaseActivity() {
 
     var index: ArrayList<BaseData> = ArrayList()
-    var dataSetOnScreen: RecyclerView? = null
+    val dataSetOnScreen: RecyclerView
+        get() = dataSet_main
 
     var currentLink = learnLink
     var currentNum = learnNum
@@ -43,7 +44,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        dataSetOnScreen?.layoutManager = chooseLayout()
+        dataSetOnScreen.layoutManager = chooseLayout()
     }
 
     private fun refresh(
@@ -140,7 +141,7 @@ class MainActivity : BaseActivity() {
             }
             i++
         }
-        dataSetOnScreen?.adapter = MyAdapter()
+        dataSetOnScreen.adapter = MyAdapter()
 //                refresher?.isRefreshing = false
 
     }
@@ -182,9 +183,8 @@ class MainActivity : BaseActivity() {
     private fun initViews() {
         setSupportActionBar(toolbar)
 
-        dataSetOnScreen = dataSet_main
-        dataSetOnScreen?.layoutManager = chooseLayout()
-        dataSetOnScreen?.itemAnimator = DefaultItemAnimator()
+        dataSetOnScreen.layoutManager = chooseLayout()
+        dataSetOnScreen.itemAnimator = DefaultItemAnimator()
 
         val refresher = refresher_main
         refresher.setOnRefreshListener {
