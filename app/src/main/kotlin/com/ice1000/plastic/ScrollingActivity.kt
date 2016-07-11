@@ -3,6 +3,7 @@ package com.ice1000.plastic
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import data.constants.TEXT_SIZE
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread
@@ -20,8 +21,7 @@ class ScrollingActivity : BaseActivity() {
         url = intent.getStringExtra(URL)
         Log.d(this.toString(), url)
         initViews()
-        refresh({
-        })
+        refresh({})
     }
 
     private fun initViews() {
@@ -35,7 +35,7 @@ class ScrollingActivity : BaseActivity() {
                 refresher.isRefreshing = false
             })
         }
-//        data.textSize = 10F
+        data.textSize = TEXT_SIZE.readInt(16).toFloat()
     }
 
     private fun refresh(end: () -> Unit) {
