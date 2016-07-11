@@ -23,8 +23,8 @@ open class BaseActivity : AppCompatActivity() {
      * it means I have 2 load data from Sp.
      */
     val connection: NetworkInfo?
-    get() = (getSystemService(Context.CONNECTIVITY_SERVICE)
-            as ConnectivityManager).activeNetworkInfo
+        get() = (getSystemService(Context.CONNECTIVITY_SERVICE)
+                as ConnectivityManager).activeNetworkInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,7 @@ open class BaseActivity : AppCompatActivity() {
     fun String.webResource(): String {
         var ret = readString(DEFAULT_VALUE)
 //        Log.i("important", "ret = $ret")
-        if(ret.equals(DEFAULT_VALUE)
+        if (ret.equals(DEFAULT_VALUE)
                 || checkNetwork()) {
             Log.i("important", "linking to web")
             ret = java.net.URL(this).readText(Charsets.UTF_8)
@@ -75,17 +75,17 @@ open class BaseActivity : AppCompatActivity() {
      *
      * Will be start casted.
      */
-     fun String.save(value: Any) {
+    fun String.save(value: Any) {
         val editor = openPreference().edit()
-        if(value is Int) {
+        if (value is Int) {
             editor.putInt(this, value)
-        } else if(value is Float) {
+        } else if (value is Float) {
             editor.putFloat(this, value)
-        } else if(value is Long) {
+        } else if (value is Long) {
             editor.putLong(this, value)
-        } else if(value is Boolean) {
+        } else if (value is Boolean) {
             editor.putBoolean(this, value)
-        } else if(value is String) {
+        } else if (value is String) {
 //            Log.i("important", "value = $value")
             editor.putString(this, value)
         } else {
@@ -94,13 +94,11 @@ open class BaseActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    fun String.readString(default: String = ""): String {
-        return openPreference().getString(this, default)
-    }
+    fun String.readString(default: String = "") =
+            openPreference().getString(this, default) ?: ""
 
-    fun String.readInt(default: Int = 0): Int {
-        return openPreference().getInt(this, default)
-    }
+    fun String.readInt(default: Int = 0) =
+            openPreference().getInt(this, default)
 
     /**
      * @return a SharedPreference
