@@ -32,22 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/setting_item" />
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:background="@drawable/btn_default_light"
-                android:layout_height="@dimen/setting_item"
-                android:layout_margin="@dimen/setting_item_margin">
-
-                <EditText
-                    android:id="@+id/text_size_settings"
-                    android:hint="@string/text_size"
-                    android:background="@color/cardview_dark_background"
-                    android:inputType="number"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </android.support.design.widget.TextInputLayout>
-
         </LinearLayout>
     </ScrollView>
 
