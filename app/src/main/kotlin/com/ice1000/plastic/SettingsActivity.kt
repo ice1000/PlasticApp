@@ -52,6 +52,7 @@ class SettingsActivity : BaseActivity() {
 
     private fun setTextSizeShowerText(textSize: Int) {
         text_size_settings_shower.text = "$textSize sp"
+        text_size_settings_shower.textSize = textSize.toFloat()
     }
 
     inner class SpinnerSelected() : AdapterView.OnItemSelectedListener {
