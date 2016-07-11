@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
-import android.widget.TextView
 import data.constants.LAYOUT_LIST
 import data.constants.LAYOUT_PREFERENCE
 import data.constants.TEXT_SIZE
@@ -15,7 +14,7 @@ import utils.BaseActivity
 
 class SettingsActivity : BaseActivity() {
 
-    private val textSizeMax = 100
+    private val textSizeMax = 50
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +39,19 @@ class SettingsActivity : BaseActivity() {
         layoutSpinner.onItemSelectedListener = SpinnerSelected()
 
         val textSizeSeeker = text_size_settings_seeker
-        val textSizeShower = text_size_settings_shower
+        setTextSizeShowerText(TEXT_SIZE.readInt(16))
 
         textSizeSeeker.max = textSizeMax
         textSizeSeeker.progress = TEXT_SIZE.readInt(16)
         textSizeSeeker.setOnSeekBarChangeListener(
-                TextSizeSeeker(textSizeMax, textSizeShower))
+                TextSizeSeeker(textSizeMax, {
+                    setTextSizeShowerText(it)
+                }))
 
+    }
+
+    private fun setTextSizeShowerText(textSize: Int) {
+        text_size_settings_shower.text = "$textSize sp"
     }
 
     inner class SpinnerSelected() : AdapterView.OnItemSelectedListener {
@@ -68,7 +73,7 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    inner class TextSizeSeeker(var max: Int, var shower: TextView) :
+    inner class TextSizeSeeker(var max: Int, var shower: (Int) -> Unit) :
             SeekBar.OnSeekBarChangeListener {
 
         private var size = 16
@@ -78,7 +83,7 @@ class SettingsActivity : BaseActivity() {
          */
         override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
             if (p1 > 5) {
-                shower.text = "$size"
+                shower(size)
                 size = p1
             }
             Log.v("important", "progress = $size")
