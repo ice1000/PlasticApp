@@ -3,6 +3,7 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import data.constants.TEXT_SIZE
 import data.modules.Blogs
 import kotlinx.android.synthetic.main.activity_about.*
 import org.jetbrains.anko.async
@@ -15,9 +16,6 @@ class AboutActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-
-        setSupportActionBar(toolbar_about)
 
         val fab = fab_setting
         fab.setOnClickListener({
@@ -32,6 +30,7 @@ class AboutActivity : BaseActivity() {
             val fuck = Blogs.appreciateLink.webResource()
             uiThread {
                 contributeText.text = fuck
+                contributeText.textSize = TEXT_SIZE.readInt(16).toFloat()
             }
         }
     }
