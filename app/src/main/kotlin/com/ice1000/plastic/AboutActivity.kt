@@ -3,7 +3,7 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import data.constants.appreciateLink
+import data.modules.Blogs
 import kotlinx.android.synthetic.main.activity_about.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
@@ -29,7 +29,7 @@ class AboutActivity : BaseActivity() {
         }
 
         async() {
-            val fuck = appreciateLink.webResource()
+            val fuck = Blogs.appreciateLink.webResource()
             uiThread {
                 contributeText.text = fuck
             }

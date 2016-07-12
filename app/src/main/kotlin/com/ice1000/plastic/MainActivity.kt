@@ -12,6 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
 import data.constants.*
+import data.modules.Blogs
+import data.modules.Learn
+import data.modules.Module
+import data.modules.News
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
@@ -26,9 +30,9 @@ class MainActivity : BaseActivity() {
     val dataSetOnScreen: RecyclerView
         get() = dataSet_main
 
-    var currentLink = learnLink
-    var currentNum = learnNum
-    var currentType = TYPE_OTHER_LIST
+    var currentLink = Learn.link
+    var currentNum = Learn.num
+    var currentType = Learn.type
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +121,7 @@ class MainActivity : BaseActivity() {
             if (indexText[i].startsWith("====")) {
                 try {
                     i++
-                    if (dataSize == NUMBER_THREE) {
+                    if (dataSize == Module.NUMBER_THREE) {
                         index.add(BaseData(
                                 title = indexText[i],
                                 url = indexText[i + 1],
@@ -127,7 +131,7 @@ class MainActivity : BaseActivity() {
                         i += 3
                         continue
                     }
-                    if (dataSize == NUMBER_TWO) {
+                    if (dataSize == Module.NUMBER_TWO) {
                         index.add(BaseData(
                                 title = indexText[i],
                                 url = indexText[i + 1],
@@ -200,27 +204,27 @@ class MainActivity : BaseActivity() {
 
         toolbar_learn_main.setOnClickListener {
             refresh(
-                    link = learnLink,
-                    dataSize = learnNum,
-                    dataType = TYPE_OTHER_LIST,
+                    link = Learn.link,
+                    dataSize = Learn.num,
+                    dataType = Learn.type,
                     done = { }
             )
         }
 
         toolbar_blog_main.setOnClickListener {
             refresh(
-                    link = blogLink,
-                    dataSize = blogNum,
-                    dataType = TYPE_LIST,
+                    link = Blogs.link,
+                    dataSize = Blogs.num,
+                    dataType = Blogs.type,
                     done = { }
             )
         }
 
         toolbar_news_main.setOnClickListener {
             refresh(
-                    link = indexLink,
-                    dataSize = indexNum,
-                    dataType = TYPE_LIST,
+                    link = News.link,
+                    dataSize = News.num,
+                    dataType = News.type,
                     done = { }
             )
         }
@@ -275,22 +279,22 @@ class MainActivity : BaseActivity() {
                 when (viewData.type) {
 
                 // 显示一个表，元素点击之后打开网页
-                    data.constants.TYPE_LIST ->
+                    Module.TYPE_LIST ->
                         if (!"null".equals(viewData.url))
                             openWeb(viewData.url)
 
                 // 显示一个表，元素打开之后是另一个表
-                    data.constants.TYPE_OTHER_LIST ->
+                    Module.TYPE_OTHER_LIST ->
                         if (!"null".equals(viewData.url))
                             refresh(
                                     link = viewData.url,
-                                    dataSize = data.constants.NUMBER_THREE,
-                                    dataType = data.constants.TYPE_FLOW,
+                                    dataSize = Module.NUMBER_THREE,
+                                    dataType = Module.TYPE_FLOW,
                                     done = { }
                             )
 
                 // 显示一个数据流
-                    data.constants.TYPE_FLOW ->
+                    Module.TYPE_FLOW ->
                         startActivity(Intent(
                                 this@MainActivity,
                                 ScrollingActivity::class.java
