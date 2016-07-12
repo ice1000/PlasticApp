@@ -22,6 +22,8 @@
 
     <string name="choose_layout">选择你喜欢的布局</string>
     <string name="text_size">字体大小</string>
+    <string name="save_ll_mode">省流量模式</string>
+    <string name="save_ll_desc">开启后，将仅加载本地资源，不再加载网络资源。</string>
     <string-array name="spinner_names">
         <item>列表式布局</item>
         <item>表格式布局（两列）</item>

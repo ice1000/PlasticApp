@@ -40,7 +40,7 @@ open class BaseActivity : AppCompatActivity() {
     protected fun checkNetwork(): Boolean {
         Log.v("not important", "connection? = " +
                 "${connection ?: "no network found!"}")
-        return connection != null
+        return connection != null && connection!!.isConnected
     }
 
     protected val DEFAULT_VALUE = "DEFAULT_VALUE"

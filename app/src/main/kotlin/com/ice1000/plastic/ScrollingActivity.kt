@@ -2,7 +2,7 @@ package com.ice1000.plastic
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import android.widget.`@+id/save_ll_mode_title`
 import data.constants.TEXT_SIZE
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import org.jetbrains.anko.async
@@ -11,7 +11,7 @@ import utils.BaseActivity
 
 class ScrollingActivity : BaseActivity() {
 
-    val data: TextView
+    val data: `@+id/save_ll_mode_title`
         get() = data_scrolling
     var url: String = ""
 
