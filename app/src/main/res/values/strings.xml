@@ -29,6 +29,7 @@
     <string name="settings">设置</string>
     <string name="browsing_web">浏览网页</string>
     <string name="about_us">参与开发</string>
+    <string name="talk_to_me">和作者闲聊</string>
     <string-array name="spinner_names">
         <item>列表式布局</item>
         <item>表格式布局（两列）</item>

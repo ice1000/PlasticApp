@@ -8,16 +8,6 @@
     android:fitsSystemWindows="true"
     tools:context="com.ice1000.plastic.AboutActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_dialog_email"
-        android:layout_margin="32dp"
-        android:layout_gravity="bottom|right"
-        app:layout_anchorGravity="top|right"
-        app:elevation="22dp" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,6 +34,17 @@
                 android:background="@drawable/btn_default_more_light"
                 android:textColor="@color/myWhite"
                 android:id="@+id/viewGiuHub"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="@string/talk_to_me"
+                android:layout_margin="@dimen/text_margin"
+                android:background="@drawable/btn_default_more_light"
+                android:textColor="@color/myWhite"
+                android:id="@+id/fab_setting"
                 android:gravity="center"
                 android:layout_gravity="center" />
             <TextView

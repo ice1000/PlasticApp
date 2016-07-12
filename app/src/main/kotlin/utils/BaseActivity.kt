@@ -55,8 +55,8 @@ open class BaseActivity : AppCompatActivity() {
      *
      * this method extended String.
      */
-    fun String.webResource(): String {
-        var ret = readString(DEFAULT_VALUE)
+    fun String.webResource(default: String = DEFAULT_VALUE): String {
+        var ret = readString(default)
 //        Log.i("important", "ret = $ret")
         if (SAVE_LL_MODE_ON.readBoolean(false) ||
                 !ret.equals(DEFAULT_VALUE) &&

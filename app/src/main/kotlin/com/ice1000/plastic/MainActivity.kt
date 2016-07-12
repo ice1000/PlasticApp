@@ -15,7 +15,7 @@ import data.constants.JJ_FLY
 import data.constants.LAYOUT_GRID_2
 import data.constants.LAYOUT_GRID_3
 import data.constants.LAYOUT_PREFERENCE
-import data.modules.Blogs
+import data.modules.BlogAndOther
 import data.modules.Learn
 import data.modules.Module
 import data.modules.News
@@ -194,9 +194,9 @@ class MainActivity : BaseActivity() {
 
         toolbar_blog_main.setOnClickListener {
             refresh(
-                    link = Blogs.link,
-                    dataSize = Blogs.num,
-                    dataType = Blogs.type,
+                    link = BlogAndOther.link,
+                    dataSize = BlogAndOther.num,
+                    dataType = BlogAndOther.type,
                     done = { }
             )
         }

@@ -15,3 +15,5 @@ null
 """
 
 val FUCKER = "享受编程的乐趣吧，写代码是多么令人愉快的一件事啊！"
+
+val QQ_GROUP_VALUE = "cAyOYEJxVW0zF4mR5XNZ1uoFk5qEBMlR"

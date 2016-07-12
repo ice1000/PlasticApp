@@ -3,8 +3,9 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import data.constants.QQ_GROUP_VALUE
 import data.constants.TEXT_SIZE
-import data.modules.Blogs
+import data.modules.BlogAndOther
 import kotlinx.android.synthetic.main.activity_about.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
@@ -19,7 +20,9 @@ class AboutActivity : BaseActivity() {
 
         val fab = fab_setting
         fab.setOnClickListener({
-            joinQQGroup("cAyOYEJxVW0zF4mR5XNZ1uoFk5qEBMlR")
+            joinQQGroup(BlogAndOther.qqLink.webResource(
+                    QQ_GROUP_VALUE
+            ))
         })
 
         viewGiuHub.setOnClickListener {
@@ -27,7 +30,7 @@ class AboutActivity : BaseActivity() {
         }
 
         async() {
-            val fuck = Blogs.appreciateLink.webResource()
+            val fuck = BlogAndOther.appreciateLink.webResource()
             uiThread {
                 contributeText.text = fuck
                 contributeText.textSize = TEXT_SIZE.readInt(16).toFloat()
