@@ -11,7 +11,10 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
-import data.constants.*
+import data.constants.JJ_FLY
+import data.constants.LAYOUT_GRID_2
+import data.constants.LAYOUT_GRID_3
+import data.constants.LAYOUT_PREFERENCE
 import data.modules.Blogs
 import data.modules.Learn
 import data.modules.Module
@@ -22,6 +25,7 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
+import utils.Parser
 import java.util.*
 
 class MainActivity : BaseActivity() {
@@ -115,35 +119,12 @@ class MainActivity : BaseActivity() {
             dataType: Int) {
 //        Log.i("important", "indexText = $indexText")
         if (clean)
-            index = ArrayList<BaseData>()
-        var i = 0
-        while (i < indexText.size) {
-            if (indexText[i].startsWith("====")) {
-                try {
-                    i++
-                    if (dataSize == Module.NUMBER_THREE) {
-                        index.add(BaseData(
-                                title = indexText[i],
-                                url = indexText[i + 1],
-                                type = dataType,
-                                description = indexText[i + 2]
-                        ))
-                        i += 3
-                        continue
-                    }
-                    if (dataSize == Module.NUMBER_TWO) {
-                        index.add(BaseData(
-                                title = indexText[i],
-                                url = indexText[i + 1],
-                                type = dataType,
-                                description = FUCKER
-                        ))
-                        i += 2
-                    }
-                } catch (e: IndexOutOfBoundsException) { }
-                Log.i("important", "parse finished")
-            }
-            i++
+            index.clear()
+        for(data in Parser.parse(
+                source = indexText,
+                dataType = dataType,
+                dataSize = dataSize)) {
+            index.add(data)
         }
         dataSetOnScreen.adapter = MyAdapter()
 //                refresher?.isRefreshing = false

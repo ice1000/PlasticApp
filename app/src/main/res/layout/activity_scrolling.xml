@@ -66,6 +66,7 @@
                 android:id="@+id/data_scrolling"
                 tools:layout_marginTop="100dp"
                 tools:text="2333\n2323\TeslaNicola"
+                android:enabled="true"
                 android:textColor="@color/colorPrimaryLight"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
