@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
@@ -149,10 +148,10 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         refresh(
-                link = learnLink,
+                link = currentLink,
                 done = { },
-                dataSize = learnNum,
-                dataType = TYPE_OTHER_LIST
+                dataSize = currentNum,
+                dataType = currentType
         )
     }
 
@@ -236,9 +235,9 @@ class MainActivity : BaseActivity() {
     inner class MyAdapter :
             RecyclerView.Adapter<MyViewHolder>() {
         override fun onBindViewHolder(
-                holder: MyViewHolder,
+                holder: MyViewHolder?,
                 position: Int) {
-            holder.init(index[position])
+            holder?.init(index[position])
         }
 
         override fun onCreateViewHolder(
@@ -253,18 +252,16 @@ class MainActivity : BaseActivity() {
 
     }
 
-    inner class MyViewHolder(view: View) :
+    inner class MyViewHolder(var view: View) :
             RecyclerView.ViewHolder(view) {
 
         private var lastClick = 0xFF
-        private var view: LinearLayout
         private var view1: TextView
         private var view2: TextView
 
         init {
-            this.view = view.find(R.id.container_card_data)
-            view1 = this.view.find<TextView>(R.id.title_data)
-            view2 = this.view.find<TextView>(R.id.des_data)
+            view1 = view.find<TextView>(R.id.title_data)
+            view2 = view.find<TextView>(R.id.des_data)
         }
 
         fun init(viewData: BaseData) {
@@ -305,15 +302,13 @@ class MainActivity : BaseActivity() {
                 Log.i("clicked", "event = ${event.action}")
                 if (lastClick == 0 && event.action == 1)
                     view.callOnClick()
-
-                //  妈的智障 我一直折腾API兼容的问题折腾了吼久 智障智障
-               view.setBackgroundColor(resources.getColor(
-                        when(event.action) {
-                            MotionEvent.ACTION_DOWN,
-                            MotionEvent.ACTION_MOVE->
-                                    R.color.btn_click_down
-                            else -> R.color.btn_click_up
-                        }))
+                // 智障智障智障
+                view.background = resources.getDrawable(
+                        when (event.action) {
+                            MotionEvent.ACTION_MOVE,
+                            MotionEvent.ACTION_DOWN -> R.drawable.btn_default_light
+                            else -> R.drawable.btn_default_more_light
+                        })
                 lastClick = event.action
                 return@setOnTouchListener true
             }
