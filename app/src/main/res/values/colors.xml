@@ -9,4 +9,7 @@
     <color name="colorAccentDark">#AE8ABE</color>
     <color name="test">#cc6e76</color>
     <color name="myWhite" >#d8d8d8</color>
+
+    <color name="btn_click_down">#4b4b4b</color>
+    <color name="btn_click_up">#262626</color>
 </resources>

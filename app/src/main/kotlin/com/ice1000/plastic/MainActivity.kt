@@ -2,10 +2,7 @@ package com.ice1000.plastic
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
 import android.util.Log
 import android.view.*
 import android.widget.TextView
@@ -252,16 +249,18 @@ class MainActivity : BaseActivity() {
 
     }
 
-    inner class MyViewHolder(var view: View) :
+    inner class MyViewHolder(view: View) :
             RecyclerView.ViewHolder(view) {
 
         private var lastClick = 0xFF
+        private var view: CardView
         private var view1: TextView
         private var view2: TextView
 
         init {
-            view1 = view.find<TextView>(R.id.title_data)
-            view2 = view.find<TextView>(R.id.des_data)
+            this.view = view.find(R.id.container_card_data)
+            view1 = this.view.find<TextView>(R.id.title_data)
+            view2 = this.view.find<TextView>(R.id.des_data)
         }
 
         fun init(viewData: BaseData) {
@@ -302,12 +301,14 @@ class MainActivity : BaseActivity() {
                 Log.i("clicked", "event = ${event.action}")
                 if (lastClick == 0 && event.action == 1)
                     view.callOnClick()
-                view.background = resources.getDrawable(
-                        when (event.action) {
-                            MotionEvent.ACTION_MOVE,
-                            MotionEvent.ACTION_DOWN -> R.drawable.btn_default_light
-                            else -> R.drawable.btn_default_more_light
-                        }, theme)
+                view.setBackgroundColor(resources.getColor(
+                        when(event.action) {
+                            MotionEvent.ACTION_DOWN ->
+                                    R.color.btn_click_down
+                            else -> R.color.btn_click_up
+                        },
+                        theme
+                ))
                 lastClick = event.action
                 return@setOnTouchListener true
             }
