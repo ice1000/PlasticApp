@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
-import android.widget.`@+id/save_ll_mode_title`
+import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
 import data.constants.*
@@ -256,12 +256,12 @@ class MainActivity : BaseActivity() {
             RecyclerView.ViewHolder(view) {
 
         private var lastClick = 0xFF
-        private var view1: `@+id/save_ll_mode_title`
-        private var view2: `@+id/save_ll_mode_title`
+        private var view1: TextView
+        private var view2: TextView
 
         init {
-            view1 = view.find<`@+id/save_ll_mode_title`>(R.id.title_data)
-            view2 = view.find<`@+id/save_ll_mode_title`>(R.id.des_data)
+            view1 = view.find<TextView>(R.id.title_data)
+            view2 = view.find<TextView>(R.id.des_data)
         }
 
         fun init(viewData: BaseData) {

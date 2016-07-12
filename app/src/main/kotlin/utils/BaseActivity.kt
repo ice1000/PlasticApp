@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.ice1000.plastic.WebViewerActivity
+import data.constants.SAVE_LL_MODE_ON
 
 /**
  * @author ice1000
@@ -57,14 +58,15 @@ open class BaseActivity : AppCompatActivity() {
     fun String.webResource(): String {
         var ret = readString(DEFAULT_VALUE)
 //        Log.i("important", "ret = $ret")
-        if (ret.equals(DEFAULT_VALUE)
-                || checkNetwork()) {
+        if (SAVE_LL_MODE_ON.readBoolean(false) ||
+                !ret.equals(DEFAULT_VALUE) &&
+                !checkNetwork()) {
+            Log.i("important", "linking to SharedPreference")
+            return ret
+        } else {
             Log.i("important", "linking to web")
             ret = java.net.URL(this).readText(Charsets.UTF_8)
             save(ret)
-            return ret
-        } else {
-            Log.i("important", "linking to SharedPreference")
             return ret
         }
     }
