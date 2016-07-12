@@ -2,9 +2,13 @@ package com.ice1000.plastic
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.*
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import data.BaseData
@@ -145,10 +149,10 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         refresh(
-                link = currentLink,
+                link = learnLink,
                 done = { },
-                dataSize = currentNum,
-                dataType = currentType
+                dataSize = learnNum,
+                dataType = TYPE_OTHER_LIST
         )
     }
 
@@ -232,9 +236,9 @@ class MainActivity : BaseActivity() {
     inner class MyAdapter :
             RecyclerView.Adapter<MyViewHolder>() {
         override fun onBindViewHolder(
-                holder: MyViewHolder?,
+                holder: MyViewHolder,
                 position: Int) {
-            holder?.init(index[position])
+            holder.init(index[position])
         }
 
         override fun onCreateViewHolder(
@@ -253,7 +257,7 @@ class MainActivity : BaseActivity() {
             RecyclerView.ViewHolder(view) {
 
         private var lastClick = 0xFF
-        private var view: CardView
+        private var view: LinearLayout
         private var view1: TextView
         private var view2: TextView
 
@@ -301,14 +305,15 @@ class MainActivity : BaseActivity() {
                 Log.i("clicked", "event = ${event.action}")
                 if (lastClick == 0 && event.action == 1)
                     view.callOnClick()
-                view.setBackgroundColor(resources.getColor(
+
+                //  妈的智障 我一直折腾API兼容的问题折腾了吼久 智障智障
+               view.setBackgroundColor(resources.getColor(
                         when(event.action) {
-                            MotionEvent.ACTION_DOWN ->
+                            MotionEvent.ACTION_DOWN,
+                            MotionEvent.ACTION_MOVE->
                                     R.color.btn_click_down
                             else -> R.color.btn_click_up
-                        },
-                        theme
-                ))
+                        }))
                 lastClick = event.action
                 return@setOnTouchListener true
             }
