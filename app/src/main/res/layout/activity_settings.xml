@@ -83,6 +83,9 @@
 
                 <Switch
                     android:layout_width="wrap_content"
+                    android:textOn="@string/open"
+                    android:textOff="@string/close"
+                    android:textColor="@color/colorPrimaryLight"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"

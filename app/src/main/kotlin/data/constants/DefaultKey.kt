@@ -8,3 +8,5 @@ package data.constants
 val LAYOUT_PREFERENCE = "LAYOUT_PREFERENCE"
 
 val TEXT_SIZE = "TEXT_SIZE"
+
+val SAVE_LL_MODE_ON = "SAVE_LL_MODE_ON"

@@ -100,6 +100,10 @@ open class BaseActivity : AppCompatActivity() {
     fun String.readInt(default: Int = 0) =
             openPreference().getInt(this, default)
 
+    fun String.readBoolean(default: Boolean = false) =
+            openPreference().getBoolean(this, default)
+
+
     /**
      * @return a SharedPreference
      */

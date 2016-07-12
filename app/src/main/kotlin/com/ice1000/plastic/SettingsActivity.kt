@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import data.constants.LAYOUT_LIST
 import data.constants.LAYOUT_PREFERENCE
+import data.constants.SAVE_LL_MODE_ON
 import data.constants.TEXT_SIZE
 import kotlinx.android.synthetic.main.activity_settings.*
 import utils.BaseActivity
@@ -48,6 +49,11 @@ class SettingsActivity : BaseActivity() {
                     setTextSizeShowerText(it)
                 }))
 
+        val saveLLButton = save_ll_switch_settings
+        saveLLButton.isChecked = SAVE_LL_MODE_ON.readBoolean(false)
+        saveLLButton.setOnCheckedChangeListener { button, isChecked ->
+            SAVE_LL_MODE_ON.save(isChecked)
+        }
     }
 
     private fun setTextSizeShowerText(textSize: Int) {
