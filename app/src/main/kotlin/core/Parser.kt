@@ -20,7 +20,7 @@ object Parser {
         var i = 0
         val variableMap = HashMap<String, String>()
         while (i < source.size) {
-            if (source[i].startsWith("def")) {
+            if (source[i].startsWith("def ")) {
                 val definition = source[i].split(" ").toList().filter {
                     it.length > 0
                 }
