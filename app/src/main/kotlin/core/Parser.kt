@@ -1,4 +1,4 @@
-package utils
+package core
 
 import android.util.Log
 import data.BaseData
@@ -18,8 +18,19 @@ object Parser {
     fun parse(source: List<String>, dataType: Int, dataSize: Int): ArrayList<BaseData> {
         val index = ArrayList<BaseData>()
         var i = 0
+        val variableMap = HashMap<String, String>()
         while (i < source.size) {
+            if (source[i].startsWith("def")) {
+                val definition = source[i].split(" ").toList().filter {
+                    it.length > 0
+                }
+                // definition[0] is def
+                variableMap.put("$" + definition[1] + "$", definition[2])
+            }
             if (source[i].startsWith("====")) {
+                variableMap.forEach {
+                    source[i].replace(it.key, it.value)
+                }
                 try {
                     i++
                     if (dataSize == Module.NUMBER_THREE) {
@@ -41,9 +52,12 @@ object Parser {
                         ))
                         i += 2
                     }
-                } catch (e: IndexOutOfBoundsException) { }
+                } catch (e: IndexOutOfBoundsException) {
+                    Log.i("important", "parsing indexOutOfBound!!!")
+                }
                 Log.i("important", "parse finished")
             }
+            // !!!VERY IMPORTANT!!!
             i++
         }
         return index

@@ -25,7 +25,7 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
-import utils.Parser
+import core.Parser
 import java.util.*
 
 class MainActivity : BaseActivity() {
