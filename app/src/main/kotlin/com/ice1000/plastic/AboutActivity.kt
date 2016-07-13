@@ -3,7 +3,7 @@ package com.ice1000.plastic
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import data.constants.QQ_GROUP_VALUE
+import data.constants.QQ_GROUP_PL_VALUE
 import data.constants.TEXT_SIZE
 import data.modules.BlogAndOther
 import kotlinx.android.synthetic.main.activity_about.*
@@ -21,7 +21,7 @@ class AboutActivity : BaseActivity() {
         val fab = fab_setting
         fab.setOnClickListener({
             joinQQGroup(BlogAndOther.qqLink.webResource(
-                    QQ_GROUP_VALUE
+                    QQ_GROUP_PL_VALUE
             ))
         })
 
