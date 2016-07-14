@@ -23,8 +23,14 @@ object Parser {
                 val definition = source[i].split(" ").toList().filter {
                     it.length > 0
                 }
+//                测试正确，definition获取了正确的信息。
+                println("%" + definition[1] + "%")
                 source.forEach {
-                    it.replace("$" + definition[1] + "$", definition[2])
+                    it.replace(
+                            oldValue = "%" + definition[1] + "%",
+                            newValue = definition[2]
+                    )
+                    println(it)
                 }
             }
             if (source[i].startsWith("====")) {
