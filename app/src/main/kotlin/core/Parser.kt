@@ -23,15 +23,12 @@ object Parser {
                 val definition = source[i].split(" ").toList().filter {
                     it.length > 0
                 }
-//                测试正确，definition获取了正确的信息。
-//                println("%" + definition[1] + "%")
                 val replacedSource = ArrayList<String>()
                 source.forEach {
                     replacedSource.add(it.replace(
                             oldValue = "%" + definition[1] + "%",
                             newValue = definition[2]
                     ))
-//                    println(it)
                 }
                 replacedSource.forEachIndexed { index, element ->
                     source[index] = element

@@ -11,8 +11,8 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
-class AboutActivity : BaseActivity() {
 
+class AboutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
