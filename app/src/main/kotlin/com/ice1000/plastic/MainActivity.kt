@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
+import core.Parser
 import data.BaseData
 import data.constants.JJ_FLY
 import data.constants.LAYOUT_GRID_2
@@ -25,7 +26,6 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
-import core.Parser
 import java.util.*
 
 class MainActivity : BaseActivity() {
@@ -66,7 +66,7 @@ class MainActivity : BaseActivity() {
         connection != null}, dataSize = $dataSize")
 
         val showUselessData = showData(
-                indexText = JJ_FLY.split("\n"),
+                indexText = JJ_FLY.split("\n") as ArrayList<String>,
                 clean = clean,
                 dataSize = dataSize,
                 dataType = dataType
@@ -95,7 +95,7 @@ class MainActivity : BaseActivity() {
         async() {
             val indexText: List<String>
 
-            indexText = link.webResource().split("\n")
+            indexText = link.webResource().split("\n") as ArrayList
 
             uiThread {
                 showData(
@@ -113,7 +113,7 @@ class MainActivity : BaseActivity() {
      * core code of this system
      */
     private fun showData(
-            indexText: List<String>,
+            indexText: ArrayList<String>,
             clean: Boolean,
             dataSize: Int,
             dataType: Int) {

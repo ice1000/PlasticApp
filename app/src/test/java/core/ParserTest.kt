@@ -2,6 +2,7 @@ package core
 
 import data.modules.Learn
 import org.junit.Test
+import java.util.*
 
 /**
  * @author ice1000
@@ -19,11 +20,10 @@ title
 %path%i_am_an_artist
 I'm hired from people to perfume their fantasies.
         """
-        val returnObject = Parser.parse(testSource.split("\n"), Learn.type, Learn.num)
+        val returnObject = Parser.parse(testSource.split("\n") as ArrayList<String>, Learn.type, Learn.num)
         returnObject.forEach {
             assert(it.title.equals("title"))
-            println("url = ${it.url}")
-            println("des = ${it.description}")
+            assert(it.url.equals("my_name_is_vani_am_an_artist"))
         }
     }
 

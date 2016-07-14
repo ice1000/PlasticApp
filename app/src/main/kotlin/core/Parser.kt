@@ -15,7 +15,7 @@ object Parser {
     /**
      * @param source DSL source
      */
-    fun parse(source: List<String>, dataType: Int, dataSize: Int): ArrayList<BaseData> {
+    fun parse(source: ArrayList<String>, dataType: Int, dataSize: Int): ArrayList<BaseData> {
         val index = ArrayList<BaseData>()
         var i = 0
         while (i < source.size) {
@@ -24,13 +24,17 @@ object Parser {
                     it.length > 0
                 }
 //                测试正确，definition获取了正确的信息。
-                println("%" + definition[1] + "%")
+//                println("%" + definition[1] + "%")
+                val replacedSource = ArrayList<String>()
                 source.forEach {
-                    it.replace(
+                    replacedSource.add(it.replace(
                             oldValue = "%" + definition[1] + "%",
                             newValue = definition[2]
-                    )
-                    println(it)
+                    ))
+//                    println(it)
+                }
+                replacedSource.forEachIndexed { index, element ->
+                    source[index] = element
                 }
             }
             if (source[i].startsWith("====")) {
