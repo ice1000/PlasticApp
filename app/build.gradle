@@ -30,8 +30,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
     compile "org.jetbrains.anko:anko-common:$anko_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    testCompile "org.jetbrains.spek:spek:$spek_version"
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.android.support:cardview-v7:24.0.0'
@@ -45,6 +47,9 @@ buildscript {
     ext.anko_version = '0.8.3'
     repositories {
         mavenCentral()
+        maven {
+            url "http://repository.jetbrains.com/all"
+        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
