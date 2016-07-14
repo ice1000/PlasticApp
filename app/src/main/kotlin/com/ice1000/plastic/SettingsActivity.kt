@@ -100,9 +100,8 @@ class SettingsActivity : BaseActivity() {
             Log.v("important", "start, max = $max")
         }
 
-        override fun onStopTrackingTouch(p0: SeekBar?) {
+        override fun onStopTrackingTouch(p0: SeekBar?) =
             TEXT_SIZE.save(size)
-        }
 
     }
 }
