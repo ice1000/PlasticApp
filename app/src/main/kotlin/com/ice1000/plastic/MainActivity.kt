@@ -62,8 +62,9 @@ class MainActivity : BaseActivity() {
             done: () -> Unit,
             clean: Boolean = true) {
 
-        Log.i("important", "refreshing, link is $link, have connection = ${
-        connection != null}, dataSize = $dataSize")
+        currentLink = link
+        currentNum = dataSize
+        currentType = dataType
 
         val showUselessData = showData(
                 indexText = JJ_FLY.split("\n") as ArrayList<String>,
@@ -72,17 +73,9 @@ class MainActivity : BaseActivity() {
                 dataType = dataType
         )
 
-        currentLink = link
-        currentNum = dataSize
-        currentType = dataType
-
-        Log.i("important",
-                "currentLink = $currentLink, " +
-                        "currentNum = $currentNum, " +
-                        "currentType = 0xFF${currentType - 0xFF0}")
-
         try {
-            checkNetwork()
+            Log.i("important", "refreshing, link is $link, have connection = ${
+            checkNetwork()}, dataSize = $dataSize")
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(
@@ -91,6 +84,10 @@ class MainActivity : BaseActivity() {
                     Toast.LENGTH_SHORT).show()
             showUselessData
         }
+
+        Log.i("important", "currentLink = $currentLink, " +
+                        "currentNum = $currentNum, " +
+                        "currentType = 0xFF${currentType - 0xFF0}")
 
         async() {
             val indexText: List<String>
@@ -132,11 +129,14 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
+        if (currentLink == Learn.link) {
+            super.onBackPressed()
+        }
         refresh(
-                link = currentLink,
-                done = { },
-                dataSize = currentNum,
-                dataType = currentType
+                link = Learn.link,
+                dataSize = Learn.num,
+                dataType = Learn.type,
+                done = { }
         )
     }
 
