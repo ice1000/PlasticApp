@@ -20,9 +20,12 @@ class AboutActivity : BaseActivity() {
 
         val fab = fab_setting
         fab.setOnClickListener({
-            joinQQGroup(BlogAndOther.qqLink.webResource(
-                    QQ_GROUP_PL_VALUE
-            ))
+            joinQQGroup(
+//                    BlogAndOther.qqLink.webResource(
+//                            QQ_GROUP_PL_VALUE
+//                    )
+                QQ_GROUP_PL_VALUE
+            )
         })
 
         viewGiuHub.setOnClickListener {

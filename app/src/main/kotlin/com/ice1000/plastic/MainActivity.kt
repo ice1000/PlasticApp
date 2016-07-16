@@ -183,29 +183,38 @@ class MainActivity : BaseActivity() {
         }
 
         toolbar_learn_main.setOnClickListener {
+            refresher_main.isRefreshing = true
             refresh(
                     link = Learn.link,
                     dataSize = Learn.num,
                     dataType = Learn.type,
-                    done = { }
+                    done = {
+                        refresher_main.isRefreshing = false
+                    }
             )
         }
 
         toolbar_blog_main.setOnClickListener {
+            refresher_main.isRefreshing = true
             refresh(
                     link = BlogAndOther.link,
                     dataSize = BlogAndOther.num,
                     dataType = BlogAndOther.type,
-                    done = { }
+                    done = {
+                        refresher_main.isRefreshing = false
+                    }
             )
         }
 
         toolbar_news_main.setOnClickListener {
+            refresher_main.isRefreshing = true
             refresh(
                     link = News.link,
                     dataSize = News.num,
                     dataType = News.type,
-                    done = { }
+                    done = {
+                        refresher_main.isRefreshing = false
+                    }
             )
         }
     }

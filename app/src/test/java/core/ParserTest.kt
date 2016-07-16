@@ -8,13 +8,12 @@ import java.util.*
  * @author ice1000
  * Created by ice1000 on 2016/7/14.
  */
-class ParserTest {
+object ParserTest {
 
     @Test
     fun parse() {
         val testSource = """
 def path my_name_is_van
-
 ====
 title
 %path%i_am_an_artist
