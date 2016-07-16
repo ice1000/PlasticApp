@@ -15,7 +15,11 @@ object Parser {
     /**
      * @param source DSL source
      */
-    fun parse(source: ArrayList<String>, dataType: Int, dataSize: Int): ArrayList<BaseData> {
+    fun parse(
+            source: ArrayList<String>,
+            dataType: Int,
+            dataSize: Int
+    ): ArrayList<BaseData> {
         val index = ArrayList<BaseData>()
         var i = 0
         while (i < source.size) {
