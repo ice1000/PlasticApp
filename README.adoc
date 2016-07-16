@@ -24,9 +24,19 @@ Kotlin中文官方文档
 https://github.com/huanglizhuo/kotlin-in-chinese/issues/18#issuecomment-230971017[Application]
 申请权限
 
-https://github.com/numbbbbb/the-swift-programming-language-in-chinese/issues/630[Swift doc Chinese]
+https://github.com/numbbbbb/the-swift-programming-language-in-chinese[Swift doc Chinese]
 Swift中文官方文档
 https://github.com/numbbbbb/the-swift-programming-language-in-chinese/issues/630[Application]
+申请权限
+
+https://github.com/cloudwu/lua53doc[Lua docs Chinese]
+Lua中文官方文档
+https://github.com/cloudwu/lua53doc/issues/48[Application]
+申请权限
+
+https://github.com/hlb/sass-doc-zh[SASS docs Chinese Taiwan]
+SASS繁体中文官方文档
+https://github.com/hlb/sass-doc-zh/issues/9[Application]
 申请权限
 
 === Build and deployment ===

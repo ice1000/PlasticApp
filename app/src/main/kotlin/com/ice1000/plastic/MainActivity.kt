@@ -86,8 +86,8 @@ class MainActivity : BaseActivity() {
         }
 
         Log.i("important", "currentLink = $currentLink, " +
-                        "currentNum = $currentNum, " +
-                        "currentType = 0xFF${currentType - 0xFF0}")
+                "currentNum = $currentNum, " +
+                "currentType = 0xFF${currentType - 0xFF0}")
 
         async() {
             val indexText: List<String>
@@ -117,14 +117,14 @@ class MainActivity : BaseActivity() {
 //        Log.i("important", "indexText = $indexText")
         if (clean)
             index.clear()
-        for(data in Parser.parse(
+        for (data in Parser.parse(
                 source = indexText,
                 dataType = dataType,
                 dataSize = dataSize)) {
             index.add(data)
         }
         dataSetOnScreen.adapter = MyAdapter()
-//                refresher?.isRefreshing = false
+//        refresher?.isRefreshing = false
 
     }
 
@@ -240,7 +240,7 @@ class MainActivity : BaseActivity() {
     inner class MyViewHolder(var view: View) :
             RecyclerView.ViewHolder(view) {
 
-        private var lastClick = 0xFF
+        private var startClickCounter = 0xFF
         private var view1: TextView
         private var view2: TextView
 
@@ -285,19 +285,18 @@ class MainActivity : BaseActivity() {
 
             view.setOnTouchListener { view, event ->
                 Log.i("clicked", "event = ${event.action}")
-                if (lastClick == 0 && event.action == 1)
+                if (startClickCounter == 0 && event.action == 1)
                     view.callOnClick()
-                // 智障智障智障
+                // 我真是智障，智障智障智障，以后记得检查方法的API版本！！
                 view.background = resources.getDrawable(
                         when (event.action) {
                             MotionEvent.ACTION_MOVE,
                             MotionEvent.ACTION_DOWN -> R.drawable.btn_default_light
                             else -> R.drawable.btn_default_more_light
                         })
-                lastClick = event.action
+                startClickCounter = event.action
                 return@setOnTouchListener true
             }
         }
     }
-
 }
