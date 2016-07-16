@@ -8,6 +8,7 @@ import java.util.*
 
 /**
  * @author ice1000
+ * @version 0.3.2
  * Created by ice1000 on 2016/7/12.
  */
 object Parser {
