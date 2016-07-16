@@ -126,13 +126,18 @@ class MainActivity : BaseActivity() {
         if (currentLink == Learn.link) {
             refresher_main.isRefreshing = false
             super.onBackPressed()
+            return
         }
-        refresh(
-                link = Learn.link,
-                dataSize = Learn.num,
-                dataType = Learn.type,
-                done = { }
-        )
+//        refresher_main.isRefreshing = true
+//        refresh(
+//                link = Learn.link,
+//                dataSize = Learn.num,
+//                dataType = Learn.type,
+//                done = {
+//                    refresher_main.isRefreshing = false
+//                }
+//        )
+        toolbar_learn_main.callOnClick()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
