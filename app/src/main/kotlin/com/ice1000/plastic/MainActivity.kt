@@ -2,20 +2,14 @@ package com.ice1000.plastic
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
 import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import core.Parser
 import data.BaseData
-import data.constants.JJ_FLY
-import data.constants.LAYOUT_GRID_2
-import data.constants.LAYOUT_GRID_3
-import data.constants.LAYOUT_PREFERENCE
+import data.constants.*
 import data.modules.BlogAndOther
 import data.modules.Learn
 import data.modules.Module
@@ -31,8 +25,6 @@ import java.util.*
 class MainActivity : BaseActivity() {
 
     var index: ArrayList<BaseData> = ArrayList()
-    val dataSetOnScreen: RecyclerView
-        get() = dataSet_main
 
     var currentLink = Learn.link
     var currentNum = Learn.num
@@ -52,7 +44,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        dataSetOnScreen.layoutManager = chooseLayout()
+        dataSet_main.layoutManager = chooseLayout()
     }
 
     private fun refresh(
@@ -66,12 +58,14 @@ class MainActivity : BaseActivity() {
         currentNum = dataSize
         currentType = dataType
 
-        val showUselessData = showData(
-                indexText = JJ_FLY.split("\n") as ArrayList<String>,
-                clean = clean,
-                dataSize = dataSize,
-                dataType = dataType
-        )
+        val showUselessData = {
+            showData(
+                    indexText = JJ_FLY.split("\n") as ArrayList<String>,
+                    clean = clean,
+                    dataSize = dataSize,
+                    dataType = dataType
+            )
+        }
 
         try {
             Log.i("important", "refreshing, link is $link, have connection = ${
@@ -82,7 +76,7 @@ class MainActivity : BaseActivity() {
                     this@MainActivity,
                     R.string.please_check_network,
                     Toast.LENGTH_SHORT).show()
-            showUselessData
+            Log.i("not important", "showUselessData = $showUselessData")
         }
 
         Log.i("important", "currentLink = $currentLink, " +
@@ -123,13 +117,14 @@ class MainActivity : BaseActivity() {
                 dataSize = dataSize)) {
             index.add(data)
         }
-        dataSetOnScreen.adapter = MyAdapter()
+        dataSet_main.adapter = MyAdapter()
 //        refresher?.isRefreshing = false
 
     }
 
     override fun onBackPressed() {
         if (currentLink == Learn.link) {
+            refresher_main.isRefreshing = false
             super.onBackPressed()
         }
         refresh(
@@ -168,17 +163,16 @@ class MainActivity : BaseActivity() {
     private fun initViews() {
         setSupportActionBar(toolbar_main)
 
-        dataSetOnScreen.layoutManager = chooseLayout()
-        dataSetOnScreen.itemAnimator = DefaultItemAnimator()
+        dataSet_main.layoutManager = chooseLayout()
+        dataSet_main.itemAnimator = DefaultItemAnimator()
 
-        val refresher = refresher_main
-        refresher.setOnRefreshListener {
+        refresher_main.setOnRefreshListener {
             refresh(
                     link = currentLink,
                     dataSize = currentNum,
                     dataType = currentType,
                     done = {
-                        refresher.isRefreshing = false
+                        refresher_main.isRefreshing = false
                     }
             )
         }
@@ -214,6 +208,10 @@ class MainActivity : BaseActivity() {
     private fun chooseLayout() = when (LAYOUT_PREFERENCE.readInt(1)) {
         LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
         LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
+        LAYOUT_STAGGERED -> StaggeredGridLayoutManager(
+                2,
+                OrientationHelper.VERTICAL
+        )
         else -> LinearLayoutManager(this)
     }
 

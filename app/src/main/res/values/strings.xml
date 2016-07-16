@@ -34,6 +34,7 @@
         <item>列表式布局</item>
         <item>表格式布局（两列）</item>
         <item>表格式布局（三列）</item>
+        <item>流式布局（两列）</item>
     </string-array>
 
 </resources><!--

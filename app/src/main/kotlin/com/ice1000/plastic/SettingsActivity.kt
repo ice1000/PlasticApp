@@ -35,23 +35,21 @@ class SettingsActivity : BaseActivity() {
                 android.R.layout.simple_spinner_item
         )
 
-        val layoutSpinner = spinner_settings_layout
-        layoutSpinner.adapter = adapter
-        layoutSpinner.onItemSelectedListener = SpinnerSelected()
+        spinner_settings_layout.adapter = adapter
+        spinner_settings_layout.onItemSelectedListener =
+                SpinnerSelected()
 
-        val textSizeSeeker = text_size_settings_seeker
         setTextSizeShowerText(TEXT_SIZE.readInt(16))
 
-        textSizeSeeker.max = textSizeMax
-        textSizeSeeker.progress = TEXT_SIZE.readInt(16)
-        textSizeSeeker.setOnSeekBarChangeListener(
-                TextSizeSeeker(textSizeMax, {
+        text_size_settings_seeker.max = textSizeMax
+        text_size_settings_seeker.progress = TEXT_SIZE.readInt(16)
+        text_size_settings_seeker.setOnSeekBarChangeListener(
+                text_size_settings_seeker(textSizeMax, {
                     setTextSizeShowerText(it)
                 }))
 
-        val saveLLButton = save_ll_switch_settings
-        saveLLButton.isChecked = SAVE_LL_MODE_ON.readBoolean(false)
-        saveLLButton.setOnCheckedChangeListener { button, isChecked ->
+        save_ll_switch_settings.isChecked = SAVE_LL_MODE_ON.readBoolean(false)
+        save_ll_switch_settings.setOnCheckedChangeListener { button, isChecked ->
             SAVE_LL_MODE_ON.save(isChecked)
         }
     }
@@ -80,7 +78,7 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    inner class TextSizeSeeker(var max: Int, var shower: (Int) -> Unit) :
+    inner class text_size_settings_seeker(var max: Int, var shower: (Int) -> Unit) :
             SeekBar.OnSeekBarChangeListener {
 
         private var size = 16
