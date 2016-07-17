@@ -2,7 +2,6 @@ package com.ice1000.plastic
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import data.constants.TEXT_SIZE
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import org.jetbrains.anko.async
@@ -11,8 +10,6 @@ import utils.BaseActivity
 
 class ScrollingActivity : BaseActivity() {
 
-    val data: TextView
-        get() = data_scrolling
     var url: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +32,7 @@ class ScrollingActivity : BaseActivity() {
                 refresher.isRefreshing = false
             })
         }
-        data.textSize = TEXT_SIZE.readInt(16).toFloat()
+        data_scrolling.textSize = TEXT_SIZE.readInt(16).toFloat()
     }
 
     private fun refresh(end: () -> Unit) {
@@ -43,7 +40,7 @@ class ScrollingActivity : BaseActivity() {
             val text = url.webResource()
             uiThread {
                 end()
-                data.text = text
+                data_scrolling.text = text
             }
         }
     }

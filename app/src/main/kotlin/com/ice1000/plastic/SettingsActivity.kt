@@ -1,7 +1,6 @@
 package com.ice1000.plastic
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -16,6 +15,7 @@ import utils.BaseActivity
 class SettingsActivity : BaseActivity() {
 
     private val textSizeMax = 50
+    private val textSizeDefault = 16
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +39,12 @@ class SettingsActivity : BaseActivity() {
         spinner_settings_layout.onItemSelectedListener =
                 SpinnerSelected()
 
-        setTextSizeShowerText(TEXT_SIZE.readInt(16))
+        setTextSizeShowerText(TEXT_SIZE.readInt(textSizeDefault))
 
         text_size_settings_seeker.max = textSizeMax
-        text_size_settings_seeker.progress = TEXT_SIZE.readInt(16)
+        text_size_settings_seeker.progress = TEXT_SIZE.readInt(textSizeDefault)
         text_size_settings_seeker.setOnSeekBarChangeListener(
-                text_size_settings_seeker(textSizeMax, {
+                text_size_settings_seeker({
                     setTextSizeShowerText(it)
                 }))
 
@@ -78,7 +78,7 @@ class SettingsActivity : BaseActivity() {
         }
     }
 
-    inner class text_size_settings_seeker(var max: Int, var shower: (Int) -> Unit) :
+    inner class text_size_settings_seeker(var shower: (Int) -> Unit) :
             SeekBar.OnSeekBarChangeListener {
 
         private var size = 16
@@ -91,11 +91,11 @@ class SettingsActivity : BaseActivity() {
                 shower(size)
                 size = p1
             }
-            Log.v("important", "progress = $size")
+//            Log.v("important", "progress = $size")
         }
 
         override fun onStartTrackingTouch(p0: SeekBar?) {
-            Log.v("important", "start, max = $max")
+//            Log.v("important", "start, max = $max")
         }
 
         override fun onStopTrackingTouch(p0: SeekBar?) =
