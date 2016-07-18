@@ -1,7 +1,6 @@
 package utils
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -10,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.ice1000.plastic.WebViewerActivity
 import data.constants.SAVE_LL_MODE_ON
+import org.jetbrains.anko.intentFor
 
 /**
  * @author ice1000
@@ -32,10 +32,8 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     protected fun openWeb(url: String) {
-        startActivity(Intent(
-                this@BaseActivity,
-                WebViewerActivity::class.java
-        ).putExtra(URL, url))
+        startActivity(intentFor<WebViewerActivity>()
+                .putExtra(URL, url))
     }
 
     protected fun checkNetwork(): Boolean {

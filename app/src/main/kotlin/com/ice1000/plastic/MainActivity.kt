@@ -1,6 +1,5 @@
 package com.ice1000.plastic
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.*
 import android.util.Log
@@ -18,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.async
 import org.jetbrains.anko.find
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 import java.util.*
@@ -149,18 +149,12 @@ class MainActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> {
-                startActivity(Intent(
-                        this@MainActivity,
-                        SettingsActivity::class.java
-                ))
+                startActivity(intentFor<SettingsActivity>())
                 return true
             }
 //            R.id.action_refresh -> refresh()
             R.id.action_contributing ->
-                startActivity(Intent(
-                        this@MainActivity,
-                        AboutActivity::class.java
-                ))
+                startActivity(intentFor<AboutActivity>())
         }
         return super.onOptionsItemSelected(item)
     }
@@ -288,10 +282,8 @@ class MainActivity : BaseActivity() {
 
                 // 显示一个数据流
                     Module.TYPE_FLOW ->
-                        startActivity(Intent(
-                                this@MainActivity,
-                                ScrollingActivity::class.java
-                        ).putExtra(URL, viewData.url))
+                        startActivity(intentFor<ScrollingActivity>()
+                                .putExtra(URL, viewData.url))
                 }
             }
 
