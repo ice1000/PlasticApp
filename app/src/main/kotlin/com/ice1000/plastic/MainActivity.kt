@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
 
         val showUselessData = {
             showData(
-                    indexText = JJ_FLY.split("\n") as ArrayList<String>,
+                    indexText = JJ_FLY.split("\n"),
                     clean = clean,
                     dataSize = dataSize,
                     dataType = dataType
@@ -86,7 +86,7 @@ class MainActivity : BaseActivity() {
         async() {
             val indexText: List<String>
 
-            indexText = link.webResource().split("\n") as ArrayList
+            indexText = link.webResource().split("\n")
 
             uiThread {
                 showData(
@@ -104,7 +104,7 @@ class MainActivity : BaseActivity() {
      * core code of this system
      */
     private fun showData(
-            indexText: ArrayList<String>,
+            indexText: List<String>,
             clean: Boolean,
             dataSize: Int,
             dataType: Int) {
