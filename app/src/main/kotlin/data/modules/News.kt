@@ -8,6 +8,5 @@ package data.modules
 
 object News: Module(){
     override var link = "${parentLink}index.txt"
-    override var num = NUMBER_THREE
     override var type = TYPE_LIST
 }

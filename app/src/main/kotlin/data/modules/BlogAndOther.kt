@@ -8,7 +8,6 @@ package data.modules
 
 object BlogAndOther : Module() {
     override var link: String = "${parentLink}blogs.txt"
-    override var num = NUMBER_TWO
     override var type = TYPE_LIST
 
     val appreciateLink = "${parentLink}thanks.txt"

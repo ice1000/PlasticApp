@@ -2,8 +2,6 @@ package core
 
 import android.util.Log
 import data.BaseData
-import data.constants.FUCKER
-import data.modules.Module
 import java.util.*
 
 /**
@@ -20,8 +18,7 @@ object Parser {
      */
     fun parse(
             source: List<String>,
-            dataType: Int,
-            dataSize: Int
+            dataType: Int
     ): ArrayList<BaseData> {
         this.source = source
         val index = ArrayList<BaseData>()
@@ -41,7 +38,6 @@ object Parser {
             if (this.source[i].startsWith("====")) {
                 try {
                     i++
-                    if (dataSize == Module.NUMBER_THREE) {
                         index.add(BaseData(
                                 title = this.source[i],
                                 url = this.source[i + 1],
@@ -50,16 +46,6 @@ object Parser {
                         ))
                         i += 3
                         continue
-                    }
-                    if (dataSize == Module.NUMBER_TWO) {
-                        index.add(BaseData(
-                                title = this.source[i],
-                                url = this.source[i + 1],
-                                type = dataType,
-                                description = FUCKER
-                        ))
-                        i += 2
-                    }
                 } catch (e: IndexOutOfBoundsException) {
                     Log.i("important", "parsing indexOutOfBound!!!")
                 }

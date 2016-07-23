@@ -16,13 +16,9 @@ abstract class Module {
         val TYPE_OTHER_LIST = 0xFF2
 
         val TYPE_FLOW = 0xFF3
-        val NUMBER_TWO = 0x2
-
-        val NUMBER_THREE = 0x3
     }
 
     abstract var link: String
-    abstract var num: Int
     abstract var type: Int
 
 }

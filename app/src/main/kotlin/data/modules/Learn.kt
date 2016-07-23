@@ -8,6 +8,5 @@ package data.modules
 
 object Learn: Module() {
     override var link = "${parentLink}learn.txt"
-    override var num = NUMBER_THREE
     override var type = TYPE_OTHER_LIST
 }

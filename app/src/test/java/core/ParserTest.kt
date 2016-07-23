@@ -19,7 +19,9 @@ title
 %path%i_am_an_artist
 I'm hired from people to perfume their fantasies.
         """
-        val returnObject = Parser.parse(testSource.split("\n") as ArrayList<String>, Learn.type, Learn.num)
+        val returnObject = Parser.parse(
+                testSource.split("\n") as ArrayList<String>,
+                Learn.type)
         returnObject.forEach {
             assert(it.title.equals("title"))
             assert(it.url.equals("my_name_is_vani_am_an_artist"))

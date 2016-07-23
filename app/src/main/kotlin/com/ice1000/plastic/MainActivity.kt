@@ -27,7 +27,6 @@ class MainActivity : BaseActivity() {
     var index: ArrayList<BaseData> = ArrayList()
 
     var currentLink = Learn.link
-    var currentNum = Learn.num
     var currentType = Learn.type
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +35,6 @@ class MainActivity : BaseActivity() {
         initViews()
         refresh(
                 link = currentLink,
-                dataSize = currentNum,
                 dataType = currentType,
                 done = { }
         )
@@ -62,7 +60,6 @@ class MainActivity : BaseActivity() {
             showData(
                     indexText = JJ_FLY.split("\n"),
                     clean = clean,
-                    dataSize = dataSize,
                     dataType = dataType
             )
         }
@@ -92,7 +89,6 @@ class MainActivity : BaseActivity() {
                 showData(
                         indexText = indexText,
                         clean = clean,
-                        dataSize = dataSize,
                         dataType = dataType
                 )
                 done()
@@ -106,15 +102,13 @@ class MainActivity : BaseActivity() {
     private fun showData(
             indexText: List<String>,
             clean: Boolean,
-            dataSize: Int,
             dataType: Int) {
 //        Log.i("important", "indexText = $indexText")
         if (clean)
             index.clear()
         for (data in Parser.parse(
                 source = indexText,
-                dataType = dataType,
-                dataSize = dataSize)) {
+                dataType = dataType)) {
             index.add(data)
         }
         dataSet_main.adapter = MyAdapter()
@@ -168,7 +162,6 @@ class MainActivity : BaseActivity() {
         refresher_main.setOnRefreshListener {
             refresh(
                     link = currentLink,
-                    dataSize = currentNum,
                     dataType = currentType,
                     done = {
                         refresher_main.isRefreshing = false
@@ -180,7 +173,6 @@ class MainActivity : BaseActivity() {
             refresher_main.isRefreshing = true
             refresh(
                     link = Learn.link,
-                    dataSize = Learn.num,
                     dataType = Learn.type,
                     done = {
                         refresher_main.isRefreshing = false
@@ -192,7 +184,6 @@ class MainActivity : BaseActivity() {
             refresher_main.isRefreshing = true
             refresh(
                     link = BlogAndOther.link,
-                    dataSize = BlogAndOther.num,
                     dataType = BlogAndOther.type,
                     done = {
                         refresher_main.isRefreshing = false
@@ -204,7 +195,6 @@ class MainActivity : BaseActivity() {
             refresher_main.isRefreshing = true
             refresh(
                     link = News.link,
-                    dataSize = News.num,
                     dataType = News.type,
                     done = {
                         refresher_main.isRefreshing = false
@@ -275,7 +265,6 @@ class MainActivity : BaseActivity() {
                         if (!"null".equals(viewData.url))
                             refresh(
                                     link = viewData.url,
-                                    dataSize = Module.NUMBER_THREE,
                                     dataType = Module.TYPE_FLOW,
                                     done = { }
                             )
