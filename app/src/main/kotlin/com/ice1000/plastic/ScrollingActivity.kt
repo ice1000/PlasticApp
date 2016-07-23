@@ -16,9 +16,9 @@ class ScrollingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
         url = intent.getStringExtra(URL)
-        Log.d(this.toString(), url)
         initViews()
         refresh({})
+        Log.d(this.toString(), url)
     }
 
     private fun initViews() {

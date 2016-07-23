@@ -28,7 +28,7 @@ object Parser {
                 val definition = this.source[i].split(" ").toList().filter {
                     it.length > 0
                 }
-                this.source = source.map {
+                this.source = this.source.map {
                     it.replace(
                             oldValue = "%" + definition[1] + "%",
                             newValue = definition[2]
