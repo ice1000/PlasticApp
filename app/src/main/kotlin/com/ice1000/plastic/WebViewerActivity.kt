@@ -1,6 +1,7 @@
 package com.ice1000.plastic
 
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_web_viewer.*
 import utils.BaseActivity
 
@@ -12,6 +13,10 @@ class WebViewerActivity : BaseActivity() {
 
 //        actionBar.setDisplayShowHomeEnabled(true)
 
-        webViewer.loadUrl(intent.getStringExtra(URL))
+        val url = intent.getStringExtra(URL)
+
+        Log.i(this.toString(), "url = $url")
+
+        webViewer.loadUrl(url)
     }
 }

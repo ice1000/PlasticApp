@@ -47,13 +47,11 @@ class MainActivity : BaseActivity() {
 
     private fun refresh(
             link: String,
-            dataSize: Int,
             dataType: Int,
             done: () -> Unit,
             clean: Boolean = true) {
 
         currentLink = link
-        currentNum = dataSize
         currentType = dataType
 
         val showUselessData = {
@@ -65,8 +63,7 @@ class MainActivity : BaseActivity() {
         }
 
         try {
-            Log.i("important", "refreshing, link is $link, have connection = ${
-            checkNetwork()}, dataSize = $dataSize")
+            Log.i("important", "refreshing, link is $link, have connection = ${checkNetwork()}")
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(
@@ -77,7 +74,6 @@ class MainActivity : BaseActivity() {
         }
 
         Log.i("important", "currentLink = $currentLink, " +
-                "currentNum = $currentNum, " +
                 "currentType = 0xFF${currentType - 0xFF0}")
 
         async() {
