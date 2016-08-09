@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import data.constants.SAVE_LL_MODE_ON
+import org.jetbrains.anko.async
+import org.jetbrains.anko.uiThread
 
 /**
  * @author ice1000
@@ -53,23 +55,33 @@ open class BaseActivity : AppCompatActivity() {
      * next time when the network is invalid, it will return the data
      * stored in the SharedPreference.
      *
-     * use this in asnyc!!!!
-     *
      * this method extended String.
      */
-    fun String.webResource(default: String = DEFAULT_VALUE): String {
-        var ret = readString(default)
+    fun String.webResource(
+            submit: (String) -> Unit,
+            default: String = DEFAULT_VALUE) {
+        async() {
+            var ret = readString(default)
+            uiThread {
+                submit(ret)
+            }
 //        Log.i("important", "ret = $ret")
-        if (SAVE_LL_MODE_ON.readBoolean(false) ||
-                !ret.equals(DEFAULT_VALUE) &&
-                !checkNetwork()) {
-            Log.i("important", "linking to SharedPreference")
-            return ret
-        } else {
-            Log.i("important", "linking to web")
-            ret = java.net.URL(this).readText(Charsets.UTF_8)
-            save(ret)
-            return ret
+            Log.i(this@BaseActivity.toString(), this@webResource)
+            if (SAVE_LL_MODE_ON.readBoolean(false) ||
+                    !ret.equals(DEFAULT_VALUE) &&
+                            !checkNetwork()) {
+                Log.i("important", "linking to SharedPreference")
+                uiThread {
+                    submit(ret)
+                }
+            } else {
+                Log.i("important", "linking to web")
+                ret = java.net.URL(this@webResource).readText(Charsets.UTF_8)
+                uiThread {
+                    submit(ret)
+                }
+                save(ret)
+            }
         }
     }
 

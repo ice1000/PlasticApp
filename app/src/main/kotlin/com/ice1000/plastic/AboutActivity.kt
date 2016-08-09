@@ -7,9 +7,7 @@ import data.constants.QQ_GROUP_PL_VALUE
 import data.constants.TEXT_SIZE
 import data.modules.BlogAndOther
 import kotlinx.android.synthetic.main.activity_about.*
-import org.jetbrains.anko.async
 import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 
 class AboutActivity : BaseActivity() {
@@ -19,26 +17,12 @@ class AboutActivity : BaseActivity() {
         setContentView(R.layout.activity_about)
 
         val fab = fab_setting
-        fab.setOnClickListener({
-            joinQQGroup(
-//                    BlogAndOther.qqLink.webResource(
-//                            QQ_GROUP_PL_VALUE
-//                    )
-                QQ_GROUP_PL_VALUE
-            )
-        })
+        fab.setOnClickListener({ joinQQGroup(QQ_GROUP_PL_VALUE) })
 
-        viewGiuHub.setOnClickListener {
-            viewGitHub()
-        }
+        viewGiuHub.setOnClickListener { viewGitHub() }
 
-        async() {
-            val fuck = BlogAndOther.appreciateLink.webResource()
-            uiThread {
-                contributeText.text = fuck
-                contributeText.textSize = TEXT_SIZE.readInt(16).toFloat()
-            }
-        }
+        BlogAndOther.appreciateLink.webResource({ s -> contributeText.text = s })
+        contributeText.textSize = TEXT_SIZE.readInt(16).toFloat()
     }
 
     fun viewGitHub() = openWeb("https://github.com/ice1000/PlasticApp")
@@ -54,12 +38,12 @@ class AboutActivity : BaseActivity() {
         // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，
         // 返回手Q主界面，不设置，按返回会返回到呼起产品界面
         // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        try {
+        return try {
             startActivity(intent)
-            return true
+            true
         } catch (e: Exception) {
             toast(getString(R.string.please_install_qq))
-            return false
+            false
         }
     }
 }

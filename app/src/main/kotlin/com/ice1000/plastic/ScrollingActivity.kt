@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import data.constants.TEXT_SIZE
 import kotlinx.android.synthetic.main.activity_scrolling.*
-import org.jetbrains.anko.async
-import org.jetbrains.anko.uiThread
 import utils.BaseActivity
 
 class ScrollingActivity : BaseActivity() {
@@ -36,12 +34,9 @@ class ScrollingActivity : BaseActivity() {
     }
 
     private fun refresh(end: () -> Unit) {
-        async() {
-            val text = url.webResource()
-            uiThread {
-                end()
-                data_scrolling.text = text
-            }
-        }
+        url.webResource({ s ->
+            end()
+            data_scrolling.text = s
+        })
     }
 }

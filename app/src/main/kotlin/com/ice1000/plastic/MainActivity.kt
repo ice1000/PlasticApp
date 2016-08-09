@@ -15,10 +15,9 @@ import data.modules.Module
 import data.modules.News
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.toast
 import utils.BaseActivity
 import java.util.*
 
@@ -54,7 +53,7 @@ class MainActivity : BaseActivity() {
         currentLink = link
         currentType = dataType
 
-        val showUselessData = {
+        fun showUselessData() = {
             showData(
                     indexText = JJ_FLY.split("\n"),
                     clean = clean,
@@ -70,26 +69,20 @@ class MainActivity : BaseActivity() {
                     this@MainActivity,
                     R.string.please_check_network,
                     Toast.LENGTH_SHORT).show()
-            Log.i("not important", "showUselessData = $showUselessData")
+            showUselessData()
         }
 
         Log.i("important", "currentLink = $currentLink, " +
                 "currentType = 0xFF${currentType - 0xFF0}")
 
-        async() {
-            val indexText: List<String>
-
-            indexText = link.webResource().split("\n")
-
-            uiThread {
-                showData(
-                        indexText = indexText,
-                        clean = clean,
-                        dataType = dataType
-                )
-                done()
-            }
-        }
+        link.webResource({ s ->
+            showData(
+                    indexText = s.split("\n"),
+                    clean = clean,
+                    dataType = dataType
+            )
+            done()
+        })
     }
 
     /**
@@ -102,9 +95,10 @@ class MainActivity : BaseActivity() {
 //        Log.i("important", "indexText = $indexText")
         if (clean)
             index.clear()
-        for (data in Parser.parse(
+        Parser.parse(
                 source = indexText,
-                dataType = dataType)) {
+                dataType = dataType).forEach {
+            data ->
             index.add(data)
         }
         dataSet_main.adapter = MyAdapter()
@@ -284,7 +278,23 @@ class MainActivity : BaseActivity() {
                             else -> R.drawable.btn_default_more_light
                         })
                 startClickCounter = event.action
-                return@setOnTouchListener true
+                return@setOnTouchListener false
+            }
+
+            view.setOnLongClickListener {
+                if (viewData.type == Module.TYPE_OTHER_LIST) {
+                    Log.i(this.toString(), "批量下载中")
+                    toast("批量下载中")
+                    viewData.url.webResource({ s ->
+                        Parser.parse(s.split(" "), Module.TYPE_FLOW).forEach {
+                            it.url.webResource({})
+                        }
+                    })
+                } else if (viewData.type == Module.TYPE_FLOW) {
+                    toast("下载中")
+                    viewData.url.webResource({ })
+                }
+                return@setOnLongClickListener false
             }
         }
     }
