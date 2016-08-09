@@ -36,15 +36,11 @@ open class BaseActivity : AppCompatActivity() {
     protected fun openWeb(url: String) {
 //        startActivity(intentFor<WebViewerActivity>()
 //                .putExtra(URL, url))
-        startActivity(Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(url)
-        ))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 
     protected fun checkNetwork(): Boolean {
-        Log.v("not important", "connection? = " +
-                "${connection ?: "no network found!"}")
+        Log.v("not important", "connection? = ${connection ?: "no network found!"}")
         return connection != null && connection!!.isConnected
     }
 
@@ -57,29 +53,20 @@ open class BaseActivity : AppCompatActivity() {
      *
      * this method extended String.
      */
-    fun String.webResource(
-            submit: (String) -> Unit,
-            default: String = DEFAULT_VALUE) {
+    fun String.webResource(submit: (String) -> Unit, default: String = DEFAULT_VALUE) {
         async() {
             var ret = readString(default)
-            uiThread {
-                submit(ret)
-            }
+            uiThread { submit(ret) }
 //        Log.i("important", "ret = $ret")
             Log.i(this@BaseActivity.toString(), this@webResource)
-            if (SAVE_LL_MODE_ON.readBoolean(false) ||
-                    !ret.equals(DEFAULT_VALUE) &&
-                            !checkNetwork()) {
+            if (SAVE_LL_MODE_ON.readBoolean(false) || !ret.equals(DEFAULT_VALUE) &&
+                    !checkNetwork()) {
                 Log.i("important", "linking to SharedPreference")
-                uiThread {
-                    submit(ret)
-                }
+                uiThread { submit(ret) }
             } else {
                 Log.i("important", "linking to web")
                 ret = java.net.URL(this@webResource).readText(Charsets.UTF_8)
-                uiThread {
-                    submit(ret)
-                }
+                uiThread { submit(ret) }
                 save(ret)
             }
         }
@@ -93,40 +80,24 @@ open class BaseActivity : AppCompatActivity() {
      */
     fun String.save(value: Any) {
         val editor = openPreference().edit()
-        if (value is Int) {
-            editor.putInt(this, value)
-        } else if (value is Float) {
-            editor.putFloat(this, value)
-        } else if (value is Long) {
-            editor.putLong(this, value)
-        } else if (value is Boolean) {
-            editor.putBoolean(this, value)
-        } else if (value is String) {
-//            Log.i("important", "value = $value")
-            editor.putString(this, value)
-        } else {
-            throw Exception("not supported type")
-        }
+        if (value is Int) editor.putInt(this, value)
+        else if (value is Float) editor.putFloat(this, value)
+        else if (value is Long) editor.putLong(this, value)
+        else if (value is Boolean) editor.putBoolean(this, value)
+        else if (value is String) editor.putString(this, value)
+        else throw Exception("not supported type")
         editor.apply()
     }
 
-    fun String.readString(default: String = "") =
-            openPreference().getString(this, default) ?: ""
-
-    fun String.readInt(default: Int = 0) =
-            openPreference().getInt(this, default)
-
-    fun String.readBoolean(default: Boolean = false) =
-            openPreference().getBoolean(this, default)
+    fun String.readString(default: String = "") = openPreference().getString(this, default) ?: ""
+    fun String.readInt(default: Int = 0) = openPreference().getInt(this, default)
+    fun String.readBoolean(default: Boolean = false) = openPreference().getBoolean(this, default)
 
 
     /**
      * @return a SharedPreference
      */
     private fun openPreference(): SharedPreferences =
-            getSharedPreferences(
-                    "MainPreference",
-                    MODE_ENABLE_WRITE_AHEAD_LOGGING
-            )
+            getSharedPreferences("MainPreference", MODE_ENABLE_WRITE_AHEAD_LOGGING)
 
 }

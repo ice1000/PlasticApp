@@ -44,11 +44,7 @@ class MainActivity : BaseActivity() {
         dataSet_main.layoutManager = chooseLayout()
     }
 
-    private fun refresh(
-            link: String,
-            dataType: Int,
-            done: () -> Unit,
-            clean: Boolean = true) {
+    private fun refresh(link: String, dataType: Int, done: () -> Unit, clean: Boolean = true) {
 
         currentLink = link
         currentType = dataType
@@ -72,8 +68,7 @@ class MainActivity : BaseActivity() {
             showUselessData()
         }
 
-        Log.i("important", "currentLink = $currentLink, " +
-                "currentType = 0xFF${currentType - 0xFF0}")
+        Log.i("important", "currentLink = $currentLink, currentType = 0xFF${currentType - 0xFF0}")
 
         link.webResource({ s ->
             showData(
@@ -88,19 +83,12 @@ class MainActivity : BaseActivity() {
     /**
      * core code of this system
      */
-    private fun showData(
-            indexText: List<String>,
-            clean: Boolean,
-            dataType: Int) {
+    private fun showData(indexText: List<String>, clean: Boolean, dataType: Int) {
 //        Log.i("important", "indexText = $indexText")
-        if (clean)
-            index.clear()
+        if (clean) index.clear()
         Parser.parse(
                 source = indexText,
-                dataType = dataType).forEach {
-            data ->
-            index.add(data)
-        }
+                dataType = dataType).forEach { data -> index.add(data) }
         dataSet_main.adapter = MyAdapter()
 //        refresher?.isRefreshing = false
 
@@ -137,8 +125,7 @@ class MainActivity : BaseActivity() {
                 return true
             }
 //            R.id.action_refresh -> refresh()
-            R.id.action_contributing ->
-                startActivity(intentFor<AboutActivity>())
+            R.id.action_contributing -> startActivity(intentFor<AboutActivity>())
         }
         return super.onOptionsItemSelected(item)
     }
@@ -153,9 +140,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = currentLink,
                     dataType = currentType,
-                    done = {
-                        refresher_main.isRefreshing = false
-                    }
+                    done = { refresher_main.isRefreshing = false }
             )
         }
 
@@ -164,9 +149,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = Learn.link,
                     dataType = Learn.type,
-                    done = {
-                        refresher_main.isRefreshing = false
-                    }
+                    done = { refresher_main.isRefreshing = false }
             )
         }
 
@@ -175,9 +158,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = BlogAndOther.link,
                     dataType = BlogAndOther.type,
-                    done = {
-                        refresher_main.isRefreshing = false
-                    }
+                    done = { refresher_main.isRefreshing = false }
             )
         }
 
@@ -186,9 +167,7 @@ class MainActivity : BaseActivity() {
             refresh(
                     link = News.link,
                     dataType = News.type,
-                    done = {
-                        refresher_main.isRefreshing = false
-                    }
+                    done = { refresher_main.isRefreshing = false }
             )
         }
     }
@@ -196,28 +175,18 @@ class MainActivity : BaseActivity() {
     private fun chooseLayout() = when (LAYOUT_PREFERENCE.readInt(1)) {
         LAYOUT_GRID_2 -> GridLayoutManager(this, 2)
         LAYOUT_GRID_3 -> GridLayoutManager(this, 3)
-        LAYOUT_STAGGERED -> StaggeredGridLayoutManager(
-                2,
-                OrientationHelper.VERTICAL
-        )
+        LAYOUT_STAGGERED -> StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL)
         else -> LinearLayoutManager(this)
     }
 
-    inner class MyAdapter :
-            RecyclerView.Adapter<MyViewHolder>() {
-        override fun onBindViewHolder(
-                holder: MyViewHolder?,
-                position: Int) {
+    inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
+        override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
             holder?.init(index[position])
         }
 
-        override fun onCreateViewHolder(
-                parent: ViewGroup?,
-                viewType: Int) = MyViewHolder(
-                LayoutInflater.from(this@MainActivity).inflate(
-                        R.layout.data_base,
-                        null
-                ))
+        override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = MyViewHolder(
+                LayoutInflater.from(this@MainActivity).inflate(R.layout.data_base, null)
+        )
 
         override fun getItemCount() = index.size
 
@@ -246,29 +215,25 @@ class MainActivity : BaseActivity() {
                 when (viewData.type) {
 
                 // 显示一个表，元素点击之后打开网页
-                    Module.TYPE_LIST ->
-                        if (!"null".equals(viewData.url))
-                            openWeb(viewData.url)
+                    Module.TYPE_LIST -> if (!"null".equals(viewData.url)) openWeb(viewData.url)
 
                 // 显示一个表，元素打开之后是另一个表
-                    Module.TYPE_OTHER_LIST ->
-                        if (!"null".equals(viewData.url))
-                            refresh(
-                                    link = viewData.url,
-                                    dataType = Module.TYPE_FLOW,
-                                    done = { }
-                            )
+                    Module.TYPE_OTHER_LIST -> if (!"null".equals(viewData.url)) refresh(
+                            link = viewData.url,
+                            dataType = Module.TYPE_FLOW,
+                            done = { }
+                    )
 
                 // 显示一个数据流
-                    Module.TYPE_FLOW ->
-                        startActivity(intentFor<ScrollingActivity>()
-                                .putExtra(URL, viewData.url))
+                    Module.TYPE_FLOW -> startActivity(intentFor<ScrollingActivity>()
+                            .putExtra(URL, viewData.url))
                 }
             }
 
             view.setOnTouchListener { view, event ->
                 Log.i("clicked", "event = ${event.action}")
-                if (startClickCounter == 0 && event.action == 1)
+                if (startClickCounter == MotionEvent.ACTION_DOWN &&
+                        event.action == MotionEvent.ACTION_UP)
                     view.callOnClick()
                 // 我真是智障，智障智障智障，以后记得检查方法的API版本！！
                 view.background = resources.getDrawable(

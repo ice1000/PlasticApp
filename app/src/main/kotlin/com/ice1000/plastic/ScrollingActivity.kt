@@ -21,15 +21,9 @@ class ScrollingActivity : BaseActivity() {
 
     private fun initViews() {
         val fab = fab_scrolling
-        fab.setOnClickListener({
-            openWeb(url)
-        })
+        fab.setOnClickListener({ openWeb(url) })
         val refresher = refresher_scrolling
-        refresher.setOnRefreshListener {
-            refresh({
-                refresher.isRefreshing = false
-            })
-        }
+        refresher.setOnRefreshListener { refresh({ refresher.isRefreshing = false }) }
         data_scrolling.textSize = TEXT_SIZE.readInt(16).toFloat()
     }
 

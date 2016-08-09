@@ -35,21 +35,37 @@ class SettingsActivity : BaseActivity() {
                 android.R.layout.simple_spinner_item
         )
 
-        spinner_settings_layout.adapter = adapter
-        spinner_settings_layout.onItemSelectedListener =
-                SpinnerSelected()
+        spinner_settings.adapter = adapter
+        spinner_settings.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) =
+                    LAYOUT_PREFERENCE.save(LAYOUT_LIST)
+
+            /**
+             * @param p2 is the item which is selected.
+             * p2 -> LAYOUT_* in data.constants.DefaultValue
+             */
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) =
+                    LAYOUT_PREFERENCE.save(p2)
+        }
 
         setTextSizeShowerText(TEXT_SIZE.readInt(textSizeDefault))
 
-        text_size_settings_seeker.max = textSizeMax
-        text_size_settings_seeker.progress = TEXT_SIZE.readInt(textSizeDefault)
-        text_size_settings_seeker.setOnSeekBarChangeListener(
-                text_size_settings_seeker({
-                    setTextSizeShowerText(it)
-                }))
+        seeker_settings.max = textSizeMax
+        seeker_settings.progress = TEXT_SIZE.readInt(textSizeDefault)
+        seeker_settings.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            private var size = 16
+            override fun onStopTrackingTouch(p0: SeekBar?) = TEXT_SIZE.save(size)
+            override fun onStartTrackingTouch(p0: SeekBar?) = Unit
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                if (p1 > 5) {
+                    setTextSizeShowerText(size)
+                    size = p1
+                }
+            }
+        })
 
-        save_ll_switch_settings.isChecked = SAVE_LL_MODE_ON.readBoolean(false)
-        save_ll_switch_settings.setOnCheckedChangeListener { button, isChecked ->
+        switch_settings.isChecked = SAVE_LL_MODE_ON.readBoolean(false)
+        switch_settings.setOnCheckedChangeListener { button, isChecked ->
             SAVE_LL_MODE_ON.save(isChecked)
         }
     }
@@ -59,47 +75,4 @@ class SettingsActivity : BaseActivity() {
         text_size_settings_shower.textSize = textSize.toFloat()
     }
 
-    inner class SpinnerSelected() : AdapterView.OnItemSelectedListener {
-
-        override fun onNothingSelected(p0: AdapterView<*>?) {
-            LAYOUT_PREFERENCE.save(LAYOUT_LIST)
-        }
-
-        /**
-         * @param p2 is the item which is selected.
-         * p2 -> LAYOUT_* in data.constants.DefaultValue
-         */
-        override fun onItemSelected(
-                p0: AdapterView<*>?,
-                p1: View?,
-                p2: Int,
-                p3: Long) {
-            LAYOUT_PREFERENCE.save(p2)
-        }
-    }
-
-    inner class text_size_settings_seeker(var shower: (Int) -> Unit) :
-            SeekBar.OnSeekBarChangeListener {
-
-        private var size = 16
-
-        /**
-         * textSize must > 6
-         */
-        override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-            if (p1 > 5) {
-                shower(size)
-                size = p1
-            }
-//            Log.v("important", "progress = $size")
-        }
-
-        override fun onStartTrackingTouch(p0: SeekBar?) {
-//            Log.v("important", "start, max = $max")
-        }
-
-        override fun onStopTrackingTouch(p0: SeekBar?) =
-            TEXT_SIZE.save(size)
-
-    }
 }

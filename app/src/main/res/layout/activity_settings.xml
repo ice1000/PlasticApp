@@ -26,7 +26,7 @@
             <Spinner
                 android:popupBackground="@color/colorPrimaryLight"
                 android:prompt="@string/choose_layout"
-                android:id="@+id/spinner_settings_layout"
+                android:id="@+id/spinner_settings"
                 android:layout_margin="@dimen/setting_item_margin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/setting_item" />
@@ -44,7 +44,7 @@
                     android:text="@string/text_size"/>
 
                 <SeekBar
-                    android:id="@+id/text_size_settings_seeker"
+                    android:id="@+id/seeker_settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -89,7 +89,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/save_ll_switch_settings" />
+                    android:id="@+id/switch_settings" />
 
             </RelativeLayout>
 

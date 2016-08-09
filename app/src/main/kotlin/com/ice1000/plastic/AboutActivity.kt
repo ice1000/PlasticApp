@@ -16,8 +16,7 @@ class AboutActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        val fab = fab_setting
-        fab.setOnClickListener({ joinQQGroup(QQ_GROUP_PL_VALUE) })
+        fab_setting.setOnClickListener({ joinQQGroup(QQ_GROUP_PL_VALUE) })
 
         viewGiuHub.setOnClickListener { viewGitHub() }
 

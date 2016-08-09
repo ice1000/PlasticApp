@@ -16,18 +16,13 @@ object Parser {
     /**
      * @param source DSL source
      */
-    fun parse(
-            source: List<String>,
-            dataType: Int
-    ): ArrayList<BaseData> {
+    fun parse(source: List<String>, dataType: Int): ArrayList<BaseData> {
         this.source = source
         val index = ArrayList<BaseData>()
         var i = 0
         while (i < this.source.size) {
             if (this.source[i].startsWith("def ")) {
-                val definition = this.source[i].split(" ").toList().filter {
-                    it.length > 0
-                }
+                val definition = this.source[i].split(" ").toList().filter { it.length > 0 }
                 this.source = this.source.map {
                     it.replace(
                             oldValue = "%" + definition[1] + "%",
@@ -38,14 +33,14 @@ object Parser {
             if (this.source[i].startsWith("====")) {
                 try {
                     i++
-                        index.add(BaseData(
-                                title = this.source[i],
-                                url = this.source[i + 1],
-                                type = dataType,
-                                description = this.source[i + 2]
-                        ))
-                        i += 3
-                        continue
+                    index.add(BaseData(
+                            title = this.source[i],
+                            url = this.source[i + 1],
+                            type = dataType,
+                            description = this.source[i + 2]
+                    ))
+                    i += 3
+                    continue
                 } catch (e: IndexOutOfBoundsException) {
                     Log.i("important", "parsing indexOutOfBound!!!")
                 }
