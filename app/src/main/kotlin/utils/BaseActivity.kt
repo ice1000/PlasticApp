@@ -22,7 +22,7 @@ open class BaseActivity : AppCompatActivity() {
     protected val URL = "URL"
 
     /**
-     * if this is null,
+     * if this value is null,
      * it means I have 2 load data from Sp.
      */
     val connection: NetworkInfo?
@@ -73,10 +73,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * insert a value t SharedPreference
+     * insert a value in2 SharedPreference
      * any types of value is accepted.
      *
-     * Will be start casted.
+     * Will be smart casted.
      */
     fun String.save(value: Any) {
         val editor = openPreference().edit()
