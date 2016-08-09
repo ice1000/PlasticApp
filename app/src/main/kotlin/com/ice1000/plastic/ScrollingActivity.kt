@@ -15,15 +15,13 @@ class ScrollingActivity : BaseActivity() {
         setContentView(R.layout.activity_scrolling)
         url = intent.getStringExtra(URL)
         initViews()
-        refresh({})
+        refresh({ })
         Log.d(this.toString(), url)
     }
 
     private fun initViews() {
-        val fab = fab_scrolling
-        fab.setOnClickListener({ openWeb(url) })
-        val refresher = refresher_scrolling
-        refresher.setOnRefreshListener { refresh({ refresher.isRefreshing = false }) }
+        fab_scrolling.setOnClickListener({ openWeb(url) })
+        pull_scrolling.setOnRefreshListener { refresh({ pull_scrolling.isRefreshing = false }) }
         data_scrolling.textSize = TEXT_SIZE.readInt(16).toFloat()
     }
 
