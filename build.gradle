@@ -6,13 +6,18 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0-alpha7'
+        classpath 'com.android.tools.build:gradle:2.2.0-beta1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 allprojects {
     repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/repositories/central"
+        }
+        mavenCentral()
+        mavenLocal()
         jcenter()
     }
 }

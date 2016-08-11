@@ -9,8 +9,8 @@ android {
         applicationId "com.ice1000.plastic"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 3
-        versionName "0.3.3"
+        versionCode 4
+        versionName "0.3.4"
     }
     buildTypes {
         release {
